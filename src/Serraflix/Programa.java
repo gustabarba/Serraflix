@@ -42,8 +42,12 @@ public abstract class Programa implements Classificar{
 	
 	
 	//getters e setters
-	public double getPontuacao() {
-		return pontuacao;
+	public double getPontuacao() throws Exception{
+		try {
+			return pontuacao;
+		}catch(Exception e){
+			throw new Exception();
+		}
 	}
 	public void setPontuacao(Double pontuacao) {
 		this.pontuacao = pontuacao;

@@ -24,7 +24,7 @@ public class Biblioteca {
 		if(resultado != null) {
 			return resultado;
 		}else {
-			throw new Exception("O Programa não foi encontrado.");
+			throw new Exception("O programa não foi encontrado.");
 		}
 	}
 	
@@ -65,18 +65,18 @@ public class Biblioteca {
 	}
 	
 	// método de escolher categoria no console
-	public Categoria fluxoEscolherCategoria() {
+	public Categoria fluxoEscolherCategoria(Categoria cat) {
 		Categoria categoriaEscolhida = null;
 				
 		while(categoriaEscolhida == null) {
 			System.out.println();
 			
-			System.out.println("Digite o número da categoria: \n\n"
-					+ "1: fantasia \n"
-					+ "2: terror \n"
-					+ "3: comédia \n\n");
+			System.out.println("Digite o número da categoria: \n");
+			System.out.println("1: fantasia" + (cat != null ? (cat.equals(Categoria.FANTASIA) ? " (atual)" : ""): ""));
+			System.out.println("2: comédia" + (cat != null ? (cat.equals(Categoria.COMEDIA) ? " (atual)" : ""): ""));
+			System.out.println("3: terror" + (cat != null ? (cat.equals(Categoria.TERROR) ? " (atual)" : ""): ""));
 			
-			int numeroCategoria = ler.nextInt();
+			int numeroCategoria = ler.nextInt();ler.nextLine();
 			
 			switch(numeroCategoria) {
 			case 1:
@@ -99,35 +99,83 @@ public class Biblioteca {
 		return categoriaEscolhida;
 	}
 	
-	// método de cadastrar categoria no console
+	// método de cadastrar filme no console
 	public void fluxoCadastrarFilme(Programa prog) {
 		System.out.println();
 		
-		System.out.println("Digite o nome do filme: \n");
-			
-		String nomeDoFilme = ler.nextLine();
+		System.out.println("Nome do filme:");
+		
+		String nomeDoFilme = "teste";
+		
+		if(prog != null) {
+			System.out.print("\n" + prog.getNome() + " (\"m\" para manter, ou digite um novo nome): ");
+			String bufferNomeDoFilme = ler.nextLine();
+			if(bufferNomeDoFilme == "m") {
+				nomeDoFilme = prog.getNome();
+			}else {
+				nomeDoFilme = bufferNomeDoFilme;
+			}
+		}else {
+			nomeDoFilme = ler.nextLine();
+		}
 		
 		System.out.println();
 		
-		System.out.println("Digite a pontuação de 1 a 5: \n");
+		Double pontuacaoFilme = null;
 		
-		Double pontuacaoFilme = ler.nextDouble(); ler.nextLine();
+		if(!(prog == null)) {
+			try {
+				pontuacaoFilme = prog.getPontuacao();
+			} catch (Exception e) {
+				
+			}
+		}
+		
+		System.out.println("Pontuação de 1 a 5:");
+		
+		if(prog != null && pontuacaoFilme != null) {
+			System.out.print("\n" + pontuacaoFilme + " (\"M\" para manter, ou digite nova pontuação): ");
+		}
+		
+		String bufferPontuacao = ler.nextLine();
+		
+		if(!(bufferPontuacao.isEmpty()) || !(bufferPontuacao == null)) {
+			try {
+				pontuacaoFilme = Double.valueOf(bufferPontuacao);
+			}catch(Exception e) {			
+					
+			}
+		}		
 		
 		System.out.println();
 		
-		System.out.println("Digite a duração em minutos: \n");
+		int duracao = 0;
 		
-		int duracao = ler.nextInt();
+		System.out.println("Digite a duração em minutos:");
 		
-		Categoria categoriaFilme = this.fluxoEscolherCategoria();
+		if(prog != null) {
+			duracao = ((Filme) prog).getDuracao();
+			System.out.print("\n" + ((Filme) prog).getDuracao() + " (\"M\" para manter, ou digite nova duração): ");
+		}
 		
-		if(nomeDoFilme != "" && duracao != 0) {
+		String bufferDuracao = ler.nextLine();
+		
+		if(!(bufferDuracao.isEmpty()) || !(bufferDuracao == null)) {
+			try {
+				duracao = Integer.valueOf(bufferDuracao);
+			}catch(Exception e) {			
+					
+			}
+		}
+		
+		Categoria categoriaFilme = this.fluxoEscolherCategoria((prog != null ? prog.getCategoria() : null));
+		
+		if(nomeDoFilme != null && duracao != 0) {
 			this.addPrograma(new Filme(nomeDoFilme, pontuacaoFilme, categoriaFilme, duracao));
 			try {
 				System.out.println(this.getProgramaPorNome("duna").toString());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
 			}
 		}else {
 			System.out.println("Programa não criado, dados incorretos foram inseridos.");
@@ -165,7 +213,7 @@ public class Biblioteca {
 			qtdEps.add(ler.nextInt());
 		}
 		
-		Categoria categoriaSerie = this.fluxoEscolherCategoria();
+		Categoria categoriaSerie = this.fluxoEscolherCategoria((prog != null ? prog.getCategoria() : null));
 		
 		if(nomeDaSerie != "" && qtdEps.size() > 0) {
 			this.addPrograma(new Serie(nomeDaSerie, pontuacaoSerie, categoriaSerie, qtdEps));

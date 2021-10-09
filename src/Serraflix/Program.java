@@ -111,8 +111,8 @@ public class Program {
 								}else{
 									System.out.println("\nOpção inválida!");
 								}
-						}
-					}				
+							}
+						}				
 						/// fim de editar um filme
 						break;
 					case 2:

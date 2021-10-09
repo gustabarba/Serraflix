@@ -1,9 +1,15 @@
 package Serraflix;
 
 public enum Categoria {
-	FANTASIA, TERROR, COMEDIA;
+	FANTASIA("Fantasia"), TERROR("Terror"), COMEDIA("Comédia");
 	
-	private Categoria(){
-		
+	private String nome;
+	
+	private Categoria(String n){
+		this.nome = n;
+	}
+	
+	public String getNomeCategoria() {
+		return this.nome;
 	}
 }

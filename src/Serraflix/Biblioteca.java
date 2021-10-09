@@ -64,6 +64,15 @@ public class Biblioteca {
 		this.programas.addAll(programas);
 	}
 	
+	//método de deletar programa por nome
+	public void deletarProgramaPorNome(String nome) {
+		for(int i = 0; i < this.programas.size(); i++) {
+			if(this.programas.get(i).getNome() == nome) {
+				this.programas.remove(i);
+			}
+		}
+	}
+	
 	// método de escolher categoria no console
 	public Categoria fluxoEscolherCategoria(Categoria cat) {
 		Categoria categoriaEscolhida = null;
@@ -73,8 +82,8 @@ public class Biblioteca {
 			
 			System.out.println("Digite o número da categoria: \n");
 			System.out.println("1: fantasia" + (cat != null ? (cat.equals(Categoria.FANTASIA) ? " (atual)" : ""): ""));
-			System.out.println("2: comédia" + (cat != null ? (cat.equals(Categoria.COMEDIA) ? " (atual)" : ""): ""));
-			System.out.println("3: terror" + (cat != null ? (cat.equals(Categoria.TERROR) ? " (atual)" : ""): ""));
+			System.out.println("2: terror" + (cat != null ? (cat.equals(Categoria.TERROR) ? " (atual)" : ""): ""));
+			System.out.println("3: comédia" + (cat != null ? (cat.equals(Categoria.COMEDIA) ? " (atual)" : ""): "\n"));
 			
 			int numeroCategoria = ler.nextInt();ler.nextLine();
 			
@@ -105,12 +114,12 @@ public class Biblioteca {
 		
 		System.out.println("Nome do filme:");
 		
-		String nomeDoFilme = "teste";
+		String nomeDoFilme = null;
 		
 		if(prog != null) {
-			System.out.print("\n" + prog.getNome() + " (\"m\" para manter, ou digite um novo nome): ");
+			System.out.print("\n" + prog.getNome() + " (\"Enter\" para manter, ou digite um novo nome): ");
 			String bufferNomeDoFilme = ler.nextLine();
-			if(bufferNomeDoFilme == "m") {
+			if(bufferNomeDoFilme.equals("")) {
 				nomeDoFilme = prog.getNome();
 			}else {
 				nomeDoFilme = bufferNomeDoFilme;
@@ -121,7 +130,7 @@ public class Biblioteca {
 		
 		System.out.println();
 		
-		Double pontuacaoFilme = null;
+		double pontuacaoFilme = 11.;
 		
 		if(!(prog == null)) {
 			try {
@@ -133,13 +142,13 @@ public class Biblioteca {
 		
 		System.out.println("Pontuação de 1 a 5:");
 		
-		if(prog != null && pontuacaoFilme != null) {
-			System.out.print("\n" + pontuacaoFilme + " (\"M\" para manter, ou digite nova pontuação): ");
+		if(pontuacaoFilme != 11) {
+			System.out.print("\n" + pontuacaoFilme + " (\"Enter\" para manter, ou digite nova pontuação): ");
 		}
 		
 		String bufferPontuacao = ler.nextLine();
 		
-		if(!(bufferPontuacao.isEmpty()) || !(bufferPontuacao == null)) {
+		if(!(bufferPontuacao.equals(""))) {
 			try {
 				pontuacaoFilme = Double.valueOf(bufferPontuacao);
 			}catch(Exception e) {			
@@ -149,18 +158,18 @@ public class Biblioteca {
 		
 		System.out.println();
 		
-		int duracao = 0;
+		Integer duracao = null;
 		
 		System.out.println("Digite a duração em minutos:");
 		
 		if(prog != null) {
 			duracao = ((Filme) prog).getDuracao();
-			System.out.print("\n" + ((Filme) prog).getDuracao() + " (\"M\" para manter, ou digite nova duração): ");
+			System.out.print("\n" + ((Filme) prog).getDuracao() + " (\"Enter\" para manter, ou digite nova duração): ");
 		}
 		
 		String bufferDuracao = ler.nextLine();
 		
-		if(!(bufferDuracao.isEmpty()) || !(bufferDuracao == null)) {
+		if(!(bufferDuracao.equals(""))) {
 			try {
 				duracao = Integer.valueOf(bufferDuracao);
 			}catch(Exception e) {			
@@ -170,10 +179,13 @@ public class Biblioteca {
 		
 		Categoria categoriaFilme = this.fluxoEscolherCategoria((prog != null ? prog.getCategoria() : null));
 		
-		if(nomeDoFilme != null && duracao != 0) {
+		if(nomeDoFilme != null && duracao != null) {
+			if(prog != null) {
+				this.deletarProgramaPorNome(prog.getNome());
+			}
 			this.addPrograma(new Filme(nomeDoFilme, pontuacaoFilme, categoriaFilme, duracao));
 			try {
-				System.out.println(this.getProgramaPorNome("duna").toString());
+				System.out.println("\n" + this.getProgramaPorNome(nomeDoFilme).toString());
 			} catch (Exception e) {
 				
 			}

@@ -83,6 +83,6 @@ public class Serie extends Programa{
 	
 	@Override
 	public String toString() {
-		return "Nome: " + super.nome + (super.pontuacao == null ? "" : (" | Nota: " + String.format("%.1f", super.pontuacao) + "/10")) + (this.temporadas.size() > 0 ? (" | Temporadas: " + this.temporadas.size() + " | Episódios: " + this.getTotalEpisodios()) : ""); 
+		return "Nome: " + super.nome + (super.pontuacao == null ? "" : (" | Nota: " + String.format("%.1f", super.pontuacao) + "/10")) + (this.temporadas.size() > 0 ? (" | Temporadas: " + this.temporadas.size() + " | Episódios: " + this.getTotalEpisodios()) : "") + " | Categoria: " + this.getCategoria().getNomeCategoria();               
 	}
 }

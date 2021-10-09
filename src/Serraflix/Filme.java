@@ -11,7 +11,7 @@ public class Filme extends Programa{
 	
 	@Override
 	public String toString() {
-		return "Nome: " + super.nome + (super.pontuacao == null ? "" : (" | Nota: " + String.format("%.1f", super.pontuacao) + "/5")) + " | Duração: " + this.duracao + " minutos";                                   
+		return "Nome: " + super.nome + (super.pontuacao == null ? "" : (" | Nota: " + String.format("%.1f", super.pontuacao) + "/5")) + " | Duração: " + this.duracao + " minutos" + " | Categoria: " + this.getCategoria().getNomeCategoria();                                   
 	}
 	
 	//método de classificação

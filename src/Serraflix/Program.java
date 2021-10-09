@@ -105,6 +105,7 @@ public class Program {
 							if(opcaoEditarFilme > 0 && opcaoEditarFilme <= filmes.size()) {
 								catalogoBrasil.fluxoCadastrarFilme(filmes.get(opcaoEditarFilme - 1));
 								escolhendo = false;
+								editando = false;
 							}else {
 								if(opcaoEditarFilme == 0) {
 									escolhendo = false;

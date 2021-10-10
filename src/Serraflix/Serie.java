@@ -7,11 +7,6 @@ import java.util.List;
 public class Serie extends Programa{
 	private ArrayList<Temporada> temporadas = new ArrayList<>();
 	
-	//construtor sem temporadas
-	public Serie(String nome, Double pontuacao, Categoria categoria) {
-		super(nome, pontuacao, categoria);
-	}
-	
 	//construtor com temporadas em massa
 	public Serie(String nome, Double pontuacao, Categoria categoria, List<Integer> qtdEps) {
 		super(nome, pontuacao, categoria);
@@ -69,6 +64,16 @@ public class Serie extends Programa{
 		}else {
 			throw new Exception("Erro ao adicionar temporadas para a série \"" + this.nome + "\". Você precisa adicionar um número positivo de episódios, e só pode criar uma temporada que ainda não exista.");
 		}
+	}
+	
+	//obter número de temporadas
+	public int getNumeroTemporas(){
+		return this.temporadas.size();
+	}
+	
+	//obter temporadas
+	public ArrayList<Temporada> getTemporadas(){
+		return this.temporadas;
 	}
 	
 	//sobrescrição do método de classificação

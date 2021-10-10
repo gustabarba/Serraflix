@@ -189,44 +189,100 @@ public class Program {
 	public static void fluxoCadastrarEditarSerie(Programa prog) {
 		System.out.println();
 		
-		System.out.println("Digite o nome da série: \n");
-			
-		String nomeDaSerie = ler.nextLine();
+		System.out.println("Nome da Série:");
+		
+		String nomeDaSerie = null;
+		
+		if(prog != null) {
+			System.out.print("\n" + prog.getNome() + " (\"Enter\" para manter, ou digite um novo nome): ");		
+			nomeDaSerie = prog.getNome();			
+		}
+		
+		String bufferNomeDaSerie = ler.nextLine();
+		
+		if(!(bufferNomeDaSerie.equals(""))) {
+			nomeDaSerie = bufferNomeDaSerie;
+		}		
 		
 		System.out.println();
 		
-		System.out.println("Digite a pontuação de 1 a 10: \n");
+		double pontuacaoSerie = 11.;
 		
-		Double pontuacaoSerie = ler.nextDouble(); ler.nextLine();
+		if(prog != null) {
+			try {
+				pontuacaoSerie = prog.getPontuacao();
+			} catch (Exception e) {
+				
+			}
+		}
 		
-		System.out.println();
+		System.out.println("Pontuação de 1 a 10:");
+		
+		if(pontuacaoSerie != 11.) {
+			System.out.print("\n" + pontuacaoSerie + " (\"Enter\" para manter, ou digite nova pontuação): ");
+		}
+		
+		String bufferPontuacao = ler.nextLine();
+		
+		if(!(bufferPontuacao.equals(""))) {
+			try {
+				pontuacaoSerie = Double.valueOf(bufferPontuacao);
+			}catch(Exception e) {			
+					
+			}
+		}		
 		
 		System.out.println("Quantas temporadas? \n");
 		
-		int numTemporadas = ler.nextInt();
+		if(prog != null) {
+			System.out.print("(atual: " + ((Serie)prog).getNumeroTemporas() + ") \"Enter\" para manter, ou digite um novo valor): ");				
+		}
+		
+		Integer numTemporadas = null;
+		
+		String bufferNumTemporadas = ler.nextLine();
+		
+		if(!(bufferNumTemporadas.equals(""))) {
+			try {
+				numTemporadas = Integer.valueOf(bufferNumTemporadas);
+			}catch(Exception e) {			
+					
+			}
+		}	
 		
 		ArrayList<Integer> qtdEps = new ArrayList<>();
 		
-		for(int i = 0; i < numTemporadas; i++) {
-			
-			System.out.println();
-			
-			System.out.println("Quantos episódios na " + (i + 1) + "º temporada? \n");
-			
-			qtdEps.add(ler.nextInt());
+		if(prog != null && numTemporadas == null) {
+			for(Temporada t : ((Serie)prog).getTemporadas()) {
+				qtdEps.add(t.getQuantidadeEpisodios());
+			}
+		}
+		
+		if(numTemporadas != null) {
+			for(int i = 0; i < numTemporadas; i++) {
+				
+				System.out.println();
+				
+				System.out.println("Quantos episódios na " + (i + 1) + "º temporada? \n");
+				
+				qtdEps.add(ler.nextInt());
+			}
 		}
 		
 		Categoria categoriaSerie = fluxoEscolherCategoria((prog != null ? prog.getCategoria() : null));
 		
-		if(nomeDaSerie != "" && qtdEps.size() > 0) {
+		if(nomeDaSerie != null && qtdEps.size() > 0) {
+			if(prog != null) {
+				catalogoBrasil.deletarProgramaPorNome(prog.getNome());
+			}
 			catalogoBrasil.addPrograma(new Serie(nomeDaSerie, pontuacaoSerie, categoriaSerie, qtdEps));
 			try {
-				System.out.println(catalogoBrasil.getProgramaPorNome(nomeDaSerie).toString());
+				System.out.println("\n" + catalogoBrasil.getProgramaPorNome(nomeDaSerie).toString());
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				
 			}
 		}else {
-			System.out.println("Programa não criado, verifique seus dados inseridos.");
+			System.out.println("Série não criado, verifique seus dados inseridos.");
 		}
 	}
 	
@@ -264,8 +320,7 @@ public class Program {
 				/// fim de editar um filme
 				break;
 			case 2:
-				/// editar uma série
-				fluxoCadastrarEditarSerie(null);
+				fluxoCadastrarEditarSerie(fluxoListarPorTipo());
 				editando = false;
 				/// fim de editar uma série
 				break;

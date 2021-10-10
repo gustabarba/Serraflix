@@ -3,6 +3,7 @@ package Serraflix;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Program {
@@ -48,7 +49,7 @@ public class Program {
 				fluxoRemoverPrograma();
 				break;
 			case 4:
-				/// exibir informações
+				fluxoExibicao();
 				break;
 			case 0:
 				emOperacao = false;
@@ -293,20 +294,44 @@ public class Program {
 					+ "4: encontrar por nome \n\n"
 					+ "0: voltar ao menu principal \n");
 			
-			int opcaoEncontrar = ler.nextInt();
+			int opcaoEncontrar = ler.nextInt(); ler.nextLine();
 			
 			switch(opcaoEncontrar) {
 			case 1:
-				fluxoEfetuarRemocao(fluxoListarPorTipo());
+				try{
+					fluxoEfetuarRemocao(fluxoListarPorTipo());
+					removendo = false;
+				}
+				catch(Exception e){
+					
+				}
 				break;
 			case 2:
-				fluxoEfetuarRemocao(fluxoListarPorCategoria());
+				try{
+					fluxoEfetuarRemocao(fluxoListarPorCategoria());
+					removendo = false;
+				}
+				catch(Exception e) {
+					
+				}
 				break;
 			case 3:
-				fluxoEfetuarRemocao(fluxoListarTodos());
+				try{
+					fluxoEfetuarRemocao(fluxoListarTodos());
+					removendo = false;
+				}
+				catch(Exception e) {
+					
+				}
 				break;
 			case 4:
-				fluxoEfetuarRemocao(fluxoEncontrarPorNome());
+				try{
+					fluxoEfetuarRemocao(fluxoEncontrarPorNome());
+					removendo = false;
+				}
+				catch(Exception e) {
+					
+				}
 				break;
 			case 0:
 				removendo = false;
@@ -319,8 +344,20 @@ public class Program {
 	}
 	
 	//fluxo de efetuar a remoção
-	public static void fluxoEfetuarRemocao(Programa prog) {
-		
+	public static void fluxoEfetuarRemocao(Programa prog) throws Exception {
+		System.out.println(prog.toString());
+		try {
+			for (Programa p : catalogoBrasil.listarProgramas(3)) {
+				if (prog.equals(prog)) {
+					catalogoBrasil.deletarProgramaPorNome(prog.getNome());
+					System.out.println("Programa deletado com sucesso!");
+					break;
+				}
+			}
+		} catch (Exception e) {
+			
+		}			
+			
 	}
 	
 	//fluxo de listar por tipo
@@ -420,14 +457,50 @@ public class Program {
 	//fluxo de listar todos
 	public static Programa fluxoListarTodos() {
 		Programa prog = null;
+		boolean listando = true;
+		while(listando) {
+			System.out.println("Listagem com todos os programas:\n");
+			ArrayList<Programa> listaDeTodos= catalogoBrasil.listarProgramas(3);
+			for(int i = 0; i < listaDeTodos.size(); i++) {
+				System.out.println((i + 1) + ": " + listaDeTodos.get(i).getNome());
+				}
+			System.out.println("\n0: voltar ao menu anterior");
+			int programaEscolhidoDaLista = ler.nextInt(); ler.nextLine();
+			if(programaEscolhidoDaLista > 0 && programaEscolhidoDaLista <= listaDeTodos.size()) {
+				listando = false;
+				prog = listaDeTodos.get(programaEscolhidoDaLista - 1);
+			}else {
+				if(programaEscolhidoDaLista != 0) {
+					System.out.println("\nOpção inválida!\n");
+				}else {
+					listando = false;
+					
+				}
+			}		
+		}	
 		return prog;
-	}
+	}	
 	
 	//fluxo de encontrar por nome
 	public static Programa fluxoEncontrarPorNome() {
 		Programa prog = null;
+		boolean escolhendo = true;
+		while(escolhendo) {
+			System.out.println("Insira o nome do programa que deseja consultar:\n");
+			String nomeDoPrograma = ler.nextLine();
+			try {
+				prog = catalogoBrasil.getProgramaPorNome(nomeDoPrograma);
+				escolhendo = false;
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+		}
 		return prog;
+		
 	}
+	
 	
 	// fluxo de escolher categoria
 	public static Categoria fluxoEscolherCategoria(Categoria cat) {
@@ -463,6 +536,71 @@ public class Program {
 		
 		return categoriaEscolhida;
 	}
+	
+	//fluxo de exibição
+	public static void fluxoExibicao() {
+		boolean exibindo = true;
+		while(exibindo) {
+			System.out.println("Escolha um dos métodos de exibição: \n\n"
+					+ "1: listar por tipo\n"
+					+ "2: listar por categoria \n"
+					+ "3: listar todos os programas \n"
+					+ "4: encontrar por nome \n\n"
+					+ "0: voltar ao menu principal \n");
+			int opcaoEscolhidaExibicao = ler.nextInt(); ler.nextLine();
+			switch (opcaoEscolhidaExibicao) {
+			case 1:
+				try {
+					fluxoEfetuaExibicao(fluxoListarPorTipo());
+					exibindo = false;
+				} catch (Exception e) {
+				
+				}
+				
+				break;
+			case 2:
+				try {
+					fluxoEfetuaExibicao(fluxoListarPorCategoria());
+					exibindo = false;
+				} catch (Exception e) {
+					
+				}
+				break;
+			case 3:
+				try {
+					fluxoEfetuaExibicao(fluxoListarTodos());
+					exibindo = false;
+				} catch (Exception e) {
+					
+				}
+				break;
+			case 4:
+				try {
+					fluxoEfetuaExibicao(fluxoEncontrarPorNome());
+					exibindo = false;
+				} catch (Exception e) {
+					
+				}
+	
+				break;
+			case 0:
+				
+				exibindo = false;
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+	
+	// fluxo efetuar exibição
+	public static void fluxoEfetuaExibicao(Programa prog) throws Exception {
+		System.out.println(prog.toString());
+		
+	}
+	
+	
 }
 
 

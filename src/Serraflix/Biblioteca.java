@@ -53,6 +53,8 @@ public class Biblioteca {
 		}
 		return programas;
 	}
+		
+	
 	
 	//método de adicionar um programa
 	public void addPrograma(Programa programa) {

@@ -2,11 +2,9 @@ package Serraflix;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Biblioteca {
 	private ArrayList<Programa> programas = new ArrayList<>();
-	static Scanner ler = new Scanner(System.in);
 	//construtor vazio
 	public Biblioteca() {
 		

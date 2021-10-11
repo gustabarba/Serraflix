@@ -59,7 +59,7 @@ public class Serie extends Programa{
 	public void adicionarTemporadas(List<Integer> qtdEps) throws Exception{
 		if(qtdEps.size() > 0) {
 			for(int i = 0; i < qtdEps.size(); i++) {
-				this.temporadas.add(new Temporada(i + this.temporadas.size() + 1, qtdEps.get(i)));
+				this.temporadas.add(new Temporada(i + 1, qtdEps.get(i)));
 			}
 		}else {
 			throw new Exception("Erro ao adicionar temporadas para a série \"" + this.nome + "\". Você precisa adicionar um número positivo de episódios, e só pode criar uma temporada que ainda não exista.");
@@ -88,6 +88,17 @@ public class Serie extends Programa{
 	
 	@Override
 	public String toString() {
-		return "Nome: " + super.nome + (super.pontuacao == null ? "" : (" | Nota: " + String.format("%.1f", super.pontuacao) + "/10")) + (this.temporadas.size() > 0 ? (" | Temporadas: " + this.temporadas.size() + " | Episódios: " + this.getTotalEpisodios()) : "") + " | Categoria: " + this.getCategoria().getNomeCategoria();               
+		String retorno = "";
+		retorno = "\nInformações sobre a série \n\n"
+				+ "Nome: " + super.nome + "\n"
+				 + (super.pontuacao == null ? "" : ("Nota: " + String.format("%.1f", super.pontuacao) + "/10 \n"))
+				 + "Categoria: " + this.getCategoria().getNomeCategoria() + "\n"
+				 + "Temporadas: " + this.temporadas.size() + "\n"
+				 + "Total de episódios: " + this.getTotalEpisodios() + "\n\n"
+				 		+ "Episódios por temporada\n\n";
+		for(Temporada t: this.getTemporadas()) {
+			retorno += String.format("%02d", t.getNomeTemporada()) + "ª temp: " + String.format("%02d", t.getQuantidadeEpisodios()) + " eps\n";
+		}
+		return retorno;
 	}
 }

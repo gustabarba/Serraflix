@@ -76,13 +76,17 @@ public class Serie extends Programa{
 		return this.temporadas;
 	}
 	
-	//sobrescrição do método de classificação
-	@Override
+	//método de classificação
 	public void classificar(Double nota) throws ClassificacaoForaDoRangeException{
-		if(nota < 0 || nota > 10) {
-			throw new ClassificacaoForaDoRangeException("Erro ao adicionar a classificação para a série \"" + this.nome + "\": a nota não deve ser menor que zero ou maior que dez.");
+		if(nota != null) {
+			if(nota < 0 || nota > 10) {
+				super.pontuacao = null;
+				throw new ClassificacaoForaDoRangeException("Erro ao adicionar a classificação para a série \"" + this.nome + "\": a nota não deve ser menor que zero ou maior que dez.");
+			}else {
+				super.pontuacao = nota;
+			}
 		}else {
-			super.pontuacao = nota;
+			super.pontuacao = null;
 		}
 	}	
 	
@@ -95,9 +99,9 @@ public class Serie extends Programa{
 				 + "Categoria: " + this.getCategoria().getNomeCategoria() + "\n"
 				 + "Temporadas: " + this.temporadas.size() + "\n"
 				 + "Total de episódios: " + this.getTotalEpisodios() + "\n\n"
-				 		+ "Episódios por temporada\n\n";
+				 		+ "Episódios por temporada\n";
 		for(Temporada t: this.getTemporadas()) {
-			retorno += String.format("%02d", t.getNomeTemporada()) + "ª temp: " + String.format("%02d", t.getQuantidadeEpisodios()) + " eps\n";
+			retorno += String.format("\n%02d", t.getNomeTemporada()) + "ª temp: " + String.format("%02d", t.getQuantidadeEpisodios()) + " eps";
 		}
 		return retorno;
 	}

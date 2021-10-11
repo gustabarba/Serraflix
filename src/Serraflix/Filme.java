@@ -20,12 +20,17 @@ public class Filme extends Programa{
 	
 	//método de classificação
 	public void classificar(Double nota) throws ClassificacaoForaDoRangeException{
-		if(nota < 0 || nota > 5) {
-			throw new ClassificacaoForaDoRangeException("Erro ao adicionar a classificação para o filme \"" + this.nome + "\": a nota não deve ser menor que zero ou maior que cinco.");
+		if(nota != null) {
+			if(nota < 0 || nota > 5) {
+				super.pontuacao = null;
+				throw new ClassificacaoForaDoRangeException("Erro ao adicionar a classificação para a série \"" + this.nome + "\": a nota não deve ser menor que zero ou maior que cinco.");
+			}else {
+				super.pontuacao = nota;
+			}
 		}else {
-			super.pontuacao = nota;
+			super.pontuacao = null;
 		}
-	}
+	}	
 	
 	
 	

@@ -545,6 +545,9 @@ public class Program {
 			ArrayList<Programa> listaDeTodos= catalogoBrasil.listarProgramas(3);
 			if(listaDeTodos.size() > 0) {
 				System.out.println("\nEscolha um programa:\n");
+				for(int i = 0; i < listaDeTodos.size(); i++) {
+					System.out.println((i + 1) + ": " + listaDeTodos.get(i).getNome());
+				}
 				System.out.println("\n0: voltar\n");
 				System.out.print("> ");
 				int programaEscolhidoDaLista = ler.nextInt(); ler.nextLine();

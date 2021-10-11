@@ -68,8 +68,7 @@ public class Program {
 		
 		
 	}
-	
-	// fluxo de criar programa
+
 	public static void fluxoCriarPrograma() {			
 		boolean criando = true;			
 		while(criando) {		
@@ -82,12 +81,10 @@ public class Program {
 			
 			switch(filmeOuSerieCriar) {
 			case 1:
-				fluxoCadastrarEditarFilme(null);
-				criando = false;
+				criando = !(fluxoCriarEditarPrograma(null, 1));
 				break;
 			case 2:
-				fluxoCadastrarEditarSerie(null);
-				criando = false;
+				criando = !(fluxoCriarEditarPrograma(null, 2));
 				break;
 			case 0:
 				criando = false;
@@ -99,243 +96,196 @@ public class Program {
 			}
 		}
 	}
-	
-	// fluxo de criar ou editar filme
-	public static void fluxoCadastrarEditarFilme(Programa prog) {
-		System.out.println();
-		
-		System.out.println("Nome do filme:");
-		
-		String nomeDoFilme = null;
-		
-		String bufferNomeDoFilme = ler.nextLine();
-		
-		if(prog != null) {
-			System.out.print("\n" + prog.getNome() + " (\"Enter\" para manter, ou digite um novo nome): ");		
-			nomeDoFilme = prog.getNome();			
-		}
-		
-		if(!(bufferNomeDoFilme.equals(""))) {
-			nomeDoFilme = bufferNomeDoFilme;
-		}		
-		
-		System.out.println();
-		
-		double pontuacaoFilme = 11.;
-		
-		if(prog != null) {
-			try {
-				pontuacaoFilme = prog.getPontuacao();
-			} catch (Exception e) {
+	public static boolean fluxoCriarEditarPrograma(Programa prog, Integer tipo) {	
+		boolean efetuado = false;
+		if((prog != null) || (prog == null && tipo != null)) {	
+			
+			if(tipo == null) {
+				if(prog instanceof Filme) {
+					tipo = 1;
+				}else if(prog instanceof Serie) {
+					tipo = 2;
+				}
 				
 			}
-		}
-		
-		System.out.println("Pontuação de 1 a 5:");
-		
-		if(pontuacaoFilme != 11.) {
-			System.out.print("\n" + pontuacaoFilme + " (\"Enter\" para manter, ou digite nova pontuação): ");
-		}
-		
-		String bufferPontuacao = ler.nextLine();
-		
-		if(!(bufferPontuacao.equals(""))) {
-			try {
-				pontuacaoFilme = Double.valueOf(bufferPontuacao);
-			}catch(Exception e) {			
-					
+			
+			switch(tipo) {
+			case 1:
+				System.out.println("Nome do filme:");
+				break;
+			case 2:
+				System.out.println("Nome da série:");
+				break;
 			}
-		}		
-		
-		System.out.println();
-		
-		Integer duracao = null;
-		
-		System.out.println("Digite a duração em minutos:");
-		
-		if(prog != null) {
-			duracao = ((Filme) prog).getDuracao();
-			System.out.print("\n" + ((Filme) prog).getDuracao() + " (\"Enter\" para manter, ou digite nova duração): ");
-		}
-		
-		String bufferDuracao = ler.nextLine();
-		
-		if(!(bufferDuracao.equals(""))) {
-			try {
-				duracao = Integer.valueOf(bufferDuracao);
-			}catch(Exception e) {			
-					
-			}
-		}
-		
-		Categoria categoriaFilme = fluxoEscolherCategoria((prog != null ? prog.getCategoria() : null));
-		
-		if(nomeDoFilme != null && duracao != null) {
+			
+			String nomeDoPrograma = null;
+			
 			if(prog != null) {
-				catalogoBrasil.deletarProgramaPorNome(prog.getNome());
+				System.out.print("\n" + prog.getNome() + " (\"Enter\" para manter, ou digite um novo nome): ");		
+				nomeDoPrograma = prog.getNome();			
 			}
-			catalogoBrasil.addPrograma(new Filme(nomeDoFilme, pontuacaoFilme, categoriaFilme, duracao));
-			try {
-				System.out.println("\n" + catalogoBrasil.getProgramaPorNome(nomeDoFilme).toString());
-			} catch (Exception e) {
-				
-			}
-		}else {
-			System.out.println("Programa não criado: ele precisa ter pelo menos nome e duração.");
-		}
-	}
-
-	// fluxo de criar ou editar série
-	public static void fluxoCadastrarEditarSerie(Programa prog) {
-		System.out.println();
-		
-		System.out.println("Nome da Série:");
-		
-		String nomeDaSerie = null;
-		
-		if(prog != null) {
-			System.out.print("\n" + prog.getNome() + " (\"Enter\" para manter, ou digite um novo nome): ");		
-			nomeDaSerie = prog.getNome();			
-		}
-		
-		String bufferNomeDaSerie = ler.nextLine();
-		
-		if(!(bufferNomeDaSerie.equals(""))) {
-			nomeDaSerie = bufferNomeDaSerie;
-		}		
-		
-		System.out.println();
-		
-		double pontuacaoSerie = 11.;
-		
-		if(prog != null) {
-			try {
-				pontuacaoSerie = prog.getPontuacao();
-			} catch (Exception e) {
-				
-			}
-		}
-		
-		System.out.println("Pontuação de 1 a 10:");
-		
-		if(pontuacaoSerie != 11.) {
-			System.out.print("\n" + pontuacaoSerie + " (\"Enter\" para manter, ou digite nova pontuação): ");
-		}
-		
-		String bufferPontuacao = ler.nextLine();
-		
-		if(!(bufferPontuacao.equals(""))) {
-			try {
-				pontuacaoSerie = Double.valueOf(bufferPontuacao);
-			}catch(Exception e) {			
-					
-			}
-		}		
-		
-		System.out.println("Quantas temporadas? \n");
-		
-		if(prog != null) {
-			System.out.print("(atual: " + ((Serie)prog).getNumeroTemporas() + ") \"Enter\" para manter, ou digite um novo valor): ");				
-		}
-		
-		Integer numTemporadas = null;
-		
-		String bufferNumTemporadas = ler.nextLine();
-		
-		if(!(bufferNumTemporadas.equals(""))) {
-			try {
-				numTemporadas = Integer.valueOf(bufferNumTemporadas);
-			}catch(Exception e) {			
-					
-			}
-		}	
-		
-		ArrayList<Integer> qtdEps = new ArrayList<>();
-		
-		if(prog != null && numTemporadas == null) {
-			for(Temporada t : ((Serie)prog).getTemporadas()) {
-				qtdEps.add(t.getQuantidadeEpisodios());
-			}
-		}
-		
-		if(numTemporadas != null) {
-			for(int i = 0; i < numTemporadas; i++) {
-				
-				System.out.println();
-				
-				System.out.println("Quantos episódios na " + (i + 1) + "º temporada? \n");
-				
-				qtdEps.add(ler.nextInt());
-			}
-		}
-		
-		Categoria categoriaSerie = fluxoEscolherCategoria((prog != null ? prog.getCategoria() : null));
-		
-		if(nomeDaSerie != null && qtdEps.size() > 0) {
+			
+			String bufferNomeDoPrograma = ler.nextLine();
+			
+			if(!(bufferNomeDoPrograma.equals(""))) {
+				nomeDoPrograma = bufferNomeDoPrograma;
+			}		
+			
+			double pontuacaoPrograma = 11.;
+			
 			if(prog != null) {
-				catalogoBrasil.deletarProgramaPorNome(prog.getNome());
+				try {
+					pontuacaoPrograma = prog.getPontuacao();
+				} catch (Exception e) {
+					
+				}
 			}
-			catalogoBrasil.addPrograma(new Serie(nomeDaSerie, pontuacaoSerie, categoriaSerie, qtdEps));
-			try {
-				System.out.println("\n" + catalogoBrasil.getProgramaPorNome(nomeDaSerie).toString());
-			} catch (Exception e) {
+			
+			switch(tipo) {
+			case 1:
+				System.out.println("Pontuação de 1 a 5:");
+				break;
+			case 2:
+				System.out.println("Pontuação de 1 a 10:");
+				break;
+			}
+			
+			if(pontuacaoPrograma != 11.) {
+				System.out.print("\n" + pontuacaoPrograma + " (\"Enter\" para manter, ou digite nova pontuação): ");
+			}
+			
+			String bufferPontuacao = ler.nextLine();
+			
+			if(!(bufferPontuacao.equals(""))) {
+				try {
+					pontuacaoPrograma = Double.valueOf(bufferPontuacao);
+				}catch(Exception e) {			
+						
+				}
+			}		
+			
+			Integer duracao = null;
+			
+			Integer numTemporadas = null;
+			
+			ArrayList<Integer> qtdEps = new ArrayList<>();
+			
+			switch(tipo) {
+			case 1:	
+				System.out.println("Quantos minutos de duração?");
 				
+				if(prog != null) {
+					duracao = ((Filme) prog).getDuracao();
+					System.out.print("\n" + ((Filme) prog).getDuracao() + " (\"Enter\" para manter, ou digite nova duração): ");
+				}
+				
+				String bufferDuracao = ler.nextLine();
+				
+				if(!(bufferDuracao.equals(""))) {
+					try {
+						duracao = Integer.valueOf(bufferDuracao);
+					}catch(Exception e) {			
+							
+					}
+				}
+				break;
+			case 2:
+				System.out.println("Quantas temporadas? \n");
+				
+				if(prog != null) {
+					System.out.print("(atual: " + ((Serie)prog).getNumeroTemporas() + ") \"Enter\" para manter, ou digite um novo valor): ");				
+				}
+				
+				String bufferNumTemporadas = ler.nextLine();
+				
+				if(!(bufferNumTemporadas.equals(""))) {
+					try {
+						numTemporadas = Integer.valueOf(bufferNumTemporadas);
+					}catch(Exception e) {			
+							
+					}
+				}	
+				
+				if(prog != null && numTemporadas == null) {
+					for(Temporada t : ((Serie)prog).getTemporadas()) {
+						qtdEps.add(t.getQuantidadeEpisodios());
+					}
+				}
+				
+				if(numTemporadas != null) {
+					for(int i = 0; i < numTemporadas; i++) {
+						
+						System.out.println();
+						
+						System.out.println("Quantos episódios na " + (i + 1) + "º temporada? \n");
+						
+						qtdEps.add(ler.nextInt());
+					}
+				}
+				break;
 			}
-		}else {
-			System.out.println("Série não criado, verifique seus dados inseridos.");
+			
+			Categoria categoriaPrograma = fluxoEscolherCategoria((prog != null ? prog.getCategoria() : null));
+			
+			if(nomeDoPrograma != null && (duracao != null || qtdEps.size() > 0)) {
+				if(prog != null) {
+					catalogoBrasil.deletarProgramaPorNome(prog.getNome());
+					System.out.println("Programa editado com sucesso!");	
+				}else {
+					System.out.println("Programa criado com sucesso!");	
+				}
+				switch(tipo) {
+				case 1:
+					catalogoBrasil.addPrograma(new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao));
+					break;
+				case 2:
+					catalogoBrasil.addPrograma(new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps));
+					break;
+				}		
+				efetuado = true;
+			}else {
+				System.out.println("O programa não foi criado: dados vazios foram inseridos.");
+			}
 		}
+		return efetuado;
 	}
-	
-	// fluxo de editar programa
 	public static void fluxoEditarPrograma(){
 		boolean editando = true;
 		while(editando) {
 			System.out.println();
-			System.out.println("Qual tipo de programa você deseja editar? \n\n"
-					+ "1: filme \n"
-					+ "2: série \n\n"
+			System.out.println("Como deseja encontrar o programa a ser editado? \n\n"
+					+ "1: escolher de uma listagem por tipo \n"
+					+ "2: escolher de uma listagem por categoria \n"
+					+ "3: escolher da lista com todos os programas \n"
+					+ "4: encontrar por nome \n\n"
 					+ "0: voltar ao menu principal \n");
-			int filmeOuSerieEditar = ler.nextInt(); ler.nextLine();
-			switch(filmeOuSerieEditar) {
+			
+			int opcaoEncontrar = ler.nextInt(); ler.nextLine();
+			
+			switch(opcaoEncontrar) {
 			case 1:
-				/// editar um filme
-				boolean escolhendoFilme = true;
-				while(escolhendoFilme) {
-					System.out.println("\nQual filme você deseja editar?\n");
-					ArrayList<Programa> filmes = catalogoBrasil.listarProgramas(1);
-					for(int i = 0; i < filmes.size(); i++) {
-						System.out.println((i + 1) + ": " + filmes.get(i).getNome());
-					}						
-					System.out.println("\n0: voltar ao menu anterior");
-					System.out.println();
-					int opcaoEditarFilme = ler.nextInt(); ler.nextLine();
-					if(opcaoEditarFilme > 0 && opcaoEditarFilme <= filmes.size()) {
-						fluxoCadastrarEditarFilme(filmes.get(opcaoEditarFilme - 1));
-						escolhendoFilme = false;
-						editando = false;
-					}else {
-						escolhendoFilme = false;
-					}
-				}				
-				/// fim de editar um filme
+				editando = !(fluxoCriarEditarPrograma(fluxoListarPorTipo(), null));
 				break;
-			case 2:
-				fluxoCadastrarEditarSerie(fluxoListarPorTipo());
-				editando = false;
-				/// fim de editar uma série
+			case 2:				
+				editando = !(fluxoCriarEditarPrograma(fluxoListarPorCategoria(), null));
+				break;
+			case 3:				
+				editando = !(fluxoCriarEditarPrograma(fluxoListarTodos(), null));
+				break;
+			case 4:
+				editando = !(fluxoCriarEditarPrograma(fluxoEncontrarPorNome(), null));
 				break;
 			case 0:
-				//voltar
 				editando = false;
 				break;
-				//fim de voltar
 			default:
-				System.out.println();
-				System.out.println("Opção inválida!");
+				System.out.println("\nOpção inválida!\n");
 				break;
 			}
 		}
 	}
+	
+	// fluxo de remover programa
 	
 	// fluxo de remover programa
 	public static void fluxoRemoverPrograma() {
@@ -353,40 +303,16 @@ public class Program {
 			
 			switch(opcaoEncontrar) {
 			case 1:
-				try{
-					fluxoEfetuarRemocao(fluxoListarPorTipo());
-					removendo = false;
-				}
-				catch(Exception e){
-					
-				}
+				removendo = !(fluxoEfetuarRemocao(fluxoListarPorTipo()));
 				break;
 			case 2:
-				try{
-					fluxoEfetuarRemocao(fluxoListarPorCategoria());
-					removendo = false;
-				}
-				catch(Exception e) {
-					
-				}
+				removendo = !(fluxoEfetuarRemocao(fluxoListarPorCategoria()));
 				break;
 			case 3:
-				try{
-					fluxoEfetuarRemocao(fluxoListarTodos());
-					removendo = false;
-				}
-				catch(Exception e) {
-					
-				}
+				removendo = !(fluxoEfetuarRemocao(fluxoListarTodos()));
 				break;
 			case 4:
-				try{
-					fluxoEfetuarRemocao(fluxoEncontrarPorNome());
-					removendo = false;
-				}
-				catch(Exception e) {
-					
-				}
+				removendo = !(fluxoEfetuarRemocao(fluxoEncontrarPorNome()));
 				break;
 			case 0:
 				removendo = false;
@@ -399,23 +325,26 @@ public class Program {
 	}
 	
 	//fluxo de efetuar a remoção
-	public static void fluxoEfetuarRemocao(Programa prog) throws Exception {
-		System.out.println(prog.toString());
-		try {
+	
+	// fluxo de efetuar remoção
+	public static boolean fluxoEfetuarRemocao(Programa prog){
+		boolean efetuado = false;
+		if(prog != null) {
 			for (Programa p : catalogoBrasil.listarProgramas(3)) {
-				if (prog.equals(prog)) {
+				if (p.equals(prog)) {
 					catalogoBrasil.deletarProgramaPorNome(prog.getNome());
 					System.out.println("Programa deletado com sucesso!");
+					efetuado = true;
 					break;
 				}
 			}
-		} catch (Exception e) {
-			
-		}			
-			
+		} 		
+		return efetuado;
 	}
 	
 	//fluxo de listar por tipo
+	
+	// fluxo de listar por tipo
 	public static Programa fluxoListarPorTipo() {
 		boolean escolhendoTipoAListar = true;
 		Programa prog = null;
@@ -470,6 +399,8 @@ public class Program {
 	}
 	
 	//fluxo de listar por categoria
+	
+	// fluxo de listar por categoria
 	public static Programa fluxoListarPorCategoria() {
 		boolean escolhendoCategoriaAListar = true;
 		Programa prog = null;
@@ -510,6 +441,8 @@ public class Program {
 	}
 	
 	//fluxo de listar todos
+	
+	//fluxo de listar todos
 	public static Programa fluxoListarTodos() {
 		Programa prog = null;
 		boolean listando = true;
@@ -537,6 +470,8 @@ public class Program {
 	}	
 	
 	//fluxo de encontrar por nome
+	
+	// fluxo de encontrar por nome
 	public static Programa fluxoEncontrarPorNome() {
 		Programa prog = null;
 		boolean escolhendo = true;
@@ -556,6 +491,8 @@ public class Program {
 		
 	}
 	
+	
+	// fluxo de escolher categoria
 	
 	// fluxo de escolher categoria
 	public static Categoria fluxoEscolherCategoria(Categoria cat) {
@@ -593,6 +530,8 @@ public class Program {
 	}
 	
 	//fluxo de exibição
+	
+	// fluxo de exibição
 	public static void fluxoExibicao() {
 		boolean exibindo = true;
 		while(exibindo) {
@@ -605,54 +544,36 @@ public class Program {
 			int opcaoEscolhidaExibicao = ler.nextInt(); ler.nextLine();
 			switch (opcaoEscolhidaExibicao) {
 			case 1:
-				try {
-					fluxoEfetuaExibicao(fluxoListarPorTipo());
-					exibindo = false;
-				} catch (Exception e) {
-				
-				}
-				
+				exibindo = !(fluxoEfetuaExibicao(fluxoListarPorTipo()));
 				break;
 			case 2:
-				try {
-					fluxoEfetuaExibicao(fluxoListarPorCategoria());
-					exibindo = false;
-				} catch (Exception e) {
-					
-				}
+				exibindo = !(fluxoEfetuaExibicao(fluxoListarPorCategoria()));
 				break;
 			case 3:
-				try {
-					fluxoEfetuaExibicao(fluxoListarTodos());
-					exibindo = false;
-				} catch (Exception e) {
-					
-				}
+				exibindo = !(fluxoEfetuaExibicao(fluxoListarTodos()));
 				break;
 			case 4:
-				try {
-					fluxoEfetuaExibicao(fluxoEncontrarPorNome());
-					exibindo = false;
-				} catch (Exception e) {
-					
-				}
-	
+				exibindo = !(fluxoEfetuaExibicao(fluxoEncontrarPorNome()));
 				break;
 			case 0:
-				
 				exibindo = false;
 				break;
-
 			default:
+				System.out.println("Opção inválida!");
 				break;
 			}
 		}
 	}
 	
 	// fluxo efetuar exibição
-	public static void fluxoEfetuaExibicao(Programa prog) throws Exception {
-		System.out.println(prog.toString());
-		
+	
+	// fluxo de efetuar exibição
+	public static boolean fluxoEfetuaExibicao(Programa prog){
+		boolean efetuado = false;
+		if(prog != null) {
+			System.out.println(prog.toString());
+		}
+		return efetuado;
 	}
 	
 	

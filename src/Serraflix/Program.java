@@ -40,13 +40,13 @@ public class Program {
 			
 			switch(opcaoSelecionada) {
 			case 1:		
-				fluxoCriarPrograma();
+				fluxoCriacao();
 				break;
 			case 2:
-				fluxoEditarPrograma();
+				fluxoEdicao();
 				break;
 			case 3:
-				fluxoRemoverPrograma();
+				fluxoRemocao();
 				break;
 			case 4:
 				fluxoExibicao();
@@ -69,7 +69,7 @@ public class Program {
 		
 	}
 
-	public static void fluxoCriarPrograma() {			
+	public static void fluxoCriacao() {			
 		boolean criando = true;			
 		while(criando) {		
 			System.out.println();
@@ -81,10 +81,10 @@ public class Program {
 			
 			switch(filmeOuSerieCriar) {
 			case 1:
-				criando = !(fluxoCriarEditarPrograma(null, 1));
+				criando = !(fluxoEfetuarCriacaoEdicao(null, 1));
 				break;
 			case 2:
-				criando = !(fluxoCriarEditarPrograma(null, 2));
+				criando = !(fluxoEfetuarCriacaoEdicao(null, 2));
 				break;
 			case 0:
 				criando = false;
@@ -96,7 +96,118 @@ public class Program {
 			}
 		}
 	}
-	public static boolean fluxoCriarEditarPrograma(Programa prog, Integer tipo) {	
+	public static void fluxoEdicao(){
+		boolean editando = true;
+		while(editando) {
+			System.out.println();
+			System.out.println("Como deseja encontrar o programa a ser editado? \n\n"
+					+ "1: escolher de uma listagem por tipo \n"
+					+ "2: escolher de uma listagem por categoria \n"
+					+ "3: escolher da lista com todos os programas \n"
+					+ "4: encontrar por nome \n\n"
+					+ "0: voltar ao menu principal \n");
+			
+			int opcaoEncontrar = ler.nextInt(); ler.nextLine();
+			
+			switch(opcaoEncontrar) {
+			case 1:
+				editando = !(fluxoEfetuarCriacaoEdicao(subfluxoListarPorTipo(), null));
+				break;
+			case 2:				
+				editando = !(fluxoEfetuarCriacaoEdicao(subfluxoListarPorCategoria(), null));
+				break;
+			case 3:				
+				editando = !(fluxoEfetuarCriacaoEdicao(subfluxoListarTodos(), null));
+				break;
+			case 4:
+				editando = !(fluxoEfetuarCriacaoEdicao(subfluxoEncontrarPorNome(), null));
+				break;
+			case 0:
+				editando = false;
+				break;
+			default:
+				System.out.println("\nOpção inválida!\n");
+				break;
+			}
+		}
+	}
+	
+	// fluxo de remover programa
+	
+	// fluxo de remover programa
+	public static void fluxoRemocao() {
+		boolean removendo = true;
+		while(removendo) {
+			System.out.println();
+			System.out.println("Como deseja encontrar o programa a ser removido? \n\n"
+					+ "1: escolher de uma listagem por tipo \n"
+					+ "2: escolher de uma listagem por categoria \n"
+					+ "3: escolher da lista com todos os programas \n"
+					+ "4: encontrar por nome \n\n"
+					+ "0: voltar ao menu principal \n");
+			
+			int opcaoEncontrar = ler.nextInt(); ler.nextLine();
+			
+			switch(opcaoEncontrar) {
+			case 1:
+				removendo = !(fluxoEfetuarRemocao(subfluxoListarPorTipo()));
+				break;
+			case 2:
+				removendo = !(fluxoEfetuarRemocao(subfluxoListarPorCategoria()));
+				break;
+			case 3:
+				removendo = !(fluxoEfetuarRemocao(subfluxoListarTodos()));
+				break;
+			case 4:
+				removendo = !(fluxoEfetuarRemocao(subfluxoEncontrarPorNome()));
+				break;
+			case 0:
+				removendo = false;
+				break;
+			default:
+				System.out.println("\nOpção inválida!\n");
+				break;
+			}
+		}
+	}
+	
+	//fluxo de efetuar a remoção
+	
+	// fluxo de efetuar remoção
+	public static void fluxoExibicao() {
+		boolean exibindo = true;
+		while(exibindo) {
+			System.out.println("Escolha um dos métodos de exibição: \n\n"
+					+ "1: listar por tipo\n"
+					+ "2: listar por categoria \n"
+					+ "3: listar todos os programas \n"
+					+ "4: encontrar por nome \n\n"
+					+ "0: voltar ao menu principal \n");
+			int opcaoEscolhidaExibicao = ler.nextInt(); ler.nextLine();
+			switch (opcaoEscolhidaExibicao) {
+			case 1:
+				exibindo = !(fluxoEfetuarExibicao(subfluxoListarPorTipo()));
+				break;
+			case 2:
+				exibindo = !(fluxoEfetuarExibicao(subfluxoListarPorCategoria()));
+				break;
+			case 3:
+				exibindo = !(fluxoEfetuarExibicao(subfluxoListarTodos()));
+				break;
+			case 4:
+				exibindo = !(fluxoEfetuarExibicao(subfluxoEncontrarPorNome()));
+				break;
+			case 0:
+				exibindo = false;
+				break;
+			default:
+				System.out.println("Opção inválida!");
+				break;
+			}
+		}
+	}
+	
+	public static boolean fluxoEfetuarCriacaoEdicao(Programa prog, Integer tipo) {	
 		boolean efetuado = false;
 		if((prog != null) || (prog == null && tipo != null)) {	
 			
@@ -225,7 +336,7 @@ public class Program {
 				break;
 			}
 			
-			Categoria categoriaPrograma = fluxoEscolherCategoria((prog != null ? prog.getCategoria() : null));
+			Categoria categoriaPrograma = subfluxoEscolherCategoria((prog != null ? prog.getCategoria() : null));
 			
 			if(nomeDoPrograma != null && (duracao != null || qtdEps.size() > 0)) {
 				if(prog != null) {
@@ -249,84 +360,6 @@ public class Program {
 		}
 		return efetuado;
 	}
-	public static void fluxoEditarPrograma(){
-		boolean editando = true;
-		while(editando) {
-			System.out.println();
-			System.out.println("Como deseja encontrar o programa a ser editado? \n\n"
-					+ "1: escolher de uma listagem por tipo \n"
-					+ "2: escolher de uma listagem por categoria \n"
-					+ "3: escolher da lista com todos os programas \n"
-					+ "4: encontrar por nome \n\n"
-					+ "0: voltar ao menu principal \n");
-			
-			int opcaoEncontrar = ler.nextInt(); ler.nextLine();
-			
-			switch(opcaoEncontrar) {
-			case 1:
-				editando = !(fluxoCriarEditarPrograma(fluxoListarPorTipo(), null));
-				break;
-			case 2:				
-				editando = !(fluxoCriarEditarPrograma(fluxoListarPorCategoria(), null));
-				break;
-			case 3:				
-				editando = !(fluxoCriarEditarPrograma(fluxoListarTodos(), null));
-				break;
-			case 4:
-				editando = !(fluxoCriarEditarPrograma(fluxoEncontrarPorNome(), null));
-				break;
-			case 0:
-				editando = false;
-				break;
-			default:
-				System.out.println("\nOpção inválida!\n");
-				break;
-			}
-		}
-	}
-	
-	// fluxo de remover programa
-	
-	// fluxo de remover programa
-	public static void fluxoRemoverPrograma() {
-		boolean removendo = true;
-		while(removendo) {
-			System.out.println();
-			System.out.println("Como deseja encontrar o programa a ser removido? \n\n"
-					+ "1: escolher de uma listagem por tipo \n"
-					+ "2: escolher de uma listagem por categoria \n"
-					+ "3: escolher da lista com todos os programas \n"
-					+ "4: encontrar por nome \n\n"
-					+ "0: voltar ao menu principal \n");
-			
-			int opcaoEncontrar = ler.nextInt(); ler.nextLine();
-			
-			switch(opcaoEncontrar) {
-			case 1:
-				removendo = !(fluxoEfetuarRemocao(fluxoListarPorTipo()));
-				break;
-			case 2:
-				removendo = !(fluxoEfetuarRemocao(fluxoListarPorCategoria()));
-				break;
-			case 3:
-				removendo = !(fluxoEfetuarRemocao(fluxoListarTodos()));
-				break;
-			case 4:
-				removendo = !(fluxoEfetuarRemocao(fluxoEncontrarPorNome()));
-				break;
-			case 0:
-				removendo = false;
-				break;
-			default:
-				System.out.println("\nOpção inválida!\n");
-				break;
-			}
-		}
-	}
-	
-	//fluxo de efetuar a remoção
-	
-	// fluxo de efetuar remoção
 	public static boolean fluxoEfetuarRemocao(Programa prog){
 		boolean efetuado = false;
 		if(prog != null) {
@@ -341,11 +374,15 @@ public class Program {
 		} 		
 		return efetuado;
 	}
+	public static boolean fluxoEfetuarExibicao(Programa prog){
+		boolean efetuado = false;
+		if(prog != null) {
+			System.out.println(prog.toString());
+		}
+		return efetuado;
+	}
 	
-	//fluxo de listar por tipo
-	
-	// fluxo de listar por tipo
-	public static Programa fluxoListarPorTipo() {
+	public static Programa subfluxoListarPorTipo() {
 		boolean escolhendoTipoAListar = true;
 		Programa prog = null;
 		while(escolhendoTipoAListar) {
@@ -401,7 +438,7 @@ public class Program {
 	//fluxo de listar por categoria
 	
 	// fluxo de listar por categoria
-	public static Programa fluxoListarPorCategoria() {
+	public static Programa subfluxoListarPorCategoria() {
 		boolean escolhendoCategoriaAListar = true;
 		Programa prog = null;
 		while(escolhendoCategoriaAListar) {
@@ -443,7 +480,7 @@ public class Program {
 	//fluxo de listar todos
 	
 	//fluxo de listar todos
-	public static Programa fluxoListarTodos() {
+	public static Programa subfluxoListarTodos() {
 		Programa prog = null;
 		boolean listando = true;
 		while(listando) {
@@ -472,7 +509,7 @@ public class Program {
 	//fluxo de encontrar por nome
 	
 	// fluxo de encontrar por nome
-	public static Programa fluxoEncontrarPorNome() {
+	public static Programa subfluxoEncontrarPorNome() {
 		Programa prog = null;
 		boolean escolhendo = true;
 		while(escolhendo) {
@@ -495,7 +532,7 @@ public class Program {
 	// fluxo de escolher categoria
 	
 	// fluxo de escolher categoria
-	public static Categoria fluxoEscolherCategoria(Categoria cat) {
+	public static Categoria subfluxoEscolherCategoria(Categoria cat) {
 		Categoria categoriaEscolhida = null;
 				
 		while(categoriaEscolhida == null) {
@@ -532,49 +569,7 @@ public class Program {
 	//fluxo de exibição
 	
 	// fluxo de exibição
-	public static void fluxoExibicao() {
-		boolean exibindo = true;
-		while(exibindo) {
-			System.out.println("Escolha um dos métodos de exibição: \n\n"
-					+ "1: listar por tipo\n"
-					+ "2: listar por categoria \n"
-					+ "3: listar todos os programas \n"
-					+ "4: encontrar por nome \n\n"
-					+ "0: voltar ao menu principal \n");
-			int opcaoEscolhidaExibicao = ler.nextInt(); ler.nextLine();
-			switch (opcaoEscolhidaExibicao) {
-			case 1:
-				exibindo = !(fluxoEfetuaExibicao(fluxoListarPorTipo()));
-				break;
-			case 2:
-				exibindo = !(fluxoEfetuaExibicao(fluxoListarPorCategoria()));
-				break;
-			case 3:
-				exibindo = !(fluxoEfetuaExibicao(fluxoListarTodos()));
-				break;
-			case 4:
-				exibindo = !(fluxoEfetuaExibicao(fluxoEncontrarPorNome()));
-				break;
-			case 0:
-				exibindo = false;
-				break;
-			default:
-				System.out.println("Opção inválida!");
-				break;
-			}
-		}
-	}
-	
-	// fluxo efetuar exibição
-	
-	// fluxo de efetuar exibição
-	public static boolean fluxoEfetuaExibicao(Programa prog){
-		boolean efetuado = false;
-		if(prog != null) {
-			System.out.println(prog.toString());
-		}
-		return efetuado;
-	}
+
 	
 	
 }

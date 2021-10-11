@@ -33,7 +33,7 @@ public class Program {
 					+ "1: criar um programa \n"
 					+ "2: editar um programa \n"
 					+ "3: remover um programa \n"
-					+ "4: exibir informações \n"
+					+ "4: exibir informações \n\n"
 					+ "0: sair \n");			
 			int opcaoSelecionada = ler.nextInt(); ler.nextLine();	
 			
@@ -69,7 +69,7 @@ public class Program {
 		
 	}
 
-	public static void fluxoCriacao() {			
+	public static void fluxoCriacao() {
 		boolean criando = true;			
 		while(criando) {		
 			System.out.println();
@@ -378,6 +378,7 @@ public class Program {
 		boolean efetuado = false;
 		if(prog != null) {
 			System.out.println(prog.toString());
+			efetuado = true;
 		}
 		return efetuado;
 	}
@@ -388,44 +389,60 @@ public class Program {
 		while(escolhendoTipoAListar) {
 			System.out.println("Qual tipo de programa você deseja listar? \n\n"
 					+ "1: filme \n"
-					+ "2: série \n\n");
+					+ "2: série \n\n"
+					+ "0: voltar ao menu anterior");
 			
 			int filmeOuSerieListar = ler.nextInt(); ler.nextLine();
 			
 			switch(filmeOuSerieListar) {
 			case 1:
-				System.out.println("\nEscolha um filme da lista: \n\n");
-				ArrayList<Programa> listaDeFilmes = catalogoBrasil.listarProgramas(1);
-				for(int i = 0; i < listaDeFilmes.size(); i++) {
-					System.out.println((i + 1) + ": " + listaDeFilmes.get(i).getNome());
-				}
-				System.out.println("\n0: voltar ao menu anterior");
-				int filmeEscolhidoDaLista = ler.nextInt(); ler.nextLine();
-				if(filmeEscolhidoDaLista > 0 && filmeEscolhidoDaLista <= listaDeFilmes.size()) {
-					escolhendoTipoAListar = false;
-					prog =  listaDeFilmes.get(filmeEscolhidoDaLista - 1);
-				}else {
-					if(filmeEscolhidoDaLista != 0) {
-						System.out.println("\nOpção inválida!\n");
+				boolean escolhendoFilmeDaLista = true;
+				while(escolhendoFilmeDaLista) {
+					System.out.println("\nEscolha um filme da lista: \n");
+					ArrayList<Programa> listaDeFilmes = catalogoBrasil.listarProgramas(1);
+					for(int i = 0; i < listaDeFilmes.size(); i++) {
+						System.out.println((i + 1) + ": " + listaDeFilmes.get(i).getNome());
+					}
+					System.out.println("\n0: voltar ao menu anterior");
+					int filmeEscolhidoDaLista = ler.nextInt(); ler.nextLine();
+					if(filmeEscolhidoDaLista > 0 && filmeEscolhidoDaLista <= listaDeFilmes.size()) {
+						escolhendoTipoAListar = false;
+						escolhendoFilmeDaLista = false;
+						prog =  listaDeFilmes.get(filmeEscolhidoDaLista - 1);
+					}else {
+						if(filmeEscolhidoDaLista == 0) {
+							escolhendoFilmeDaLista = false;
+						}else {
+							System.out.println("\nOpção inválida!\n");
+						}
 					}
 				}
 				break;
 			case 2:
-				System.out.println("\nEscolha uma série da lista: \n\n");
-				ArrayList<Programa> listaDeSeries = catalogoBrasil.listarProgramas(2);
-				for(int i = 0; i < listaDeSeries.size(); i++) {
-					System.out.println((i + 1) + ": " + listaDeSeries.get(i).getNome());
-				}
-				System.out.println("\n0: voltar ao menu anterior");
-				int serieEscolhidaDaLista = ler.nextInt(); ler.nextLine();
-				if(serieEscolhidaDaLista > 0 && serieEscolhidaDaLista <= listaDeSeries.size()) {
-					escolhendoTipoAListar = false;
-					prog = listaDeSeries.get(serieEscolhidaDaLista - 1);
-				}else {
-					if(serieEscolhidaDaLista != 0) {
-						System.out.println("\nOpção inválida!\n");
+				boolean escolhendoSerieDaLista = true;
+				while(escolhendoSerieDaLista) {
+					System.out.println("\nEscolha uma série da lista: \n");
+					ArrayList<Programa> listaDeSeries = catalogoBrasil.listarProgramas(2);
+					for(int i = 0; i < listaDeSeries.size(); i++) {
+						System.out.println((i + 1) + ": " + listaDeSeries.get(i).getNome());
+					}
+					System.out.println("\n0: voltar ao menu anterior");
+					int serieEscolhidaDaLista = ler.nextInt(); ler.nextLine();
+					if(serieEscolhidaDaLista > 0 && serieEscolhidaDaLista <= listaDeSeries.size()) {
+						escolhendoTipoAListar = false;
+						escolhendoSerieDaLista = false;
+						prog = listaDeSeries.get(serieEscolhidaDaLista - 1);
+					}else {
+						if(serieEscolhidaDaLista == 0) {
+							escolhendoSerieDaLista = false;
+						}else {
+							System.out.println("\nOpção inválida!\n");							
+						}
 					}
 				}
+				break;
+			case 0:
+				escolhendoTipoAListar = false;
 				break;
 			default:
 				System.out.println("Opção inválida!");
@@ -442,37 +459,51 @@ public class Program {
 		boolean escolhendoCategoriaAListar = true;
 		Programa prog = null;
 		while(escolhendoCategoriaAListar) {
-			System.out.println("De qual categoria você deseja listar? \n\n"
-					+ "1: fantasia \n"
-					+ "2: terror \n"
-					+ "3: comédia \n\n");
+			System.out.println("De qual categoria você deseja listar? \n");
+			
+			for(int i = 0; i < Categoria.values().length; i++) {
+				System.out.println((i + 1) + ": " + Categoria.values()[i].getNomeCategoria());
+			}
+			
+			System.out.println("\n0: voltar ao menu anterior");
 			
 			int categoriaEscolhidaAListar = ler.nextInt(); ler.nextLine();
 			
-			if(categoriaEscolhidaAListar > 0 && categoriaEscolhidaAListar <= 3) {
-				try {
-					System.out.println("\nEscolha um programa da lista: \n");
-					ArrayList<Programa> progsDaCategoria = catalogoBrasil.getProgramasPorCategoria(Categoria.values()[categoriaEscolhidaAListar - 1]);
-					for(int i = 0; i < progsDaCategoria.size(); i++) {
-						System.out.println((i + 1) + ": " + progsDaCategoria.get(i).getNome());
-					}
-					System.out.println("\n0: voltar ao menu anterior");
-					int progEscolhidoDaLista = ler.nextInt(); ler.nextLine();
-					if(progEscolhidoDaLista > 0 && progEscolhidoDaLista <= progsDaCategoria.size()) {
-						escolhendoCategoriaAListar = false;
-						prog = progsDaCategoria.get(progEscolhidoDaLista - 1);
-					}else {
-						if(progEscolhidoDaLista != 0) {
-							System.out.println("\nOpção inválida!\n");
-						}
-					}
-					
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
+			if(categoriaEscolhidaAListar > 0 && categoriaEscolhidaAListar <= Categoria.values().length) {
+				
+				ArrayList<Programa> progsDaCategoria = catalogoBrasil.getProgramasPorCategoria(Categoria.values()[categoriaEscolhidaAListar - 1]);
+				
+				if(progsDaCategoria != null) {
+						boolean escolhendoProgramaDaLista = true;
+						while(escolhendoProgramaDaLista) {
+							System.out.println("\nEscolha um programa da lista: \n");
+							for(int i = 0; i < progsDaCategoria.size(); i++) {
+								System.out.println((i + 1) + ": " + progsDaCategoria.get(i).getNome());
+							}
+							System.out.println("\n0: voltar ao menu anterior");
+							int progEscolhidoDaLista = ler.nextInt(); ler.nextLine();
+							if(progEscolhidoDaLista > 0 && progEscolhidoDaLista <= progsDaCategoria.size()) {
+								escolhendoCategoriaAListar = false;
+								escolhendoProgramaDaLista = false;
+								prog = progsDaCategoria.get(progEscolhidoDaLista - 1);
+							}else {
+								if(progEscolhidoDaLista == 0) {
+									escolhendoProgramaDaLista = false;
+								}else {
+									System.out.println("\nOpção inválida!\n");
+								}
+							}
+						}	
+				}else {
+					System.out.println("Nenhum programa pertence a essa categoria.");
 				}
 			}else {
-				System.out.println("Escolha uma categoria válida!");
-			}
+				if(categoriaEscolhidaAListar == 0) {
+					escolhendoCategoriaAListar = false;
+				}else {					
+					System.out.println("Opção inválida!");
+				}
+			}		
 		}
 		return prog;
 	}
@@ -538,28 +569,20 @@ public class Program {
 		while(categoriaEscolhida == null) {
 			System.out.println();
 			
-			System.out.println("Digite o número da categoria: \n");
-			System.out.println("1: fantasia" + (cat != null ? (cat.equals(Categoria.FANTASIA) ? " (atual)" : ""): ""));
-			System.out.println("2: terror" + (cat != null ? (cat.equals(Categoria.TERROR) ? " (atual)" : ""): ""));
-			System.out.println("3: comédia" + (cat != null ? (cat.equals(Categoria.COMEDIA) ? " (atual)" : ""): "\n"));
+			System.out.println("Escolha uma categoria: \n");
+			
+			for(int i = 0; i < Categoria.values().length; i++) {
+				System.out.println((i + 1) + ": " + Categoria.values()[i].getNomeCategoria() + (cat != null ? (cat.equals(Categoria.values()[i]) ? " (atual)" : ""): ""));
+			}
+			
+			System.out.println();
 			
 			int numeroCategoria = ler.nextInt();ler.nextLine();
 			
-			switch(numeroCategoria) {
-			case 1:
-				categoriaEscolhida = Categoria.FANTASIA;
-				break;
-			case 2:
-				categoriaEscolhida = Categoria.TERROR;								
-				break;
-			case 3:
-				categoriaEscolhida = Categoria.COMEDIA;
-				break;
-			default:
-				System.out.println();
-				
-				System.out.println("Opção inválida! \n");
-				break;
+			if(numeroCategoria > 0 && numeroCategoria <= Categoria.values().length) {
+				categoriaEscolhida = Categoria.values()[numeroCategoria - 1];
+			}else {
+				System.out.println("\nOpção inválida! \n");
 			}
 		}
 		

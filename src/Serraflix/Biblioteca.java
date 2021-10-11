@@ -29,7 +29,7 @@ public class Biblioteca {
 	}
 	
 	//método de obter programas por categoria
-	public ArrayList<Programa> getProgramasPorCategoria(Categoria categoria) throws Exception{
+	public ArrayList<Programa> getProgramasPorCategoria(Categoria categoria){
 		ArrayList<Programa> resultado = new ArrayList<>();
 		for(Programa p: this.programas) {
 			if(p.getCategoria().equals(categoria)) {
@@ -39,7 +39,7 @@ public class Biblioteca {
 		if(resultado.size() > 0) {
 			return resultado;
 		}else {
-			throw new Exception("Nenhum programa encontrado com essa categoria.");
+			return null;
 		}
 	}
 	

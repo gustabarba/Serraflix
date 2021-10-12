@@ -103,7 +103,7 @@ public class Serie extends Programa{
 	@Override
 	public String toString() {
 		String retorno = "";
-		retorno = "\n" + super.nome + "\n\n"
+		retorno = "\n" + super.nome + " | Série\n\n"
 				 + (super.pontuacao == null ? "" : ("Nota: " + String.format("%.1f", super.pontuacao) + "/10 \n"))
 				 + "Categoria: " + this.getCategoria().getNomeCategoria() + "\n\n"
 				 + "Temporadas: " + this.temporadas.size() + "\n\n";

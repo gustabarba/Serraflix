@@ -17,8 +17,8 @@ public class Filme extends Programa{
 	
 	@Override
 	public String toString() {
-		return "\n" + super.nome + "\n\n"
-				 + (super.pontuacao == null ? "" : ("Nota: " + String.format("%.1f", super.pontuacao) + "/10 \n"))
+		return "\n" + super.nome + " | Filme\n\n"
+				 + (super.pontuacao == null ? "" : ("Nota: " + String.format("%.1f", super.pontuacao) + "/5 \n"))
 				 + "Categoria: " + this.getCategoria().getNomeCategoria() + "\n"
 				 + "Duração: " + this.duracao + " minutos";
 	}

@@ -4,13 +4,13 @@ public class Filme extends Programa{
 	private int duracao;
 	
 	//construtor padrão
-	public Filme(String nome, Double pontuacao, Categoria categoria, int duracao) {
+	public Filme(String nome, Double pontuacao, Categoria categoria, int duracao){
 		super(nome, pontuacao, categoria);
 		this.duracao = duracao;
 	}
 	
 	//construtor de edição
-	public Filme(String nome, Double pontuacao, Categoria categoria, int duracao, int id) {
+	public Filme(String nome, Double pontuacao, Categoria categoria, int duracao, int id){
 		super(nome, pontuacao, categoria, id);
 		this.duracao = duracao;
 	}
@@ -28,7 +28,7 @@ public class Filme extends Programa{
 		if(nota != null) {
 			if(nota < 0 || nota > 5) {
 				super.pontuacao = null;
-				throw new ClassificacaoForaDoRangeException("Erro ao adicionar a classificação para a série \"" + this.nome + "\": a nota não deve ser menor que zero ou maior que cinco.");
+				throw new ClassificacaoForaDoRangeException("\nErro ao adicionar a classificação: a nota não deve ser menor que zero ou maior que cinco.");
 			}else {
 				super.pontuacao = nota;
 			}

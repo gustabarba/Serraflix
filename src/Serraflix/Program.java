@@ -42,23 +42,23 @@ public class Program {
 			
 			System.out.print("> ");
 			
-			int opcaoSelecionada = ler.nextInt(); ler.nextLine();	
+			String opcaoSelecionada = ler.nextLine();	
 			
 			
 			switch(opcaoSelecionada) {
-			case 1:		
+			case "1":		
 				fluxoCriacao();
 				break;
-			case 2:
+			case "2":
 				fluxoEdicao();
 				break;
-			case 3:
+			case "3":
 				fluxoRemocao();
 				break;
-			case 4:
+			case "4":
 				fluxoExibicao();
 				break;
-			case 0:
+			case "0":
 				emOperacao = false;
 				break;
 			default:
@@ -114,16 +114,16 @@ public class Program {
 			
 			System.out.print("> ");
 			
-			int filmeOuSerieCriar = ler.nextInt(); ler.nextLine();
+			String filmeOuSerieCriar = ler.nextLine();
 			
 			switch(filmeOuSerieCriar) {
-			case 1:
+			case "1":
 				criando = !(fluxoEfetuarCriacaoEdicao(null, 1));
 				break;
-			case 2:
+			case "2":
 				criando = !(fluxoEfetuarCriacaoEdicao(null, 2));
 				break;
-			case 0:
+			case "0":
 				criando = false;
 				break;
 			default:
@@ -145,22 +145,22 @@ public class Program {
 			
 			System.out.print("> ");
 			
-			int opcaoEncontrar = ler.nextInt(); ler.nextLine();
+			String opcaoEncontrar = ler.nextLine();
 			
 			switch(opcaoEncontrar) {
-			case 1:
+			case "1":
 				editando = !(fluxoEfetuarCriacaoEdicao(subfluxoListarPorTipo(), null));
 				break;
-			case 2:				
+			case "2":				
 				editando = !(fluxoEfetuarCriacaoEdicao(subfluxoListarPorCategoria(), null));
 				break;
-			case 3:				
+			case "3":				
 				editando = !(fluxoEfetuarCriacaoEdicao(subfluxoListarTodos(), null));
 				break;
-			case 4:
+			case "4":
 				editando = !(fluxoEfetuarCriacaoEdicao(subfluxoEncontrarPorNome(), null));
 				break;
-			case 0:
+			case "0":
 				editando = false;
 				break;
 			default:
@@ -181,22 +181,22 @@ public class Program {
 					+ "0: voltar ao menu principal \n");
 			
 			System.out.print("> ");
-			int opcaoEncontrar = ler.nextInt(); ler.nextLine();
+			String opcaoEncontrar = ler.nextLine();
 			
 			switch(opcaoEncontrar) {
-			case 1:
+			case "1":
 				removendo = !(fluxoEfetuarRemocao(subfluxoListarPorTipo()));
 				break;
-			case 2:
+			case "2":
 				removendo = !(fluxoEfetuarRemocao(subfluxoListarPorCategoria()));
 				break;
-			case 3:
+			case "3":
 				removendo = !(fluxoEfetuarRemocao(subfluxoListarTodos()));
 				break;
-			case 4:
+			case "4":
 				removendo = !(fluxoEfetuarRemocao(subfluxoEncontrarPorNome()));
 				break;
-			case 0:
+			case "0":
 				removendo = false;
 				break;
 			default:
@@ -215,21 +215,21 @@ public class Program {
 					+ "4: pesquisar por nome \n\n"
 					+ "0: voltar ao menu principal \n");
 			System.out.print("> ");
-			int opcaoEscolhidaExibicao = ler.nextInt(); ler.nextLine();
+			String opcaoEscolhidaExibicao = ler.nextLine();
 			switch (opcaoEscolhidaExibicao) {
-			case 1:
+			case "1":
 				exibindo = !(fluxoEfetuarExibicao(subfluxoListarPorTipo()));
 				break;
-			case 2:
+			case "2":
 				exibindo = !(fluxoEfetuarExibicao(subfluxoListarPorCategoria()));
 				break;
-			case 3:
+			case "3":
 				exibindo = !(fluxoEfetuarExibicao(subfluxoListarTodos()));
 				break;
-			case 4:
+			case "4":
 				exibindo = !(fluxoEfetuarExibicao(subfluxoEncontrarPorNome()));
 				break;
-			case 0:
+			case "0":
 				exibindo = false;
 				break;
 			default:
@@ -363,13 +363,22 @@ public class Program {
 				}
 				
 				if(numTemporadas != null) {
-					for(int i = 0; i < numTemporadas; i++) {
+					for(int i = 0; i < numTemporadas; i++) {		
 						
-						System.out.println("\nQuantos episódios na " + (i + 1) + "º temporada? \n");
+						boolean adicionouEps = false;
 						
-						System.out.print("> ");
-						
-						qtdEps.add(ler.nextInt()); ler.nextLine();
+						while(!adicionouEps) {
+							System.out.println("\nQuantos episódios na " + (i + 1) + "º temporada? \n");
+							System.out.print("> ");
+							try {
+								qtdEps.add(Integer.valueOf(ler.nextLine()));
+								adicionouEps = true;
+								
+							}catch(Exception e) {
+								System.out.print("> (Valor inválido!)\n");	
+							}
+						}
+							
 					}
 				}
 				break;
@@ -397,14 +406,6 @@ public class Program {
 				
 				String desejaProsseguir = ler.nextLine();
 				if(!(desejaProsseguir.equals("0"))) {
-					if(prog != null) {
-						catalogo.deletarProgramaPorId(prog.getId());
-						System.out.print("\n" + (tipo == 1 ? "Filme editado" : "Série editada") + " com sucesso! (Pressione \"Enter\" para voltar ao menu principal)");
-						ler.nextLine();
-					}else {
-						System.out.print("\n" + (tipo == 1 ? "Filme criado" : "Série criada") + " com sucesso! (Pressione \"Enter\" para voltar ao menu principal)");
-						ler.nextLine();
-					}
 					switch(tipo) {
 					case 1:
 						if(prog != null) {
@@ -421,6 +422,14 @@ public class Program {
 						}
 						break;
 					}		
+					if(prog != null) {
+						catalogo.deletarProgramaPorId(prog.getId());
+						System.out.print("\n" + (tipo == 1 ? "Filme editado" : "Série editada") + " com sucesso! (Pressione \"Enter\" para voltar ao menu principal)");
+						ler.nextLine();
+					}else {
+						System.out.print("\n" + (tipo == 1 ? "Filme criado" : "Série criada") + " com sucesso! (Pressione \"Enter\" para voltar ao menu principal)");
+						ler.nextLine();
+					}
 					efetuado = true;
 				}
 			}else {
@@ -473,10 +482,10 @@ public class Program {
 			
 			System.out.print("> ");
 			
-			int filmeOuSerieListar = ler.nextInt(); ler.nextLine();
+			String filmeOuSerieListar = ler.nextLine();
 			
 			switch(filmeOuSerieListar) {
-			case 1:
+			case "1":
 				boolean escolhendoFilmeDaLista = true;
 				while(escolhendoFilmeDaLista) {
 					ArrayList<Programa> listaDeFilmes = catalogo.listarProgramas(1);
@@ -489,7 +498,16 @@ public class Program {
 						
 						System.out.print("> ");
 						
-						int filmeEscolhidoDaLista = ler.nextInt(); ler.nextLine();
+						int filmeEscolhidoDaLista = -1;				
+						
+						String bufferFilmeEscolhidoDaLista = ler.nextLine();
+						try {
+							filmeEscolhidoDaLista = Integer.valueOf(bufferFilmeEscolhidoDaLista);
+						}
+						catch(Exception e) {
+							
+						}
+						
 						if(filmeEscolhidoDaLista > 0 && filmeEscolhidoDaLista <= listaDeFilmes.size()) {
 							escolhendoTipoAListar = false;
 							escolhendoFilmeDaLista = false;
@@ -510,7 +528,7 @@ public class Program {
 					}										
 				}
 				break;
-			case 2:
+			case "2":
 				boolean escolhendoSerieDaLista = true;
 				while(escolhendoSerieDaLista) {
 					ArrayList<Programa> listaDeSeries = catalogo.listarProgramas(2);
@@ -521,7 +539,17 @@ public class Program {
 						}
 						System.out.println("\n0: voltar\n");
 						System.out.print("> ");
-						int serieEscolhidaDaLista = ler.nextInt(); ler.nextLine();
+						
+						int serieEscolhidaDaLista = -1;						
+						
+						String bufferSerieEscolhidaDaLista = ler.nextLine();
+						try {
+							serieEscolhidaDaLista = Integer.valueOf(bufferSerieEscolhidaDaLista);
+						}
+						catch(Exception e) {
+							
+						}		
+						
 						if(serieEscolhidaDaLista > 0 && serieEscolhidaDaLista <= listaDeSeries.size()) {
 							escolhendoTipoAListar = false;
 							escolhendoSerieDaLista = false;
@@ -542,7 +570,7 @@ public class Program {
 					}
 				}
 				break;
-			case 0:
+			case "0":
 				escolhendoTipoAListar = false;
 				break;
 			default:
@@ -566,7 +594,16 @@ public class Program {
 			
 			System.out.print("> ");
 			
-			int categoriaEscolhidaAListar = ler.nextInt(); ler.nextLine();
+			int categoriaEscolhidaAListar = -1;
+			
+			String bufferCategoriaEscolhidaAListar = ler.nextLine();
+			
+			try {
+				categoriaEscolhidaAListar = Integer.valueOf(bufferCategoriaEscolhidaAListar);
+			}
+			catch(Exception e) {
+				
+			}
 			
 			if(categoriaEscolhidaAListar > 0 && categoriaEscolhidaAListar <= Categoria.values().length) {
 				
@@ -581,7 +618,14 @@ public class Program {
 							}
 							System.out.println("\n0: voltar\n");
 							System.out.print("> ");
-							int progEscolhidoDaLista = ler.nextInt(); ler.nextLine();
+							int progEscolhidoDaLista = -1;
+							String bufferProgEscolhidoDaLista = ler.nextLine();
+							try {
+								progEscolhidoDaLista = Integer.valueOf(bufferProgEscolhidoDaLista);
+							}
+							catch(Exception e) {
+								
+							}
 							if(progEscolhidoDaLista > 0 && progEscolhidoDaLista <= progsDaCategoria.size()) {
 								escolhendoCategoriaAListar = false;
 								escolhendoProgramaDaLista = false;
@@ -621,7 +665,17 @@ public class Program {
 				}
 				System.out.println("\n0: voltar\n");
 				System.out.print("> ");
-				int programaEscolhidoDaLista = ler.nextInt(); ler.nextLine();
+				
+				
+				int programaEscolhidoDaLista = -1;
+				String bufferProgramaEscolhidoDaLista = ler.nextLine();
+				try {
+					programaEscolhidoDaLista = Integer.valueOf(bufferProgramaEscolhidoDaLista);
+				}
+				catch(Exception e) {
+					
+				}
+				
 				if(programaEscolhidoDaLista > 0 && programaEscolhidoDaLista <= listaDeTodos.size()) {
 					listando = false;
 					prog = listaDeTodos.get(programaEscolhidoDaLista - 1);
@@ -660,7 +714,16 @@ public class Program {
 					}
 					System.out.println("\n0: voltar\n");
 					System.out.print("> ");
-					int resultadoSelecionado = ler.nextInt(); ler.nextLine();
+					
+					int resultadoSelecionado = -1;
+					String bufferResultadoSelecionado = ler.nextLine();
+					try {
+						resultadoSelecionado = Integer.valueOf(bufferResultadoSelecionado);
+					}
+					catch(Exception e) {
+						
+					}
+					
 					if(resultadoSelecionado > 0 && resultadoSelecionado <= progs.size()) {
 						prog = progs.get(resultadoSelecionado - 1);
 						escolhendo = false;

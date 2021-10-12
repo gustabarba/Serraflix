@@ -8,7 +8,7 @@ public class Serie extends Programa{
 	private ArrayList<Temporada> temporadas = new ArrayList<>();
 	
 	//construtor padrão
-	public Serie(String nome, Double pontuacao, Categoria categoria, List<Integer> qtdEps) {
+	public Serie(String nome, Double pontuacao, Categoria categoria, List<Integer> qtdEps){
 		super(nome, pontuacao, categoria);
 		try {
 			adicionarTemporadas(qtdEps);
@@ -18,7 +18,7 @@ public class Serie extends Programa{
 	}
 	
 	//construtor de edição
-	public Serie(String nome, Double pontuacao, Categoria categoria, List<Integer> qtdEps, int id) {
+	public Serie(String nome, Double pontuacao, Categoria categoria, List<Integer> qtdEps, int id){
 		super(nome, pontuacao, categoria, id);
 		try {
 			adicionarTemporadas(qtdEps);
@@ -72,7 +72,7 @@ public class Serie extends Programa{
 				this.temporadas.add(new Temporada(i + 1, qtdEps.get(i)));
 			}
 		}else {
-			throw new Exception("Erro ao adicionar temporadas para a série \"" + this.nome + "\". Você precisa adicionar um número positivo de episódios, e só pode criar uma temporada que ainda não exista.");
+			throw new Exception("Erro ao adicionar temporadas para a série \"" + this.nome + "\": você precisa adicionar um número positivo de episódios, e só pode criar uma temporada que ainda não exista.");
 		}
 	}
 	
@@ -91,7 +91,7 @@ public class Serie extends Programa{
 		if(nota != null) {
 			if(nota < 0 || nota > 10) {
 				super.pontuacao = null;
-				throw new ClassificacaoForaDoRangeException("Erro ao adicionar a classificação para a série \"" + this.nome + "\": a nota não deve ser menor que zero ou maior que dez.");
+				throw new ClassificacaoForaDoRangeException("\nErro ao adicionar a classificação: a nota não deve ser menor que zero ou maior que dez.");
 			}else {
 				super.pontuacao = nota;
 			}

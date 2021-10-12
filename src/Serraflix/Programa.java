@@ -15,7 +15,7 @@ public abstract class Programa implements Classificar{
 		try {
 			classificar(pontuacao);
 		} catch (ClassificacaoForaDoRangeException e) {
-			/*System.out.println(e.getMessage());*/
+			System.out.println(e.getMessage());
 		}
 		this.categoria = categoria;
 	}
@@ -27,7 +27,7 @@ public abstract class Programa implements Classificar{
 		try {
 			classificar(pontuacao);
 		} catch (ClassificacaoForaDoRangeException e) {
-			/*System.out.println(e.getMessage());*/
+			System.out.println(e.getMessage());
 		}
 		this.categoria = categoria;
 	}

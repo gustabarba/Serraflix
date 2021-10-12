@@ -15,7 +15,7 @@ public class Temporada {
 		if(eps > 0) {
 			this.quantidadeEpisodios += eps;
 		}else {
-			throw new Exception("Você precisa inserir um valor positivo de episódios.");
+			throw new Exception("VOCÊ PRECISA INSERIR UM VALOR POSITIVO DE EPISÓDIOS.");
 		}
 	}
 	
@@ -24,7 +24,7 @@ public class Temporada {
 		if(eps < this.quantidadeEpisodios) {
 			this.quantidadeEpisodios -= eps;
 		}else {
-			throw new Exception("Você não pode remover todos os episódios de uma temporada. Para fazer isso, precisa remover ela inteira como objeto.");
+			throw new Exception("VOCÊ NÃO PODE REMOVER TODOS OS EPISÓDIOS DE UMA TEMPORADA. PARA QUE ISSO SEJA FEITO, É NECESSÁRIO QUE REMOVA A TEMPORADA INTEIRA.");
 		}
 	}
 	

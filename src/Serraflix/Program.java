@@ -29,16 +29,22 @@ public class Program {
 
 		boolean emOperacao = true;
 		
-		System.out.println("Bem vindo ao Serraflix!");
+		System.out.println(" ________________________________");
+		System.out.println("|      SEJA BEM-VINDO(A) AO     |");
+		System.out.println("|   *** S E R R A F L I X ***   |");
+		System.out.println("|_______________________________|\n\n");
 		
 		while(emOperacao) {	
-			System.out.println();
-			System.out.println("O que você deseja fazer? \n\n"
-					+ "1: criar um programa \n"
-					+ "2: editar um programa \n"
-					+ "3: deletar um programa \n"
-					+ "4: exibir informações \n\n"
-					+ "0: sair \n");			
+			System.out.println("|=========================|");
+			System.out.println("|O QUE VOCÊ DESEJA FAZER? |");
+			System.out.println("|=========================|\n\n");
+			System.out.println("__________________________");
+			System.out.println("1 ---> CRIAR UM PROGRAMA  |\n"
+					+ "2 ---> EDITAR UM PROGRAMA |\n"
+					+ "3 ---> DELETAR UM PROGRAMA| \n"
+					+ "4 ---> EXIBIR INFORMAÇÕES | \n"
+					+ "0 ---> SAIR               |");
+			System.out.println("__________________________|\n");
 			
 			System.out.print("> ");
 			
@@ -62,11 +68,11 @@ public class Program {
 				emOperacao = false;
 				break;
 			default:
-				System.out.print("> (Opção inválida!)\n");
+				System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
 				break;
 			}
 		}
-		System.out.println("\nAté a próxima!");
+		System.out.println("\nATÉ A PRÓXIMA 0/ ");
 		ler.close();
 	}
 
@@ -106,11 +112,15 @@ public class Program {
 	private static void fluxoCriacao() {
 		boolean criando = true;			
 		while(criando) {		
-			System.out.println();
-			System.out.println("Qual tipo de programa você deseja criar? \n\n"
-					+ "1: filme \n"
-					+ "2: série \n\n"
-					+ "0: voltar ao menu principal \n");
+					System.out.println(" __________________________________________");
+					System.out.println("| QUAL TIPO DE PROGRAMA VOCÊ DESEJA CRIAR? |");
+					System.out.println("|__________________________________________|\n\n)");
+					System.out.println("_______________________________");
+					System.out.println(
+					  "1 ---> FILME                   |\n"
+					+ "2 ---> SÉRIE                   |\n"
+					+ "0 ---> VOLTAR AO MENU PRINCIPAL|");
+					System.out.println("_______________________________|\n");
 			
 			System.out.print("> ");
 			
@@ -127,7 +137,7 @@ public class Program {
 				criando = false;
 				break;
 			default:
-				System.out.print("> (Opção inválida!)\n");
+				System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
 				break;
 			}
 		}
@@ -135,13 +145,17 @@ public class Program {
 	private static void fluxoEdicao(){
 		boolean editando = true;
 		while(editando) {
-			System.out.println();
-			System.out.println("Como deseja encontrar o programa a ser editado? \n\n"
-					+ "1: escolher de uma listagem por tipo \n"
-					+ "2: escolher de uma listagem por categoria \n"
-					+ "3: escolher da lista com todos os programas \n"
-					+ "4: pesquisar por nome \n\n"
-					+ "0: voltar ao menu principal \n");
+			System.out.println("________________________________________________ ");
+			System.out.println("|COMO DESEJA ECONTRAR O PROGRAMA A SER EDITADO? |");
+			System.out.println("|_______________________________________________|\n\n");
+			System.out.println("__________________________________________");
+			System.out.println(
+					  "1 ---> DE UMA LISTAGEM POR TIPO           |\n"
+					+ "2 ---> DE UMA LISTAGEM POR CATEGORIA      |\n"
+					+ "3 ---> DE UMA LISTA COM TODOS OS PROGRAMAS| \n"
+					+ "4 ---> PELO NOME DO PROGRAMA              | \n"
+					+ "0 ---> VOLTAR AO MENU PRINCIPAL           |");
+			System.out.println("__________________________________________|\n");
 			
 			System.out.print("> ");
 			
@@ -164,7 +178,7 @@ public class Program {
 				editando = false;
 				break;
 			default:
-				System.out.print("> (Opção inválida!)\n");
+				System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
 				break;
 			}
 		}
@@ -172,14 +186,17 @@ public class Program {
 	private static void fluxoRemocao() {
 		boolean removendo = true;
 		while(removendo) {
-			System.out.println();
-			System.out.println("Como deseja encontrar o programa a ser deletado? \n\n"
-					+ "1: escolher de uma listagem por tipo \n"
-					+ "2: escolher de uma listagem por categoria \n"
-					+ "3: escolher da lista com todos os programas \n"
-					+ "4: pesquisar por nome \n\n"
-					+ "0: voltar ao menu principal \n");
-			
+			System.out.println("_________________________________________________ ");
+			System.out.println("|COMO DESEJA ECONTRAR O PROGRAMA A SER DELETADO? |");
+			System.out.println("|________________________________________________|\n\n");
+			System.out.println("__________________________________________");
+			System.out.println(
+					  "1 ---> DE UMA LISTAGEM POR TIPO           |\n"
+					+ "2 ---> DE UMA LISTAGEM POR CATEGORIA      |\n"
+					+ "3 ---> DE UMA LISTA COM TODOS OS PROGRAMAS| \n"
+					+ "4 ---> PELO NOME DO PROGRAMA              | \n"
+					+ "0 ---> VOLTAR AO MENU PRINCIPAL           |");
+			System.out.println("__________________________________________|\n");
 			System.out.print("> ");
 			String opcaoEncontrar = ler.nextLine();
 			
@@ -200,7 +217,7 @@ public class Program {
 				removendo = false;
 				break;
 			default:
-				System.out.print("> (Opção inválida!)\n");
+				System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
 				break;
 			}
 		}
@@ -208,12 +225,17 @@ public class Program {
 	private static void fluxoExibicao() {
 		boolean exibindo = true;
 		while(exibindo) {
-			System.out.println("\nEscolha um dos métodos de exibição: \n\n"
-					+ "1: listar por tipo\n"
-					+ "2: listar por categoria \n"
-					+ "3: listar todos os programas \n"
-					+ "4: pesquisar por nome \n\n"
-					+ "0: voltar ao menu principal \n");
+			System.out.println("_____________________________________ ");
+			System.out.println("|ESCOLHA UM DOS MÉTODOS DE EXIBIÇÃO  |");
+			System.out.println("|____________________________________|\n\n");
+			System.out.println("__________________________________________");
+			System.out.println(
+					  "1 ---> DE UMA LISTAGEM POR TIPO           |\n"
+					+ "2 ---> DE UMA LISTAGEM POR CATEGORIA      |\n"
+					+ "3 ---> DE UMA LISTA COM TODOS OS PROGRAMAS| \n"
+					+ "4 ---> PELO NOME DO PROGRAMA              | \n"
+					+ "0 ---> VOLTAR AO MENU PRINCIPAL           |");
+			System.out.println("__________________________________________|\n");
 			System.out.print("> ");
 			String opcaoEscolhidaExibicao = ler.nextLine();
 			switch (opcaoEscolhidaExibicao) {
@@ -233,7 +255,7 @@ public class Program {
 				exibindo = false;
 				break;
 			default:
-				System.out.print("> (Opção inválida!)\n");
+				System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
 				break;
 			}
 		}
@@ -253,17 +275,17 @@ public class Program {
 			
 			switch(tipo) {
 			case 1:
-				System.out.println("\nNome do filme:\n");
+				System.out.println("\n* NOME DO FILME:\n");
 				break;
 			case 2:
-				System.out.println("\nNome da série:\n");
+				System.out.println("\n* NOME DA SÉRIE:\n");
 				break;
 			}
 			
 			String nomeDoPrograma = null;
 			
 			if(prog != null) {
-				System.out.print(prog.getNome() + " (Pressione \"Enter\" para manter, ou digite um novo nome) > ");		
+				System.out.print(prog.getNome() + " (PRESSIONE \"E N T E R\" PARA MANTER, OU DIGITE UM NOVO NOME) > ");		
 				nomeDoPrograma = prog.getNome();			
 			}else {
 				System.out.print("> ");
@@ -287,15 +309,15 @@ public class Program {
 			
 			switch(tipo) {
 			case 1:
-				System.out.println("\nPontuação de 1 a 5:\n");
+				System.out.println("\n* POTNUAÇÃO DE 1 A 5:\n");
 				break;
 			case 2:
-				System.out.println("\nPontuação de 1 a 10:\n");
+				System.out.println("\n* PONTUAÇÃO DE 1 A 10:\n");
 				break;
 			}
 			
 			if(pontuacaoPrograma != null) {
-				System.out.print(pontuacaoPrograma + (prog instanceof Filme ? "/5" : "/10") + " (Pressione \"Enter\" para manter, ou digite nova pontuação) > ");
+				System.out.print(pontuacaoPrograma + (prog instanceof Filme ? "/5" : "/10") + " (PRESSIONE \"E N T E R\" PARA MANTER, OU DIGITE UMA NOVA PONTUAÇÃO) > ");
 			}else {
 				System.out.print("> ");
 			}
@@ -318,11 +340,11 @@ public class Program {
 			
 			switch(tipo) {
 			case 1:	
-				System.out.println("\nQuantos minutos de duração?\n");
+				System.out.println("\n* QUANTOS MINUTOS DE DURAÇÃO?\n");
 				
 				if(prog != null) {
 					duracao = ((Filme) prog).getDuracao();
-					System.out.print(((Filme) prog).getDuracao() + " minutos (Pressione \"Enter\" para manter, ou digite nova duração) > ");
+					System.out.print(((Filme) prog).getDuracao() + " MINUTOS (PRESSIONE \"E N T E R\" PARA MANTER, OU DIGITE UMA NOVA DURAÇÃO) > ");
 				}else {
 					System.out.print("> ");
 				}
@@ -338,10 +360,10 @@ public class Program {
 				}
 				break;
 			case 2:
-				System.out.println("\nQuantas temporadas? \n");
+				System.out.println("\n* QUANTAS TEMPORADAS? \n");
 				
 				if(prog != null) {
-					System.out.print(((Serie)prog).getNumeroTemporas() + " (Pressione \"Enter\" para manter, ou digite um novo valor) > ");				
+					System.out.print(((Serie)prog).getNumeroTemporas() + " (PRESSIONE \"E N T E R\" PARA MANTER, OU DIGITE UM NOVO Nº DE TEMPORADAS) > ");				
 				}else {
 					System.out.print("> ");
 				}
@@ -368,14 +390,14 @@ public class Program {
 						boolean adicionouEps = false;
 						
 						while(!adicionouEps) {
-							System.out.println("\nQuantos episódios na " + (i + 1) + "º temporada? \n");
+							System.out.println("\n* QUANTOS EPISÓDIOS NA " + (i + 1) + "º TEMPORADA? \n");
 							System.out.print("> ");
 							try {
 								qtdEps.add(Integer.valueOf(ler.nextLine()));
 								adicionouEps = true;
 								
 							}catch(Exception e) {
-								System.out.print("> (Valor inválido!)\n");	
+								System.out.print("*** VALOR INVÁLIDO :( ***\n");	
 							}
 						}
 							
@@ -398,11 +420,11 @@ public class Program {
 					break;
 				}
 				if(prog == null) {
-					System.out.println("\nVocê está prestes a criar " + (tipo == 1 ? "um filme" : "uma série") + " com as informações acima. Deseja prosseguir?\n");
+					System.out.println("\n* VOCÊ ESTÁ PRESTES A CRIAR " + (tipo == 1 ? "UM FILME" : "UMA SÉRIE") + " COM AS INFORMAÇÕES ACIMA, DESEJA PROSSEGUIR?\n");
 				}else {
-					System.out.println("\nVocê está prestes a editar " + (tipo == 1 ? "o filme" : "a série") + " \"" + prog.nome + "\" com as informações acima. Deseja prosseguir?\n");
+					System.out.println("\n* VOCÊ ESTÁ PRESTES A EDITAR " + (tipo == 1 ? "O FILME" : "A SÉRIE") + " \"" + prog.nome + "\" COM AS INFORMAÇÕES ACIMA, DESEJA PROSSEGUIR?\n");
 				}
-				System.out.print("(Pressione \"Enter\" para prosseguir, ou digite \"0\" para voltar ao menu de " + (prog == null ? "criação" : "edição") + ") > ");
+				System.out.print("(PRESSIONE \"E N T E R\" PARA PROSSEGUIR, OU DIGITE \"0\" PARA VOLTAR AO MENU DE" + (prog == null ? "CRIAÇÃO" : "EDIÇÃO") + ") > ");
 				
 				String desejaProsseguir = ler.nextLine();
 				if(!(desejaProsseguir.equals("0"))) {
@@ -424,16 +446,16 @@ public class Program {
 					}		
 					if(prog != null) {
 						catalogo.deletarProgramaPorId(prog.getId());
-						System.out.print("\n" + (tipo == 1 ? "Filme editado" : "Série editada") + " com sucesso! (Pressione \"Enter\" para voltar ao menu principal)");
+						System.out.print("\n" + (tipo == 1 ? "* FILME EDITADO" : "SÉRIE EDITADA") + " COM SUCESSO! :) (PRESSIONE \"E N T E R\" PARA VOLTAR AO MENU PRINCIPAL)");
 						ler.nextLine();
 					}else {
-						System.out.print("\n" + (tipo == 1 ? "Filme criado" : "Série criada") + " com sucesso! (Pressione \"Enter\" para voltar ao menu principal)");
+						System.out.print("\n" + (tipo == 1 ? "* FILME CRIADO" : "SÉRIE CRIADA") + " COM SUCESSO! :) (PRESSIONE \"E N T E R\" PARA VOLTAR AO MENU PRINCIPAL)");
 						ler.nextLine();
 					}
 					efetuado = true;
 				}
 			}else {
-				System.out.print("\nImpossível criar o programa: dados vazios foram inseridos. (Pressione \"Enter\" para voltar ao menu de criação) ");
+				System.out.print("\n*** IMPOSSÍVEL CRIAR O PROGRAMA: DADOS VAZIOS FORAM INSERIDOS :(. (PRESSIONE \"E N T E R\" PARA VOLTAR AO MENU DE CRIAÇÃO) *** ");
 				ler.nextLine();
 			}
 		}
@@ -442,8 +464,8 @@ public class Program {
 	private static boolean fluxoEfetuarRemocao(Programa prog){
 		boolean efetuado = false;
 		if(prog != null) {
-			System.out.println("\nVocê está prestes a deletar " + (prog instanceof Filme ? "o filme" : "a série") + " \"" + prog.nome + "\". Deseja prosseguir?");
-			System.out.print("\n(Pressione \"Enter\" para deletar o programa selecionado, ou digite \"0\" para voltar) > ");
+			System.out.println("\n* VOCÊ ESTÁ PRESTES A DELETAR " + (prog instanceof Filme ? "O FILME" : "A SÉRIE") + " \"" + prog.nome + "\". DESEJA PROSSEGUIR?");
+			System.out.print("\n(pRESSIONE \"E N T E R \" PARA DELETAR O PROGRAMA SELECIONADO, OU DIGITE\"0\" PARA VOLTAR) > ");
 			String confirmaDeletar = ler.nextLine();
 			if(confirmaDeletar.equals("0")) {
 				efetuado = false;
@@ -451,7 +473,7 @@ public class Program {
 				for (Programa p : catalogo.listarProgramas(3)) {
 					if (p.equals(prog)) {
 						catalogo.deletarProgramaPorId(prog.getId());
-						System.out.print("\nPrograma deletado com sucesso. (Pressione \"Enter\" para voltar ao menu principal)");
+						System.out.print("\n* PROGRAMA DELETADO COM SUCESSO :). (PRESSIONE \"E N T E R\" PARA VOLTAR AO MENU PRINCIPAL)");
 						ler.nextLine();
 						efetuado = true;
 						break;
@@ -465,7 +487,7 @@ public class Program {
 		boolean efetuado = false;
 		if(prog != null) {
 			System.out.println(prog.toString());
-			System.out.print("\n(Pressione \"Enter\" para voltar ao menu principal)");
+			System.out.print("\n(PRESSIONE \"E N T E R\" PARA VOLTAR AO MENU PRINCIPAL)");
 			ler.nextLine();
 			efetuado = true;
 		}
@@ -475,10 +497,15 @@ public class Program {
 		boolean escolhendoTipoAListar = true;
 		Programa prog = null;
 		while(escolhendoTipoAListar) {
-			System.out.println("\nQual tipo de programa você deseja listar?\n\n"
-					+ "1: filme \n"
-					+ "2: série \n\n"
-					+ "0: voltar\n");
+			System.out.println(" ____________________________________________");
+			System.out.println("| QUAL TIPO DE PROGRAMA VOCÊ DESEJA LISTAR?  |");
+			System.out.println("|____________________________________________|\n\n)");
+			System.out.println("_______________________________");
+			System.out.println(
+			  "1 ---> FILME                   |\n"
+			+ "2 ---> SÉRIE                   |\n"
+			+ "0 ---> VOLTAR AO MENU PRINCIPAL|");
+			System.out.println("_______________________________|\n");
 			
 			System.out.print("> ");
 			
@@ -490,11 +517,11 @@ public class Program {
 				while(escolhendoFilmeDaLista) {
 					ArrayList<Programa> listaDeFilmes = catalogo.listarProgramas(1);
 					if(listaDeFilmes.size() > 0) {
-						System.out.println("\nEscolha um filme da lista: \n");
+						System.out.println("\n* ESCOLHA UM FILME DA LISTA: \n");
 						for(int i = 0; i < listaDeFilmes.size(); i++) {
 							System.out.println((i + 1) + ": " + listaDeFilmes.get(i).getNome());
 						}
-						System.out.println("\n0: voltar\n");
+						System.out.println("\n0: VOLTAR\n");
 						
 						System.out.print("> ");
 						
@@ -516,11 +543,11 @@ public class Program {
 							if(filmeEscolhidoDaLista == 0) {
 								escolhendoFilmeDaLista = false;
 							}else {
-								System.out.print("> (Opção inválida!)\n");
+								System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
 							}
 						}
 					}else {
-						System.out.print("\nNenhum filme encontrado. (Pressione \"Enter\" para voltar)");	
+						System.out.print("\n*** NENHUM FILME ENCONTRADO (PRESSIONE \"E N T E R \" PARA VOLTAR) ***");	
 						
 						ler.nextLine();
 						
@@ -533,11 +560,11 @@ public class Program {
 				while(escolhendoSerieDaLista) {
 					ArrayList<Programa> listaDeSeries = catalogo.listarProgramas(2);
 					if(listaDeSeries.size() > 0) {
-						System.out.println("\nEscolha uma série da lista: \n");
+						System.out.println("\n* ESCOLHA UM SÉRIE DA LISTA \n");
 						for(int i = 0; i < listaDeSeries.size(); i++) {
 							System.out.println((i + 1) + ": " + listaDeSeries.get(i).getNome());
 						}
-						System.out.println("\n0: voltar\n");
+						System.out.println("\n0: VOLTAR\n");
 						System.out.print("> ");
 						
 						int serieEscolhidaDaLista = -1;						
@@ -558,11 +585,11 @@ public class Program {
 							if(serieEscolhidaDaLista == 0) {
 								escolhendoSerieDaLista = false;
 							}else {
-								System.out.print("> (Opção inválida!)\n");							
+								System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");							
 							}
 						}
 					}else {
-						System.out.print("\nNenhuma série encontrada. (Pressione \"Enter\" para voltar)");	
+						System.out.print("\n*** NENHUMA SÉRIE ENCONTRADA. (PRESSIONE \"E N T E R\" PARA VOLTAR) ***");	
 						
 						ler.nextLine();
 						
@@ -574,7 +601,7 @@ public class Program {
 				escolhendoTipoAListar = false;
 				break;
 			default:
-				System.out.print("> (Opção inválida!)\n");
+				System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
 				break;
 			}
 		}
@@ -584,13 +611,13 @@ public class Program {
 		boolean escolhendoCategoriaAListar = true;
 		Programa prog = null;
 		while(escolhendoCategoriaAListar) {
-			System.out.println("\nDe qual categoria você deseja listar? \n");
+			System.out.println("\n* DE QUAL CATEGORIA VOCÊ DESEJA LISTAR? \n");
 			
 			for(int i = 0; i < Categoria.values().length; i++) {
 				System.out.println((i + 1) + ": " + Categoria.values()[i].getNomeCategoria());
 			}
 			
-			System.out.println("\n0: voltar\n");
+			System.out.println("\n0: VOLTAR\n");
 			
 			System.out.print("> ");
 			
@@ -612,11 +639,11 @@ public class Program {
 				if(progsDaCategoria != null) {
 						boolean escolhendoProgramaDaLista = true;
 						while(escolhendoProgramaDaLista) {
-							System.out.println("\nEscolha um programa da lista: \n");
+							System.out.println("\n* ESCOLHA UM PROGRAMA DA LISTA: \n");
 							for(int i = 0; i < progsDaCategoria.size(); i++) {
 								System.out.println((i + 1) + ": " + progsDaCategoria.get(i).getNome());
 							}
-							System.out.println("\n0: voltar\n");
+							System.out.println("\n0: VOLTAR\n");
 							System.out.print("> ");
 							int progEscolhidoDaLista = -1;
 							String bufferProgEscolhidoDaLista = ler.nextLine();
@@ -634,12 +661,12 @@ public class Program {
 								if(progEscolhidoDaLista == 0) {
 									escolhendoProgramaDaLista = false;
 								}else {
-									System.out.print("> (Opção inválida!)\n");
+									System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
 								}
 							}
 						}	
 				}else {
-					System.out.print("\nNenhum programa pertence a essa categoria. (Pressione \"Enter\" para voltar)");
+					System.out.print("\n*** NENHUM PROGRAMA PERTENCE A ESSA CATEGORIA. (PRESSIONE \"E N T E R\" PARA VOLTAR) ***");
 					
 					ler.nextLine();
 				}
@@ -647,7 +674,7 @@ public class Program {
 				if(categoriaEscolhidaAListar == 0) {
 					escolhendoCategoriaAListar = false;
 				}else {					
-					System.out.print("> (Opção inválida!)\n");
+					System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
 				}
 			}		
 		}
@@ -659,11 +686,11 @@ public class Program {
 		while(listando) {
 			ArrayList<Programa> listaDeTodos= catalogo.listarProgramas(3);
 			if(listaDeTodos.size() > 0) {
-				System.out.println("\nEscolha um programa:\n");
+				System.out.println("\n* ESCOLHA UM PROGRAMA:\n");
 				for(int i = 0; i < listaDeTodos.size(); i++) {
 					System.out.println((i + 1) + ": " + listaDeTodos.get(i).getNome());
 				}
-				System.out.println("\n0: voltar\n");
+				System.out.println("\n0: VOLTAR\n");
 				System.out.print("> ");
 				
 				
@@ -683,11 +710,11 @@ public class Program {
 					if(programaEscolhidoDaLista == 0) {
 						listando = false;
 					}else {
-						System.out.print("> (Opção inválida!)\n");	
+						System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");	
 					}
 				}		
 			}else {
-				System.out.print("\nNenhuma programa encontrado. (Pressione \"Enter\" para voltar)");	
+				System.out.print("\n*** NENHUM PROGRAMA ENCONTRADO. (PRESSIONE \"E N T E R\" PARA VOLTAR) ***");	
 				
 				ler.nextLine();
 				
@@ -701,18 +728,18 @@ public class Program {
 		ArrayList<Programa> progs = null;
 		boolean procurando = true;
 		while(procurando) {
-			System.out.println("\nInsira o nome do programa que deseja consultar:\n");
-			System.out.print("(Digite sua pesquisa, ou pressione \"Enter\" para voltar) > ");
+			System.out.println("\n* INSIRA O NOME DO PROGRAMA QUE DESEJA CONSULTAR:\n");
+			System.out.print("(DIGITE SUA PESQUISA, OU PRESSIONE \"E N T E R\" PARA VOLTAR) > ");
 			String nomeDoPrograma = ler.nextLine();
 			progs = catalogo.getProgramaPorNome(nomeDoPrograma);
 			if(progs != null && !(nomeDoPrograma.equals(""))) {
 				boolean escolhendo = true;
 				while(escolhendo) {
-					System.out.println("\nExibindo " + progs.size() + " resultado(s) na pesquisa por \"" + nomeDoPrograma + "\":\n");
+					System.out.println("\n* EXIBINDO " + progs.size() + " RESULTADO(S) NA PESQUISA POR \"" + nomeDoPrograma + "\":\n");
 					for(int i = 0; i < progs.size(); i++) {
 						System.out.println((i + 1) + ": " + progs.get(i).getNome());
 					}
-					System.out.println("\n0: voltar\n");
+					System.out.println("\n0: VOLTAR\n");
 					System.out.print("> ");
 					
 					int resultadoSelecionado = -1;
@@ -732,7 +759,7 @@ public class Program {
 						if(resultadoSelecionado == 0) {
 							escolhendo = false;
 						}else {
-							System.out.print("> (Opção inválida!)\n");
+							System.out.print(" *** OPÇÃO INVÁLIDA :( ***\n");
 						}
 					}
 				}
@@ -740,8 +767,8 @@ public class Program {
 				if(nomeDoPrograma.equals("")) {
 					procurando = false;
 				}else {
-					System.out.println("\nNenhum programa encontrado.");
-					System.out.print("\n(Pressione \"Enter\" para procurar de novo, ou digite \"0\" para voltar) > ");
+					System.out.println("\n*** NENHUM PROGRAMA ENCONTARDO :( ***");
+					System.out.print("\n(* PRESSIONE \"E N T E R\" PARA PROCURAR DE NOVO, OU DIGITE \"0\" PARA VOLTAR) > ");
 					String tentarDeNovo = ler.nextLine();
 					if(tentarDeNovo.equals("0")) {
 						procurando = false;
@@ -756,17 +783,17 @@ public class Program {
 				
 		while(categoriaEscolhida == null) {
 			
-			System.out.println("\nCategoria: \n");
+			System.out.println("\nCATEGORIA: \n");
 			
 			for(int i = 0; i < Categoria.values().length; i++) {
-				System.out.println((i + 1) + ": " + Categoria.values()[i].getNomeCategoria() + (cat != null ? (cat.equals(Categoria.values()[i]) ? " (atual)" : ""): ""));
+				System.out.println((i + 1) + ": " + Categoria.values()[i].getNomeCategoria() + (cat != null ? (cat.equals(Categoria.values()[i]) ? " (ATUAL)" : ""): ""));
 			}
 			
 			System.out.println();
 			
 			if(cat != null) {
 				categoriaEscolhida = cat;
-				System.out.print("(Pressione \"Enter\" para manter, ou escolha uma nova) > ");
+				System.out.print("(* PRESSIONE \"E N T E R\" PARA MANTER, OU ESCOLHA UMA NOVA) > ");
 			}else {
 				System.out.print("> ");
 			}
@@ -788,11 +815,11 @@ public class Program {
 					categoriaEscolhida = Categoria.values()[numeroCategoria - 1];
 				}else {
 					categoriaEscolhida = null;
-					System.out.print("> (Opção inválida!)\n");
+					System.out.print("> (*** OPÇÃO INVÁLIDA :( ***)\n");
 				}
 			}else {
 				if(categoriaEscolhida == null) {
-					System.out.println("\nVocê precisa escolher uma categoria!");
+					System.out.println("\n*** É NECESSÁRIO QUE ESCOLHA UMA CATEGORIA! ***");
 				}
 			}
 

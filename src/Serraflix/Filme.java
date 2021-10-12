@@ -17,10 +17,10 @@ public class Filme extends Programa{
 	
 	@Override
 	public String toString() {
-		return "\n" + super.nome + " | Filme\n\n"
-				 + (super.pontuacao == null ? "" : ("Nota: " + String.format("%.1f", super.pontuacao) + "/5 \n"))
-				 + "Categoria: " + this.getCategoria().getNomeCategoria() + "\n"
-				 + "Duração: " + this.duracao + " minutos";
+		return "\n" + super.nome + " | FILME\n\n"
+				 + (super.pontuacao == null ? "" : ("NOTA: " + String.format("%.1f", super.pontuacao) + "/5 \n"))
+				 + "CATEGORIA: " + this.getCategoria().getNomeCategoria() + "\n"
+				 + "DURAÇÃO: " + this.duracao + " MINUTOS";
 	}
 	
 	//método de classificação
@@ -28,7 +28,7 @@ public class Filme extends Programa{
 		if(nota != null) {
 			if(nota < 0 || nota > 5) {
 				super.pontuacao = null;
-				throw new ClassificacaoForaDoRangeException("\nErro ao adicionar a classificação: a nota não deve ser menor que zero ou maior que cinco.");
+				throw new ClassificacaoForaDoRangeException("\n*** ERRO AO ADICIONAR A CLASSIFICAÇÃO: A NOTA DEVE SER MAIOR QUE ZERO E MENOR QUE CINCO ***");
 			}else {
 				super.pontuacao = nota;
 			}

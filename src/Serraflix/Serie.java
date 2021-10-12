@@ -61,7 +61,7 @@ public class Serie extends Programa{
 				}
 		}
 		if(achou == false) {
-			throw new Exception("Impossível remover: temporada inexistente.");
+			throw new Exception("*** IMPOSSÍVEL REMOVER: TEMPORADA INEXISTENTE ***");
 		}
 	}
 	
@@ -72,7 +72,7 @@ public class Serie extends Programa{
 				this.temporadas.add(new Temporada(i + 1, qtdEps.get(i)));
 			}
 		}else {
-			throw new Exception("Erro ao adicionar temporadas para a série \"" + this.nome + "\": você precisa adicionar um número positivo de episódios, e só pode criar uma temporada que ainda não exista.");
+			throw new Exception("*** ERRO AO ADICIONAR TEMPORADAS PARA A SÉRIE \"" + this.nome + "\": VOCÊ PRECISA ADICIONAR UM NÚMERO POSITIVO DE EPISÓDIOS, E SÓ PODE CRIAR UMA TEMPORADA QUE AINDA NÃO EXISTA ***");
 		}
 	}
 	
@@ -91,7 +91,7 @@ public class Serie extends Programa{
 		if(nota != null) {
 			if(nota < 0 || nota > 10) {
 				super.pontuacao = null;
-				throw new ClassificacaoForaDoRangeException("\nErro ao adicionar a classificação: a nota não deve ser menor que zero ou maior que dez.");
+				throw new ClassificacaoForaDoRangeException("\n*** ERRO AO ADICIONAR A CLASSIFICAÇÃO: A NOTA NÃO PODE SER MENOR QUE ZERO OU MAIOR DO QUE DEZ ***");
 			}else {
 				super.pontuacao = nota;
 			}
@@ -103,14 +103,14 @@ public class Serie extends Programa{
 	@Override
 	public String toString() {
 		String retorno = "";
-		retorno = "\n" + super.nome + " | Série\n\n"
-				 + (super.pontuacao == null ? "" : ("Nota: " + String.format("%.1f", super.pontuacao) + "/10 \n"))
-				 + "Categoria: " + this.getCategoria().getNomeCategoria() + "\n\n"
-				 + "Temporadas: " + this.temporadas.size() + "\n\n";
+		retorno = "\n" + super.nome + " | SÉRIE\n\n"
+				 + (super.pontuacao == null ? "" : ("NOTA: " + String.format("%.1f", super.pontuacao) + "/10 \n"))
+				 + "CATEGORIA: " + this.getCategoria().getNomeCategoria() + "\n\n"
+				 + "TEMPORADAS: " + this.temporadas.size() + "\n\n";
 		for(Temporada t: this.getTemporadas()) {
-			retorno += String.format("%02d", t.getNomeTemporada()) + "ª temp: " + String.format("%02d", t.getQuantidadeEpisodios()) + " eps\n";
+			retorno += String.format("%02d", t.getNomeTemporada()) + "ª TEMP: " + String.format("%02d", t.getQuantidadeEpisodios()) + " EPS\n";
 		}
-		retorno += "\nTotal de episódios: " + this.getTotalEpisodios();
+		retorno += "\nTOTAL DE EPISÓDIOS: " + this.getTotalEpisodios();
 		return retorno;
 	}
 }

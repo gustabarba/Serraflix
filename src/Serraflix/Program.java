@@ -3,7 +3,6 @@ package Serraflix;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class Program {
@@ -12,17 +11,17 @@ public class Program {
 	public static void main(String[] args) {
 		catalogo.addProgramas(Arrays.asList(
 				new Serie("The Office", 8.9, Categoria.COMEDIA, Arrays.asList(6, 22, 25, 19, 28, 26, 26, 24, 25)),
-				new Serie("Hinterland", 9.5, Categoria.TERROR, Arrays.asList(8, 10, 8)),
-				new Serie("Cowboy Bebop", 8.9, Categoria.COMEDIA, Arrays.asList(26)),
-				new Serie("Breaking Bad", 10., Categoria.TERROR, Arrays.asList(7, 13, 13, 13, 16)),
-				new Serie("Dr. House", 8.5, Categoria.FANTASIA, Arrays.asList(22, 24, 24, 16, 24, 22, 23, 22)),
+				new Serie("Hinterland", 9.5, Categoria.SUSPENSE, Arrays.asList(8, 10, 8)),
+				new Serie("Cowboy Bebop", 8.9, Categoria.CYBERPUNK, Arrays.asList(26)),
+				new Serie("Breaking Bad", 10., Categoria.SUSPENSE, Arrays.asList(7, 13, 13, 13, 16)),
+				new Serie("Dr. House", 8.5, Categoria.DRAMA, Arrays.asList(22, 24, 24, 16, 24, 22, 23, 22)),
 				new Serie("House Of Cards", 8.7, Categoria.DRAMA, Arrays.asList(13, 13, 13, 13, 13, 8)),
 				new Serie("Lost", 8.3, Categoria.FANTASIA, Arrays.asList(25, 24, 23, 14, 17, 18)),
-				new Filme("Lost In Translation", 3.8, Categoria.COMEDIA, 101),
+				new Filme("Lost In Translation", 3.8, Categoria.ROMANCE, 101),
 				new Filme("Fútil e Inútil", 3.4, Categoria.COMEDIA, 101),
-				new Filme("Eternal Sunshine Of The Spotless Mind", 4.1, Categoria.TERROR, 108),			
-				new Filme("Her", 4., Categoria.COMEDIA, 126),			
-				new Filme("Cowboy Bebop: The Movie", 3.9, Categoria.FANTASIA, 115),
+				new Filme("Eternal Sunshine Of The Spotless Mind", 4.1, Categoria.ROMANCE, 108),			
+				new Filme("Her", 4., Categoria.ROMANCE, 126),			
+				new Filme("Cowboy Bebop: The Movie", 3.9, Categoria.CYBERPUNK, 115),
 				new Filme("Lorem Ipsum", 3., Categoria.FANTASIA, 0)
 			));
 		

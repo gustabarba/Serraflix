@@ -1,7 +1,7 @@
 package Serraflix;
 
 public enum Categoria {
-	FANTASIA("Fantasia"), TERROR("Terror"), COMEDIA("Comédia"), DRAMA("Drama");
+	FANTASIA("Fantasia"), TERROR("Terror"), COMEDIA("Comédia"), DRAMA("Drama"), SUSPENSE("Suspense");
 	
 	private String nome;
 	

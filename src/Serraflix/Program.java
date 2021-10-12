@@ -378,31 +378,54 @@ public class Program {
 			Categoria categoriaPrograma = subfluxoEscolherCategoria((prog != null ? prog.getCategoria() : null));
 			
 			if(nomeDoPrograma != null && (duracao != null || qtdEps.size() > 0)) {
-				if(prog != null) {
-					catalogo.deletarProgramaPorId(prog.getId());
-					System.out.println("\nPrograma editado com sucesso!");	
-				}else {
-					System.out.println("\nPrograma criado com sucesso!");	
-				}
 				switch(tipo) {
 				case 1:
-					if(prog != null) {
-						catalogo.addPrograma(new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao, prog.id));
-					}else {
-						catalogo.addPrograma(new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao));
-					}
+					Filme previewFilme = new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao);
+					System.out.println(previewFilme.toString());
 					break;
 				case 2:
-					if(prog != null) {
-						catalogo.addPrograma(new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps, prog.id));
-					}else {
-						catalogo.addPrograma(new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps));
-					}
+					Serie previewSerie = new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps);
+					System.out.println(previewSerie.toString());
 					break;
-				}		
-				efetuado = true;
+				}
+				if(prog == null) {
+					System.out.println("\nVocê está prestes a criar " + (tipo == 1 ? "um filme" : "uma série") + " com as informações acima. Deseja prosseguir?\n");
+				}else {
+					System.out.println("\nVocê está prestes a editar " + (tipo == 1 ? "o filme" : "a série") + " \"" + prog.nome + "\" com as informações acima. Deseja prosseguir?\n");
+				}
+				System.out.print("(Pressione \"Enter\" para prosseguir, ou digite \"0\" para voltar ao menu de " + (prog == null ? "criação" : "edição") + ") > ");
+				
+				String desejaProsseguir = ler.nextLine();
+				if(!(desejaProsseguir.equals("0"))) {
+					if(prog != null) {
+						catalogo.deletarProgramaPorId(prog.getId());
+						System.out.print("\n" + (tipo == 1 ? "Filme editado" : "Série editada") + " com sucesso! (Pressione \"Enter\" para voltar ao menu principal)");
+						ler.nextLine();
+					}else {
+						System.out.print("\n" + (tipo == 1 ? "Filme criado" : "Série criada") + " com sucesso! (Pressione \"Enter\" para voltar ao menu principal)");
+						ler.nextLine();
+					}
+					switch(tipo) {
+					case 1:
+						if(prog != null) {
+							catalogo.addPrograma(new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao, prog.id));
+						}else {
+							catalogo.addPrograma(new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao));
+						}
+						break;
+					case 2:
+						if(prog != null) {
+							catalogo.addPrograma(new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps, prog.id));
+						}else {
+							catalogo.addPrograma(new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps));
+						}
+						break;
+					}		
+					efetuado = true;
+				}
 			}else {
-				System.out.println("\nO programa não foi criado: dados vazios foram inseridos.");
+				System.out.print("\nImpossível criar o programa: dados vazios foram inseridos. (Pressione \"Enter\" para voltar ao menu de criação) ");
+				ler.nextLine();
 			}
 		}
 		return efetuado;
@@ -443,7 +466,7 @@ public class Program {
 		boolean escolhendoTipoAListar = true;
 		Programa prog = null;
 		while(escolhendoTipoAListar) {
-			System.out.println("\nQual tipo de programa você deseja listar? \n\n"
+			System.out.println("\nQual tipo de programa você deseja listar?\n\n"
 					+ "1: filme \n"
 					+ "2: série \n\n"
 					+ "0: voltar\n");

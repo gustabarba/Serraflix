@@ -7,9 +7,19 @@ import java.util.List;
 public class Serie extends Programa{
 	private ArrayList<Temporada> temporadas = new ArrayList<>();
 	
-	//construtor com temporadas em massa
+	//construtor padrão
 	public Serie(String nome, Double pontuacao, Categoria categoria, List<Integer> qtdEps) {
 		super(nome, pontuacao, categoria);
+		try {
+			adicionarTemporadas(qtdEps);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	//construtor de edição
+	public Serie(String nome, Double pontuacao, Categoria categoria, List<Integer> qtdEps, int id) {
+		super(nome, pontuacao, categoria, id);
 		try {
 			adicionarTemporadas(qtdEps);
 		} catch (Exception e) {
@@ -94,6 +104,7 @@ public class Serie extends Programa{
 	public String toString() {
 		String retorno = "";
 		retorno = "\nInformações sobre a série \n\n"
+				+ "Id:" + super.id + "\n"
 				+ "Nome: " + super.nome + "\n"
 				 + (super.pontuacao == null ? "" : ("Nota: " + String.format("%.1f", super.pontuacao) + "/10 \n"))
 				 + "Categoria: " + this.getCategoria().getNomeCategoria() + "\n"

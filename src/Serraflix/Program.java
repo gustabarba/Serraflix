@@ -8,9 +8,9 @@ import java.util.Scanner;
 
 public class Program {
 	static Scanner ler = new Scanner(System.in);	
-	static Biblioteca catalogoBrasil = new Biblioteca();
+	static Biblioteca catalogo = new Biblioteca();
 	public static void main(String[] args) {
-		catalogoBrasil.addProgramas(Arrays.asList(
+		catalogo.addProgramas(Arrays.asList(
 				new Serie("The Office", 8.9, Categoria.COMEDIA, Arrays.asList(6, 22, 25, 19, 28, 26, 26, 24, 25)),
 				new Serie("Hinterland", 9.5, Categoria.TERROR, Arrays.asList(8, 10, 8)),
 				new Serie("Cowboy Bebop", 8.9, Categoria.COMEDIA, Arrays.asList(26)),
@@ -26,14 +26,14 @@ public class Program {
 
 		boolean emOperacao = true;
 		
-		System.out.println("Bem vindo ao Serraflix! (digite sempre o número da opção desejada)");
+		System.out.println("Bem vindo ao Serraflix!");
 		
 		while(emOperacao) {	
 			System.out.println();
 			System.out.println("O que você deseja fazer? \n\n"
 					+ "1: criar um programa \n"
 					+ "2: editar um programa \n"
-					+ "3: remover um programa \n"
+					+ "3: deletar um programa \n"
 					+ "4: exibir informações \n\n"
 					+ "0: sair \n");			
 			
@@ -73,7 +73,7 @@ public class Program {
 		
 	}
 
-	public static void fluxoCriacao() {
+	private static void fluxoCriacao() {
 		boolean criando = true;			
 		while(criando) {		
 			System.out.println();
@@ -102,7 +102,7 @@ public class Program {
 			}
 		}
 	}
-	public static void fluxoEdicao(){
+	private static void fluxoEdicao(){
 		boolean editando = true;
 		while(editando) {
 			System.out.println();
@@ -139,11 +139,11 @@ public class Program {
 			}
 		}
 	}
-	public static void fluxoRemocao() {
+	private static void fluxoRemocao() {
 		boolean removendo = true;
 		while(removendo) {
 			System.out.println();
-			System.out.println("Como deseja encontrar o programa a ser removido? \n\n"
+			System.out.println("Como deseja encontrar o programa a ser deletado? \n\n"
 					+ "1: escolher de uma listagem por tipo \n"
 					+ "2: escolher de uma listagem por categoria \n"
 					+ "3: escolher da lista com todos os programas \n"
@@ -175,7 +175,7 @@ public class Program {
 			}
 		}
 	}
-	public static void fluxoExibicao() {
+	private static void fluxoExibicao() {
 		boolean exibindo = true;
 		while(exibindo) {
 			System.out.println("\nEscolha um dos métodos de exibição: \n\n"
@@ -208,7 +208,7 @@ public class Program {
 			}
 		}
 	}
-	public static boolean fluxoEfetuarCriacaoEdicao(Programa prog, Integer tipo) {	
+	private static boolean fluxoEfetuarCriacaoEdicao(Programa prog, Integer tipo) {	
 		boolean efetuado = false;
 		if((prog != null) || (prog == null && tipo != null)) {	
 			
@@ -349,17 +349,25 @@ public class Program {
 			
 			if(nomeDoPrograma != null && (duracao != null || qtdEps.size() > 0)) {
 				if(prog != null) {
-					catalogoBrasil.deletarProgramaPorNome(prog.getNome());
+					catalogo.deletarProgramaPorId(prog.getId());
 					System.out.println("\nPrograma editado com sucesso!");	
 				}else {
 					System.out.println("\nPrograma criado com sucesso!");	
 				}
 				switch(tipo) {
 				case 1:
-					catalogoBrasil.addPrograma(new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao));
+					if(prog != null) {
+						catalogo.addPrograma(new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao, prog.id));
+					}else {
+						catalogo.addPrograma(new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao));
+					}
 					break;
 				case 2:
-					catalogoBrasil.addPrograma(new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps));
+					if(prog != null) {
+						catalogo.addPrograma(new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps, prog.id));
+					}else {
+						catalogo.addPrograma(new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps));
+					}
 					break;
 				}		
 				efetuado = true;
@@ -369,29 +377,39 @@ public class Program {
 		}
 		return efetuado;
 	}
-	public static boolean fluxoEfetuarRemocao(Programa prog){
+	private static boolean fluxoEfetuarRemocao(Programa prog){
 		boolean efetuado = false;
 		if(prog != null) {
-			for (Programa p : catalogoBrasil.listarProgramas(3)) {
-				if (p.equals(prog)) {
-					catalogoBrasil.deletarProgramaPorNome(prog.getNome());
-					System.out.println("Programa deletado com sucesso!");
-					efetuado = true;
-					break;
+			System.out.println("\nVocê está prestes a deletar " + (prog instanceof Filme ? "o filme" : "a série") + " \"" + prog.nome + "\". Deseja prosseguir?");
+			System.out.print("\n(Pressione \"Enter\" para deletar o programa selecionado, ou digite \"0\" para voltar) > ");
+			String confirmaDeletar = ler.nextLine();
+			if(confirmaDeletar.equals("0")) {
+				efetuado = false;
+			}else {
+				for (Programa p : catalogo.listarProgramas(3)) {
+					if (p.equals(prog)) {
+						catalogo.deletarProgramaPorId(prog.getId());
+						System.out.print("\nPrograma deletado com sucesso. (Pressione \"Enter\" para voltar ao menu principal)");
+						ler.nextLine();
+						efetuado = true;
+						break;
+					}
 				}
 			}
 		} 		
 		return efetuado;
 	}
-	public static boolean fluxoEfetuarExibicao(Programa prog){
+	private static boolean fluxoEfetuarExibicao(Programa prog){
 		boolean efetuado = false;
 		if(prog != null) {
 			System.out.println(prog.toString());
+			System.out.print("\n(Pressione \"Enter\" para voltar ao menu principal)");
+			ler.nextLine();
 			efetuado = true;
 		}
 		return efetuado;
 	}
-	public static Programa subfluxoListarPorTipo() {
+	private static Programa subfluxoListarPorTipo() {
 		boolean escolhendoTipoAListar = true;
 		Programa prog = null;
 		while(escolhendoTipoAListar) {
@@ -408,7 +426,7 @@ public class Program {
 			case 1:
 				boolean escolhendoFilmeDaLista = true;
 				while(escolhendoFilmeDaLista) {
-					ArrayList<Programa> listaDeFilmes = catalogoBrasil.listarProgramas(1);
+					ArrayList<Programa> listaDeFilmes = catalogo.listarProgramas(1);
 					if(listaDeFilmes.size() > 0) {
 						System.out.println("\nEscolha um filme da lista: \n");
 						for(int i = 0; i < listaDeFilmes.size(); i++) {
@@ -442,7 +460,7 @@ public class Program {
 			case 2:
 				boolean escolhendoSerieDaLista = true;
 				while(escolhendoSerieDaLista) {
-					ArrayList<Programa> listaDeSeries = catalogoBrasil.listarProgramas(2);
+					ArrayList<Programa> listaDeSeries = catalogo.listarProgramas(2);
 					if(listaDeSeries.size() > 0) {
 						System.out.println("\nEscolha uma série da lista: \n");
 						for(int i = 0; i < listaDeSeries.size(); i++) {
@@ -481,7 +499,7 @@ public class Program {
 		}
 		return prog;
 	}
-	public static Programa subfluxoListarPorCategoria() {
+	private static Programa subfluxoListarPorCategoria() {
 		boolean escolhendoCategoriaAListar = true;
 		Programa prog = null;
 		while(escolhendoCategoriaAListar) {
@@ -499,7 +517,7 @@ public class Program {
 			
 			if(categoriaEscolhidaAListar > 0 && categoriaEscolhidaAListar <= Categoria.values().length) {
 				
-				ArrayList<Programa> progsDaCategoria = catalogoBrasil.getProgramasPorCategoria(Categoria.values()[categoriaEscolhidaAListar - 1]);
+				ArrayList<Programa> progsDaCategoria = catalogo.getProgramasPorCategoria(Categoria.values()[categoriaEscolhidaAListar - 1]);
 				
 				if(progsDaCategoria != null) {
 						boolean escolhendoProgramaDaLista = true;
@@ -538,11 +556,11 @@ public class Program {
 		}
 		return prog;
 	}
-	public static Programa subfluxoListarTodos() {
+	private static Programa subfluxoListarTodos() {
 		Programa prog = null;
 		boolean listando = true;
 		while(listando) {
-			ArrayList<Programa> listaDeTodos= catalogoBrasil.listarProgramas(3);
+			ArrayList<Programa> listaDeTodos= catalogo.listarProgramas(3);
 			if(listaDeTodos.size() > 0) {
 				System.out.println("\nEscolha um programa:\n");
 				for(int i = 0; i < listaDeTodos.size(); i++) {
@@ -568,13 +586,10 @@ public class Program {
 				
 				listando = false;
 			}
-			for(int i = 0; i < listaDeTodos.size(); i++) {
-				System.out.println((i + 1) + ": " + listaDeTodos.get(i).getNome());
-			}
 		}	
 		return prog;
 	}	
-	public static Programa subfluxoEncontrarPorNome() {
+	private static Programa subfluxoEncontrarPorNome() {
 		Programa prog = null;
 		boolean escolhendo = true;
 		while(escolhendo) {
@@ -582,7 +597,7 @@ public class Program {
 			System.out.print("> ");
 			String nomeDoPrograma = ler.nextLine();
 			try {
-				prog = catalogoBrasil.getProgramaPorNome(nomeDoPrograma);
+				prog = catalogo.getProgramaPorNome(nomeDoPrograma);
 				escolhendo = false;
 				
 			} catch (Exception e) {
@@ -598,7 +613,7 @@ public class Program {
 		return prog;
 		
 	}
-	public static Categoria subfluxoEscolherCategoria(Categoria cat) {
+	private static Categoria subfluxoEscolherCategoria(Categoria cat) {
 		Categoria categoriaEscolhida = null;
 				
 		while(categoriaEscolhida == null) {

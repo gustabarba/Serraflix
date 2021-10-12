@@ -3,9 +3,15 @@ package Serraflix;
 public class Filme extends Programa{
 	private int duracao;
 	
-	//construtor
+	//construtor padrão
 	public Filme(String nome, Double pontuacao, Categoria categoria, int duracao) {
 		super(nome, pontuacao, categoria);
+		this.duracao = duracao;
+	}
+	
+	//construtor de edição
+	public Filme(String nome, Double pontuacao, Categoria categoria, int duracao, int id) {
+		super(nome, pontuacao, categoria, id);
 		this.duracao = duracao;
 	}
 	

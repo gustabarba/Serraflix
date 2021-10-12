@@ -64,11 +64,12 @@ public class Biblioteca {
 		this.programas.addAll(programas);
 	}
 	
-	//método de deletar programa por nome
-	public void deletarProgramaPorNome(String nome) {
+	//método de deletar programa por id
+	public void deletarProgramaPorId(int id) {
 		for(int i = 0; i < this.programas.size(); i++) {
-			if(this.programas.get(i).getNome() == nome) {
+			if(this.programas.get(i).getId() == id) {
 				this.programas.remove(i);
+				break;
 			}
 		}
 	}

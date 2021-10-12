@@ -97,11 +97,11 @@ public class Program {
 	108
 	109
 	110
-	111(-)		private static void fluxoQualquer() {
-	112	|     		bla
-	113	|			bla
-	114	|			bla
-	115	|			...
+	111(-)    private static void fluxoQualquer() {
+	112 |         bla
+	113 |         bla
+	114 |         bla
+	115 |         ...
 	
 	
 	
@@ -406,7 +406,7 @@ public class Program {
 				break;
 			}
 			
-			Categoria categoriaPrograma = subfluxoEscolherCategoria((prog != null ? prog.getCategoria() : null));
+			Categoria categoriaPrograma = subfluxoEscolherCategoria((prog != null ? (prog.getCategoria()) : (null)), false);
 			
 			if(nomeDoPrograma != null && (duracao != null || qtdEps.size() > 0)) {
 				switch(tipo) {
@@ -424,7 +424,7 @@ public class Program {
 				}else {
 					System.out.println("\n* VOCÊ ESTÁ PRESTES A EDITAR " + (tipo == 1 ? "O FILME" : "A SÉRIE") + " \"" + prog.nome + "\" COM AS INFORMAÇÕES ACIMA, DESEJA PROSSEGUIR?\n");
 				}
-				System.out.print("(PRESSIONE \"E N T E R\" PARA PROSSEGUIR, OU DIGITE \"0\" PARA VOLTAR AO MENU DE" + (prog == null ? "CRIAÇÃO" : "EDIÇÃO") + ") > ");
+				System.out.print("(PRESSIONE \"E N T E R\" PARA PROSSEGUIR, OU DIGITE \"0\" PARA VOLTAR AO MENU DE " + (prog == null ? "CRIAÇÃO" : "EDIÇÃO") + ") > ");
 				
 				String desejaProsseguir = ler.nextLine();
 				if(!(desejaProsseguir.equals("0"))) {
@@ -611,30 +611,12 @@ public class Program {
 		boolean escolhendoCategoriaAListar = true;
 		Programa prog = null;
 		while(escolhendoCategoriaAListar) {
-			System.out.println("\n* DE QUAL CATEGORIA VOCÊ DESEJA LISTAR? \n");
 			
-			for(int i = 0; i < Categoria.values().length; i++) {
-				System.out.println((i + 1) + ": " + Categoria.values()[i].getNomeCategoria());
-			}
+			Categoria categoriaEscolhida = subfluxoEscolherCategoria(null, true);
 			
-			System.out.println("\n0: VOLTAR\n");
-			
-			System.out.print("> ");
-			
-			int categoriaEscolhidaAListar = -1;
-			
-			String bufferCategoriaEscolhidaAListar = ler.nextLine();
-			
-			try {
-				categoriaEscolhidaAListar = Integer.valueOf(bufferCategoriaEscolhidaAListar);
-			}
-			catch(Exception e) {
+			if(categoriaEscolhida != null) {
 				
-			}
-			
-			if(categoriaEscolhidaAListar > 0 && categoriaEscolhidaAListar <= Categoria.values().length) {
-				
-				ArrayList<Programa> progsDaCategoria = catalogo.getProgramasPorCategoria(Categoria.values()[categoriaEscolhidaAListar - 1]);
+				ArrayList<Programa> progsDaCategoria = catalogo.getProgramasPorCategoria(categoriaEscolhida);
 				
 				if(progsDaCategoria != null) {
 						boolean escolhendoProgramaDaLista = true;
@@ -670,12 +652,8 @@ public class Program {
 					
 					ler.nextLine();
 				}
-			}else {
-				if(categoriaEscolhidaAListar == 0) {
-					escolhendoCategoriaAListar = false;
-				}else {					
-					System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
-				}
+			}else {			
+				escolhendoCategoriaAListar = false;
 			}		
 		}
 		return prog;
@@ -778,24 +756,28 @@ public class Program {
 		}
 		return prog;	
 	}
-	private static Categoria subfluxoEscolherCategoria(Categoria cat) {
+	private static Categoria subfluxoEscolherCategoria(Categoria cat, boolean deixaSairSemRetornarCategoria) {
 		Categoria categoriaEscolhida = null;
 				
-		while(categoriaEscolhida == null) {
+		boolean escolhendoCategoria = true;
+		while(escolhendoCategoria) {
 			
-			System.out.println("\nCATEGORIA: \n");
+			System.out.println("\nESCOLHA UMA CATEGORIA: \n");
 			
 			for(int i = 0; i < Categoria.values().length; i++) {
 				System.out.println((i + 1) + ": " + Categoria.values()[i].getNomeCategoria() + (cat != null ? (cat.equals(Categoria.values()[i]) ? " (ATUAL)" : ""): ""));
 			}
 			
-			System.out.println();
+			if(deixaSairSemRetornarCategoria) {
+				System.out.println("\n0: VOLTAR");
+			}
+			
 			
 			if(cat != null) {
 				categoriaEscolhida = cat;
 				System.out.print("(* PRESSIONE \"E N T E R\" PARA MANTER, OU ESCOLHA UMA NOVA) > ");
 			}else {
-				System.out.print("> ");
+				System.out.print("\n> ");
 			}
 			
 			String bufferNumeroCategoria = ler.nextLine();
@@ -813,13 +795,19 @@ public class Program {
 			if(numeroCategoria != null) {
 				if(numeroCategoria > 0 && numeroCategoria <= Categoria.values().length) {
 					categoriaEscolhida = Categoria.values()[numeroCategoria - 1];
+					escolhendoCategoria = false;
 				}else {
-					categoriaEscolhida = null;
-					System.out.print("> (*** OPÇÃO INVÁLIDA :( ***)\n");
+					if(numeroCategoria == 0) {
+						escolhendoCategoria = false;
+					}else {
+						System.out.print("> (*** OPÇÃO INVÁLIDA :( ***)\n");
+					}
 				}
 			}else {
-				if(categoriaEscolhida == null) {
+				if(categoriaEscolhida == null && !deixaSairSemRetornarCategoria) {
 					System.out.println("\n*** É NECESSÁRIO QUE ESCOLHA UMA CATEGORIA! ***");
+				}else {
+					escolhendoCategoria = false;
 				}
 			}
 

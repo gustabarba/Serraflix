@@ -31,7 +31,7 @@ public abstract class Programa implements Classificar{
 		}
 		this.categoria = categoria;
 	}
-
+	
 	//getters e setters
 	public double getPontuacao() throws Exception{
 		try {

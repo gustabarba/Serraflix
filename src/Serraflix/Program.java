@@ -16,11 +16,14 @@ public class Program {
 				new Serie("Cowboy Bebop", 8.9, Categoria.COMEDIA, Arrays.asList(26)),
 				new Serie("Breaking Bad", 11., Categoria.TERROR, Arrays.asList(7, 13, 13, 13, 16)),
 				new Serie("Dr. House", 8.5, Categoria.FANTASIA, Arrays.asList(22, 24, 24, 16, 24, 22, 23, 22)),
+				new Serie("House Of Cards", 8.7, Categoria.DRAMA, Arrays.asList(13, 13, 13, 13, 13, 8)),
+				new Serie("Lost", 8.3, Categoria.FANTASIA, Arrays.asList(25, 24, 23, 14, 17, 18)),
 				new Filme("Lost In Translation", 3.8, Categoria.COMEDIA, 101),
+				new Filme("Fútil e Inútil", 3.4, Categoria.COMEDIA, 101),
 				new Filme("Eternal Sunshine Of The Spotless Mind", 4.1, Categoria.TERROR, 108),			
 				new Filme("Her", 4., Categoria.COMEDIA, 126),			
 				new Filme("Cowboy Bebop: The Movie", 3.9, Categoria.FANTASIA, 115),
-				new Filme("A Bela Amortecida", 11., Categoria.FANTASIA, 0)
+				new Filme("Lorem Ipsum", 11., Categoria.FANTASIA, 0)
 			));
 		
 
@@ -110,7 +113,7 @@ public class Program {
 					+ "1: escolher de uma listagem por tipo \n"
 					+ "2: escolher de uma listagem por categoria \n"
 					+ "3: escolher da lista com todos os programas \n"
-					+ "4: encontrar por nome \n\n"
+					+ "4: pesquisar por nome \n\n"
 					+ "0: voltar ao menu principal \n");
 			
 			System.out.print("> ");
@@ -147,7 +150,7 @@ public class Program {
 					+ "1: escolher de uma listagem por tipo \n"
 					+ "2: escolher de uma listagem por categoria \n"
 					+ "3: escolher da lista com todos os programas \n"
-					+ "4: encontrar por nome \n\n"
+					+ "4: pesquisar por nome \n\n"
 					+ "0: voltar ao menu principal \n");
 			
 			System.out.print("> ");
@@ -182,7 +185,7 @@ public class Program {
 					+ "1: listar por tipo\n"
 					+ "2: listar por categoria \n"
 					+ "3: listar todos os programas \n"
-					+ "4: encontrar por nome \n\n"
+					+ "4: pesquisar por nome \n\n"
 					+ "0: voltar ao menu principal \n");
 			System.out.print("> ");
 			int opcaoEscolhidaExibicao = ler.nextInt(); ler.nextLine();
@@ -591,27 +594,49 @@ public class Program {
 	}	
 	private static Programa subfluxoEncontrarPorNome() {
 		Programa prog = null;
-		boolean escolhendo = true;
-		while(escolhendo) {
+		ArrayList<Programa> progs = null;
+		boolean procurando = true;
+		while(procurando) {
 			System.out.println("\nInsira o nome do programa que deseja consultar:\n");
-			System.out.print("> ");
+			System.out.print("(Digite sua pesquisa, ou pressione \"Enter\" para voltar) > ");
 			String nomeDoPrograma = ler.nextLine();
-			try {
-				prog = catalogo.getProgramaPorNome(nomeDoPrograma);
-				escolhendo = false;
-				
-			} catch (Exception e) {
-				System.out.println("\n" + e.getMessage());
-				System.out.print("\n(Pressione \"Enter\" para procurar de novo, ou digite \"0\" para voltar) > ");
-				String tentarDeNovo = ler.nextLine();
-				if(tentarDeNovo.equals("0")) {
-					escolhendo = false;
+			progs = catalogo.getProgramaPorNome(nomeDoPrograma);
+			if(progs != null && !(nomeDoPrograma.equals(""))) {
+				boolean escolhendo = true;
+				while(escolhendo) {
+					System.out.println("\nExibindo " + progs.size() + " resultado(s) na pesquisa por \"" + nomeDoPrograma + "\":\n");
+					for(int i = 0; i < progs.size(); i++) {
+						System.out.println((i + 1) + ": " + progs.get(i).getNome());
+					}
+					System.out.println("\n0: voltar\n");
+					System.out.print("> ");
+					int resultadoSelecionado = ler.nextInt(); ler.nextLine();
+					if(resultadoSelecionado > 0 && resultadoSelecionado <= progs.size()) {
+						prog = progs.get(resultadoSelecionado - 1);
+						escolhendo = false;
+						procurando = false;
+					}else {
+						if(resultadoSelecionado == 0) {
+							escolhendo = false;
+						}else {
+							System.out.print("> (Opção inválida!)\n");
+						}
+					}
 				}
-			}
-			
+			}else {
+				if(nomeDoPrograma.equals("")) {
+					procurando = false;
+				}else {
+					System.out.println("\nNenhum programa encontrado.");
+					System.out.print("\n(Pressione \"Enter\" para procurar de novo, ou digite \"0\" para voltar) > ");
+					String tentarDeNovo = ler.nextLine();
+					if(tentarDeNovo.equals("0")) {
+						procurando = false;
+					}
+				}
+			}		
 		}
-		return prog;
-		
+		return prog;	
 	}
 	private static Categoria subfluxoEscolherCategoria(Categoria cat) {
 		Categoria categoriaEscolhida = null;

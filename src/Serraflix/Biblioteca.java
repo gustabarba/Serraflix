@@ -1,5 +1,6 @@
 package Serraflix;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,18 +12,22 @@ public class Biblioteca {
 	}
 	
 	//método de obter programa por nome
-	public Programa getProgramaPorNome(String nome) throws Exception{
-		Programa resultado = null;
+	public ArrayList<Programa> getProgramaPorNome(String nome){
+		ArrayList<Programa> resultado = new ArrayList<>();
+		String termoPesquisa = nome.toLowerCase();
+		termoPesquisa = Normalizer.normalize(termoPesquisa, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+		
 		for(Programa p: this.programas) {
-			if(p.getNome().equals(nome)) {
-				resultado = p;
-				break;
+			String nomeCadastrado = p.nome.toLowerCase();
+			nomeCadastrado = Normalizer.normalize(nomeCadastrado, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+			if(nomeCadastrado.contains(termoPesquisa)) {
+				resultado.add(p);
 			}
 		}
-		if(resultado != null) {
+		if(resultado.size() > 0) {
 			return resultado;
 		}else {
-			throw new Exception("O programa não foi encontrado.");
+			return null;
 		}
 	}
 	
@@ -51,8 +56,6 @@ public class Biblioteca {
 		}
 		return programas;
 	}
-		
-	
 	
 	//método de adicionar um programa
 	public void addPrograma(Programa programa) {

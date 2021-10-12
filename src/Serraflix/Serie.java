@@ -103,17 +103,14 @@ public class Serie extends Programa{
 	@Override
 	public String toString() {
 		String retorno = "";
-		retorno = "\nInformações sobre a série \n\n"
-				+ "Id:" + super.id + "\n"
-				+ "Nome: " + super.nome + "\n"
+		retorno = "\n" + super.nome + "\n\n"
 				 + (super.pontuacao == null ? "" : ("Nota: " + String.format("%.1f", super.pontuacao) + "/10 \n"))
-				 + "Categoria: " + this.getCategoria().getNomeCategoria() + "\n"
-				 + "Temporadas: " + this.temporadas.size() + "\n"
-				 + "Total de episódios: " + this.getTotalEpisodios() + "\n\n"
-				 		+ "Episódios por temporada\n";
+				 + "Categoria: " + this.getCategoria().getNomeCategoria() + "\n\n"
+				 + "Temporadas: " + this.temporadas.size() + "\n\n";
 		for(Temporada t: this.getTemporadas()) {
-			retorno += String.format("\n%02d", t.getNomeTemporada()) + "ª temp: " + String.format("%02d", t.getQuantidadeEpisodios()) + " eps";
+			retorno += String.format("%02d", t.getNomeTemporada()) + "ª temp: " + String.format("%02d", t.getQuantidadeEpisodios()) + " eps\n";
 		}
+		retorno += "\nTotal de episódios: " + this.getTotalEpisodios();
 		return retorno;
 	}
 }

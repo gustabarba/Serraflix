@@ -14,7 +14,7 @@ public class Program {
 				new Serie("The Office", 8.9, Categoria.COMEDIA, Arrays.asList(6, 22, 25, 19, 28, 26, 26, 24, 25)),
 				new Serie("Hinterland", 9.5, Categoria.TERROR, Arrays.asList(8, 10, 8)),
 				new Serie("Cowboy Bebop", 8.9, Categoria.COMEDIA, Arrays.asList(26)),
-				new Serie("Breaking Bad", 11., Categoria.TERROR, Arrays.asList(7, 13, 13, 13, 16)),
+				new Serie("Breaking Bad", 10., Categoria.TERROR, Arrays.asList(7, 13, 13, 13, 16)),
 				new Serie("Dr. House", 8.5, Categoria.FANTASIA, Arrays.asList(22, 24, 24, 16, 24, 22, 23, 22)),
 				new Serie("House Of Cards", 8.7, Categoria.DRAMA, Arrays.asList(13, 13, 13, 13, 13, 8)),
 				new Serie("Lost", 8.3, Categoria.FANTASIA, Arrays.asList(25, 24, 23, 14, 17, 18)),
@@ -23,7 +23,7 @@ public class Program {
 				new Filme("Eternal Sunshine Of The Spotless Mind", 4.1, Categoria.TERROR, 108),			
 				new Filme("Her", 4., Categoria.COMEDIA, 126),			
 				new Filme("Cowboy Bebop: The Movie", 3.9, Categoria.FANTASIA, 115),
-				new Filme("Lorem Ipsum", 11., Categoria.FANTASIA, 0)
+				new Filme("Lorem Ipsum", 3., Categoria.FANTASIA, 0)
 			));
 		
 

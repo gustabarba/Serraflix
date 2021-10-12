@@ -67,13 +67,37 @@ public class Program {
 			}
 		}
 		System.out.println("\nAté a próxima!");
-		
-		
+		/*
 		
 		///////////// FIM DA MAIN ////////////////
 		
 		
+	
 		
+		
+		DICA:
+		
+		Na barra com o número de linhas do Eclipse, minimize os métodos dos fluxos a seguir,
+		clicando na bolinha com um "-", à direita do número da linha onde tá o cabeçalho da função.
+		Isso vai te ajudar a entender como elas foram estruturadas.   
+		
+		EXEMPLO
+
+		108
+		109
+		110
+		111 (-)		private static void fluxoQualquer() {
+		112	 |     		bla
+		113	 |			bla
+		114	 |			bla
+		115	 |			...
+		
+		
+		
+			
+		
+		
+		*/
 	}
 
 	private static void fluxoCriacao() {

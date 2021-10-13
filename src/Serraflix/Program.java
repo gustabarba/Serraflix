@@ -432,7 +432,7 @@ public class Program {
 						System.out.println("\n* VOCÊ ESTÁ PRESTES A CRIAR " + (tipo == 1 ? "UM FILME" : "UMA SÉRIE") + " COM AS INFORMAÇÕES ACIMA, DESEJA PROSSEGUIR?");
 					}
 					
-					System.out.print("\n(PRESSIONE \"E N T E R\" PARA PROSSEGUIR, DIGITE \"V\" PARA VOLTAR AO MENU DE " + (prog != null && catalogo.encontrarIndicePorId(prog.getId()) != -1? "EDIÇÃO" : "CRIAÇÃO") + ", OU \"0\" PARA VOLTAR AO MENU PRINCIPAL) > ");
+					System.out.print("\n(PRESSIONE \"E N T E R\" PARA PROSSEGUIR, DIGITE \"V\" PARA VOLTAR AO FORMULÁRIO DE " + (prog != null && catalogo.encontrarIndicePorId(prog.getId()) != -1? "EDIÇÃO" : "CRIAÇÃO") + ", OU \"0\" PARA VOLTAR AO MENU PRINCIPAL) > ");
 					
 					veredito = ler.nextLine();
 					
@@ -485,7 +485,7 @@ public class Program {
 					break;
 				}
 				System.out.println("\n*** IMPOSSÍVEL CRIAR O PROGRAMA: UM OU MAIS DADOS ESSENCIAIS ESTÃO AUSENTES ***\n");
-				System.out.print("(PRESSIONE \"E N T E R\" PARA VOLTAR AO MENU DE CRIAÇÃO, OU DIGITE \"0\" PARA VOLTAR AO MENU PRINCIPAL) > ");
+				System.out.print("(PRESSIONE \"E N T E R\" PARA VOLTAR AO FORMULÁRIO DE CRIAÇÃO, OU DIGITE \"0\" PARA VOLTAR AO MENU PRINCIPAL) > ");
 				String tentarDeNovo = ler.nextLine();
 				if(!(tentarDeNovo.equals("0"))) {
 					fluxoEfetuarCriacaoEdicao(rebote, null);

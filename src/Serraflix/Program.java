@@ -412,14 +412,14 @@ public class Program {
 				
 				switch(tipo) {
 				case 1:
-					if(catalogo.encontrarIndicePorId(prog.getId()) != -1) {
+					if(prog != null && catalogo.encontrarIndicePorId(prog.getId()) != -1) {
 						preview = new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao, prog.id);
 					}else {
 						preview = new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao);
 					}
 					break;
 				case 2:
-					if(catalogo.encontrarIndicePorId(prog.getId()) != -1) {
+					if(prog != null && catalogo.encontrarIndicePorId(prog.getId()) != -1) {
 						preview = new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps, prog.id);
 					}else {
 						preview = new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps);
@@ -491,7 +491,7 @@ public class Program {
 					rebote = new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps);
 					break;
 				}
-				System.out.println("\n*** IMPOSSÍVEL CRIAR O PROGRAMA: UM OU MAIS DADOS ESSENCIAIS FICARAM FALTANDO ***\n");
+				System.out.println("\n*** IMPOSSÍVEL CRIAR O PROGRAMA: UM OU MAIS DADOS ESSENCIAIS ESTÃO AUSENTES ***\n");
 				System.out.print("(PRESSIONE \"E N T E R\" PARA VOLTAR AO MENU DE CRIAÇÃO, OU DIGITE \"0\" PARA VOLTAR AO MENU PRINCIPAL) > ");
 				String tentarDeNovo = ler.nextLine();
 				if(!(tentarDeNovo.equals("0"))) {

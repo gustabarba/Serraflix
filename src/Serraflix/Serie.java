@@ -50,7 +50,7 @@ public class Serie extends Programa{
 */
 	
 	//método de remover temporada
-	public void removerTemporada(int nome) throws Exception{
+	/*public void removerTemporada(int nome) throws Exception{
 		boolean achou = false;
 		Iterator<Temporada> i = this.temporadas.iterator();
 		while (i.hasNext()) {
@@ -63,7 +63,7 @@ public class Serie extends Programa{
 		if(achou == false) {
 			throw new Exception("*** IMPOSSÍVEL REMOVER: TEMPORADA INEXISTENTE ***");
 		}
-	}
+	}*/
 	
 	//método de adicionar temporadas em massa
 	public void adicionarTemporadas(List<Integer> qtdEps) throws Exception{
@@ -72,7 +72,7 @@ public class Serie extends Programa{
 				this.temporadas.add(new Temporada(i + 1, qtdEps.get(i)));
 			}
 		}else {
-			throw new Exception("*** ERRO AO ADICIONAR TEMPORADAS PARA A SÉRIE \"" + this.nome + "\": VOCÊ PRECISA ADICIONAR UM NÚMERO POSITIVO DE EPISÓDIOS, E SÓ PODE CRIAR UMA TEMPORADA QUE AINDA NÃO EXISTA ***");
+			throw new Exception("\n*** ERRO AO ADICIONAR TEMPORADAS PARA A SÉRIE" + (this.nome == null ? "" : (" \"" + this.nome + "\"")) + ": VOCÊ PRECISA ADICIONAR UM NÚMERO POSITIVO DE EPISÓDIOS, E SÓ PODE CRIAR UMA TEMPORADA QUE AINDA NÃO EXISTA ***");
 		}
 	}
 	
@@ -105,7 +105,7 @@ public class Serie extends Programa{
 	public String toString() {
 		String retorno = "";
 		retorno = "\n" + super.nome + " | SÉRIE\n\n"
-				 + (super.pontuacao == null ? "" : ("NOTA: " + String.format("%.1f", super.pontuacao) + "/10 \n"))
+				 + "NOTA: " + (super.pontuacao == null ? "SEM NOTA" : String.format("%.1f", super.pontuacao) + "/10") + "\n"
 				 + "CATEGORIA: " + this.getCategoria().getNomeCategoria() + "\n\n"
 				 + "TEMPORADAS: " + this.temporadas.size() + "\n\n";
 		for(Temporada t: this.getTemporadas()) {

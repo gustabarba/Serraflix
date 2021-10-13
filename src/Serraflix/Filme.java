@@ -1,10 +1,10 @@
 package Serraflix;
 
 public class Filme extends Programa{
-	private int duracao;
+	private Integer duracao;
 	
 	//construtor padrão
-	public Filme(String nome, Double pontuacao, Categoria categoria, int duracao){
+	public Filme(String nome, Double pontuacao, Categoria categoria, Integer duracao){
 		super(nome, pontuacao, categoria);
 		this.duracao = duracao;
 	}
@@ -34,6 +34,7 @@ public class Filme extends Programa{
 			}
 		}else {
 			super.pontuacao = null;
+			throw new ClassificacaoForaDoRangeException("\n*** AVISO: NÃO FOI INFORMADO UM VALOR PARA CLASSIFICAÇÃO ***");
 		}
 	}	
 	
@@ -47,7 +48,7 @@ public class Filme extends Programa{
 	
 	
 	//getter e setter
-	public int getDuracao() {
+	public Integer getDuracao() {
 		return duracao;
 	}
 	public void setDuracao(int duracao) {

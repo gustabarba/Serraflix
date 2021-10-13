@@ -263,16 +263,14 @@ public class Program {
 		}
 	}
 	private static boolean fluxoEfetuarCriacaoEdicao(Programa prog, Integer tipo) {	
-		boolean efetuado = false;
-		if((prog != null) || (prog == null && tipo != null)) {	
-			
+		boolean efetuado = true;
+		if((prog != null) || (prog == null && tipo != null)) {
 			if(tipo == null) {
 				if(prog instanceof Filme) {
 					tipo = 1;
 				}else if(prog instanceof Serie) {
 					tipo = 2;
-				}
-				
+				}	
 			}
 			
 			switch(tipo) {
@@ -286,7 +284,7 @@ public class Program {
 			
 			String nomeDoPrograma = null;
 			
-			if(prog != null) {
+			if(prog != null && prog.nome != null) {
 				System.out.print(prog.getNome() + " (PRESSIONE \"E N T E R\" PARA MANTER, OU DIGITE UM NOVO NOME) > ");		
 				nomeDoPrograma = prog.getNome();			
 			}else {
@@ -311,7 +309,7 @@ public class Program {
 			
 			switch(tipo) {
 			case 1:
-				System.out.println("\n* POTNUAÇÃO DE 1 A 5:\n");
+				System.out.println("\n* PONTUAÇÃO DE 1 A 5:\n");
 				break;
 			case 2:
 				System.out.println("\n* PONTUAÇÃO DE 1 A 10:\n");
@@ -344,7 +342,7 @@ public class Program {
 			case 1:	
 				System.out.println("\n* QUANTOS MINUTOS DE DURAÇÃO?\n");
 				
-				if(prog != null) {
+				if(prog != null && ((Filme)prog).getDuracao() != null) {
 					duracao = ((Filme) prog).getDuracao();
 					System.out.print(((Filme) prog).getDuracao() + " MINUTOS (PRESSIONE \"E N T E R\" PARA MANTER, OU DIGITE UMA NOVA DURAÇÃO) > ");
 				}else {
@@ -364,7 +362,7 @@ public class Program {
 			case 2:
 				System.out.println("\n* QUANTAS TEMPORADAS? \n");
 				
-				if(prog != null) {
+				if(prog != null && ((Serie)prog).getNumeroTemporas() > 0) {
 					System.out.print(((Serie)prog).getNumeroTemporas() + " (PRESSIONE \"E N T E R\" PARA MANTER, OU DIGITE UM NOVO Nº DE TEMPORADAS) > ");				
 				}else {
 					System.out.print("> ");
@@ -411,54 +409,88 @@ public class Program {
 			Categoria categoriaPrograma = subfluxoEscolherCategoria((prog != null ? (prog.getCategoria()) : (null)), false);
 			
 			if(nomeDoPrograma != null && (duracao != null || qtdEps.size() > 0)) {
+				Programa preview = null;
+				
 				switch(tipo) {
 				case 1:
-					Filme previewFilme = new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao);
-					System.out.println(previewFilme.toString());
+					preview = new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao);
 					break;
 				case 2:
-					Serie previewSerie = new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps);
-					System.out.println(previewSerie.toString());
+					preview = new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps);
 					break;
 				}
-				if(prog == null) {
-					System.out.println("\n* VOCÊ ESTÁ PRESTES A CRIAR " + (tipo == 1 ? "UM FILME" : "UMA SÉRIE") + " COM AS INFORMAÇÕES ACIMA, DESEJA PROSSEGUIR?\n");
-				}else {
-					System.out.println("\n* VOCÊ ESTÁ PRESTES A EDITAR " + (tipo == 1 ? "O FILME" : "A SÉRIE") + " \"" + prog.nome + "\" COM AS INFORMAÇÕES ACIMA, DESEJA PROSSEGUIR?\n");
-				}
-				System.out.print("(PRESSIONE \"E N T E R\" PARA PROSSEGUIR, OU DIGITE \"0\" PARA VOLTAR AO MENU DE " + (prog == null ? "CRIAÇÃO" : "EDIÇÃO") + ") > ");
 				
-				String desejaProsseguir = ler.nextLine();
-				if(!(desejaProsseguir.equals("0"))) {
+				boolean prossegue = false;
+				
+				String veredito = "";
+				
+				while(!prossegue) {
+					System.out.println(preview.toString());
+					if(prog != null && catalogo.encontrarIndicePorId(prog.getId()) != -1) {
+						System.out.println("\n* VOCÊ ESTÁ PRESTES A EDITAR " + (tipo == 1 ? "O FILME" : "A SÉRIE") + " \"" + prog.nome + "\" COM AS INFORMAÇÕES ACIMA, DESEJA PROSSEGUIR?\n");
+					}else {
+						System.out.println("\n* VOCÊ ESTÁ PRESTES A CRIAR " + (tipo == 1 ? "UM FILME" : "UMA SÉRIE") + " COM AS INFORMAÇÕES ACIMA, DESEJA PROSSEGUIR?");
+					}
+					
+					System.out.print("\n(PRESSIONE \"E N T E R\" PARA PROSSEGUIR, DIGITE \"V\" PARA VOLTAR AO MENU DE " + (prog != null && catalogo.encontrarIndicePorId(prog.getId()) != -1? "EDIÇÃO" : "CRIAÇÃO") + ", OU \"0\" PARA VOLTAR AO MENU PRINCIPAL) > ");
+					
+					veredito = ler.nextLine();
+					
+					if(!veredito.equals("") && !veredito.toLowerCase().equals("v") && !veredito.equals("0")) {
+						System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
+					}else {
+						prossegue = true;
+					}
+					
+				}	
+				
+				if(veredito.equals("")) {
 					switch(tipo) {
 					case 1:
-						if(prog != null) {
+						if(prog != null && catalogo.encontrarIndicePorId(prog.getId()) != -1) {
 							catalogo.addPrograma(new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao, prog.id));
 						}else {
 							catalogo.addPrograma(new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao));
 						}
 						break;
 					case 2:
-						if(prog != null) {
+						if(prog != null && catalogo.encontrarIndicePorId(prog.getId()) != -1 ) {
 							catalogo.addPrograma(new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps, prog.id));
 						}else {
 							catalogo.addPrograma(new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps));
 						}
 						break;
 					}		
-					if(prog != null) {
-						catalogo.deletarProgramaPorId(prog.getId());
+					if(prog != null && catalogo.encontrarIndicePorId(prog.getId()) != -1 ) {
+						catalogo.deletarProgramaPorIndice(catalogo.encontrarIndicePorId(prog.getId()));
 						System.out.print("\n" + (tipo == 1 ? "* FILME EDITADO" : "SÉRIE EDITADA") + " COM SUCESSO! :) (PRESSIONE \"E N T E R\" PARA VOLTAR AO MENU PRINCIPAL)");
 						ler.nextLine();
 					}else {
 						System.out.print("\n" + (tipo == 1 ? "* FILME CRIADO" : "SÉRIE CRIADA") + " COM SUCESSO! :) (PRESSIONE \"E N T E R\" PARA VOLTAR AO MENU PRINCIPAL)");
 						ler.nextLine();
 					}
-					efetuado = true;
+				}else {
+					if(veredito.toLowerCase().equals("v")) {
+						fluxoEfetuarCriacaoEdicao(preview, null);
+					}
 				}
 			}else {
-				System.out.print("\n*** IMPOSSÍVEL CRIAR O PROGRAMA: DADOS VAZIOS FORAM INSERIDOS :(. (PRESSIONE \"E N T E R\" PARA VOLTAR AO MENU DE CRIAÇÃO) *** ");
-				ler.nextLine();
+				System.out.println("rebote");
+				Programa rebote = null;
+				switch(tipo) {
+				case 1:
+					rebote = new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao);
+					break;
+				case 2:
+					rebote = new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps);
+					break;
+				}
+				System.out.println("\n*** IMPOSSÍVEL CRIAR O PROGRAMA: UM OU MAIS DADOS ESSENCIAIS FICARAM FALTANDO ***\n");
+				System.out.print("(PRESSIONE \"E N T E R\" PARA VOLTAR AO MENU DE CRIAÇÃO, OU DIGITE \"0\" PARA VOLTAR AO MENU PRINCIPAL) > ");
+				String tentarDeNovo = ler.nextLine();
+				if(!(tentarDeNovo.equals("0"))) {
+					fluxoEfetuarCriacaoEdicao(rebote, null);
+				}
 			}
 		}
 		return efetuado;
@@ -474,7 +506,7 @@ public class Program {
 			}else {
 				for (Programa p : catalogo.listarProgramas(3, null, null)) {
 					if (p.equals(prog)) {
-						catalogo.deletarProgramaPorId(prog.getId());
+						catalogo.deletarProgramaPorIndice(catalogo.encontrarIndicePorId(prog.getId()));
 						System.out.print("\n* PROGRAMA DELETADO COM SUCESSO :). (PRESSIONE \"E N T E R\" PARA VOLTAR AO MENU PRINCIPAL)");
 						ler.nextLine();
 						efetuado = true;
@@ -777,7 +809,7 @@ public class Program {
 			
 			if(cat != null) {
 				categoriaEscolhida = cat;
-				System.out.print("(* PRESSIONE \"E N T E R\" PARA MANTER, OU ESCOLHA UMA NOVA) > ");
+				System.out.print("(*\nPRESSIONE \"E N T E R\" PARA MANTER, OU ESCOLHA UMA NOVA) > ");
 			}else {
 				System.out.print("\n> ");
 			}

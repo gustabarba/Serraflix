@@ -42,14 +42,21 @@ public class Biblioteca{
 		this.programas.addAll(programas);
 	}
 	
-	//método de deletar programa por id
-	public void deletarProgramaPorId(int id) {
+	//método de deletar programa por indice
+	public void deletarProgramaPorIndice(int indice) {
+		this.programas.remove(indice);
+	}
+	
+	//método de encontrar programa por id
+	public int encontrarIndicePorId(int id) {
+		int indice = -1;
 		for(int i = 0; i < this.programas.size(); i++) {
 			if(this.programas.get(i).getId() == id) {
-				this.programas.remove(i);
+				indice = i;
 				break;
 			}
 		}
+		return indice;
 	}
 		
 	

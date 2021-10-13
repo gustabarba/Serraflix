@@ -28,12 +28,13 @@ public class Program {
 
 		boolean emOperacao = true;
 		
-		System.out.println(" ________________________________");
+		System.out.println();
 		System.out.println("|      SEJA BEM-VINDO(A) AO     |");
 		System.out.println("|   *** S E R R A F L I X ***   |");
 		System.out.println("|_______________________________|\n\n");
 		
 		while(emOperacao) {	
+			System.out.println();
 			System.out.println("|=========================|");
 			System.out.println("|O QUE VOCÊ DESEJA FAZER? |");
 			System.out.println("|=========================|\n\n");
@@ -85,7 +86,7 @@ public class Program {
 	
 	DICA:
 	
-	Na barra com o número de linhas do Eclipse, minimize os métodos dos fluxos a seguir,
+	Na barra com o número de linhas do Eclipse (ou da sua IDE escolhida), minimize os métodos dos fluxos a seguir,
 	clicando na bolinha com um "-", à direita do número da linha onde tá o cabeçalho da função.
 	Isso vai te ajudar a entender como elas foram estruturadas.
 	
@@ -111,7 +112,7 @@ public class Program {
 	private static void fluxoCriacao() {
 		boolean criando = true;			
 		while(criando) {		
-					System.out.println(" __________________________________________");
+					System.out.println();
 					System.out.println("| QUAL TIPO DE PROGRAMA VOCÊ DESEJA CRIAR? |");
 					System.out.println("|__________________________________________|\n\n)");
 					System.out.println("_______________________________");
@@ -464,7 +465,7 @@ public class Program {
 		boolean efetuado = false;
 		if(prog != null) {
 			System.out.println("\n* VOCÊ ESTÁ PRESTES A DELETAR " + (prog instanceof Filme ? "O FILME" : "A SÉRIE") + " \"" + prog.nome + "\". DESEJA PROSSEGUIR?");
-			System.out.print("\n(pRESSIONE \"E N T E R \" PARA DELETAR O PROGRAMA SELECIONADO, OU DIGITE\"0\" PARA VOLTAR) > ");
+			System.out.print("\n(PRESSIONE \"E N T E R \" PARA DELETAR O PROGRAMA SELECIONADO, OU DIGITE \"0\" PARA VOLTAR) > ");
 			String confirmaDeletar = ler.nextLine();
 			if(confirmaDeletar.equals("0")) {
 				efetuado = false;

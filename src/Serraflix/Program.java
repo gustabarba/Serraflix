@@ -228,14 +228,16 @@ public class Program {
 			System.out.println("_____________________________________ ");
 			System.out.println("|ESCOLHA UM DOS MÉTODOS DE EXIBIÇÃO  |");
 			System.out.println("|____________________________________|\n\n");
-			System.out.println("__________________________________________");
 			System.out.println(
-					  "1 ---> DE UMA LISTAGEM POR TIPO           |\n"
-					+ "2 ---> DE UMA LISTAGEM POR CATEGORIA      |\n"
-					+ "3 ---> DE UMA LISTA COM TODOS OS PROGRAMAS| \n"
-					+ "4 ---> PELO NOME DO PROGRAMA              | \n"
-					+ "0 ---> VOLTAR AO MENU PRINCIPAL           |");
-			System.out.println("__________________________________________|\n");
+					  "_____________________________________");
+			System.out.println(
+					  "1 ---> LISTAR POR TIPO               |\n"
+					+ "2 ---> LISTAR POR CATEGORIA          |\n"
+					+ "3 ---> LISTAR TODOS OS PROGRAMAS     | \n"
+					+ "4 ---> ENCONTRAR POR NOME            | \n"
+					+ "0 ---> VOLTAR AO MENU PRINCIPAL      |");
+			System.out.println(
+					  "_____________________________________|\n");
 			System.out.print("> ");
 			String opcaoEscolhidaExibicao = ler.nextLine();
 			switch (opcaoEscolhidaExibicao) {

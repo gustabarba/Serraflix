@@ -25,7 +25,7 @@ public class Program {
 				new Filme("Lorem Ipsum", 3., Categoria.FANTASIA, 0)
 			));
 		
-
+		
 		boolean emOperacao = true;
 		
 		System.out.println();
@@ -321,15 +321,13 @@ public class Program {
 				System.out.print("> ");
 			}
 			
-			String bufferPontuacao = ler.nextLine();
 			
-			if(!(bufferPontuacao.equals(""))) {
-				try {
-					pontuacaoPrograma = Double.valueOf(bufferPontuacao);
-				}catch(Exception e) {			
-						
-				}
-			}		
+			try {
+				pontuacaoPrograma = Double.valueOf(ler.nextLine());
+			}catch(Exception e) {			
+					
+			}
+				
 			
 			Integer duracao = null;
 			
@@ -348,15 +346,12 @@ public class Program {
 					System.out.print("> ");
 				}
 				
-				String bufferDuracao = ler.nextLine();
-				
-				if(!(bufferDuracao.equals(""))) {
-					try {
-						duracao = Integer.valueOf(bufferDuracao);
-					}catch(Exception e) {			
-							
-					}
+				try {
+					duracao = Integer.valueOf(ler.nextLine());
+				}catch(Exception e) {			
+						
 				}
+			
 				break;
 			case 2:
 				System.out.println("\n* QUANTAS TEMPORADAS? \n");
@@ -367,15 +362,13 @@ public class Program {
 					System.out.print("> ");
 				}
 				
-				String bufferNumTemporadas = ler.nextLine();
 				
-				if(!(bufferNumTemporadas.equals(""))) {
-					try {
-						numTemporadas = Integer.valueOf(bufferNumTemporadas);
-					}catch(Exception e) {			
-							
-					}
-				}	
+				try {
+					numTemporadas = Integer.valueOf(ler.nextLine());
+				}catch(Exception e) {			
+						
+				}
+					
 				
 				if(prog != null && numTemporadas == null) {
 					for(Temporada t : ((Serie)prog).getTemporadas()) {
@@ -567,9 +560,8 @@ public class Program {
 						
 						int filmeEscolhidoDaLista = -1;				
 						
-						String bufferFilmeEscolhidoDaLista = ler.nextLine();
 						try {
-							filmeEscolhidoDaLista = Integer.valueOf(bufferFilmeEscolhidoDaLista);
+							filmeEscolhidoDaLista = Integer.valueOf(ler.nextLine());
 						}
 						catch(Exception e) {
 							
@@ -609,9 +601,8 @@ public class Program {
 						
 						int serieEscolhidaDaLista = -1;						
 						
-						String bufferSerieEscolhidaDaLista = ler.nextLine();
 						try {
-							serieEscolhidaDaLista = Integer.valueOf(bufferSerieEscolhidaDaLista);
+							serieEscolhidaDaLista = Integer.valueOf(ler.nextLine());
 						}
 						catch(Exception e) {
 							
@@ -668,9 +659,8 @@ public class Program {
 							System.out.println("\n0: VOLTAR\n");
 							System.out.print("> ");
 							int progEscolhidoDaLista = -1;
-							String bufferProgEscolhidoDaLista = ler.nextLine();
 							try {
-								progEscolhidoDaLista = Integer.valueOf(bufferProgEscolhidoDaLista);
+								progEscolhidoDaLista = Integer.valueOf(ler.nextLine());
 							}
 							catch(Exception e) {
 								
@@ -713,9 +703,8 @@ public class Program {
 				
 				
 				int programaEscolhidoDaLista = -1;
-				String bufferProgramaEscolhidoDaLista = ler.nextLine();
 				try {
-					programaEscolhidoDaLista = Integer.valueOf(bufferProgramaEscolhidoDaLista);
+					programaEscolhidoDaLista = Integer.valueOf(ler.nextLine());
 				}
 				catch(Exception e) {
 					
@@ -761,9 +750,9 @@ public class Program {
 					System.out.print("> ");
 					
 					int resultadoSelecionado = -1;
-					String bufferResultadoSelecionado = ler.nextLine();
+
 					try {
-						resultadoSelecionado = Integer.valueOf(bufferResultadoSelecionado);
+						resultadoSelecionado = Integer.valueOf(ler.nextLine());
 					}
 					catch(Exception e) {
 						
@@ -818,19 +807,17 @@ public class Program {
 				System.out.print("\n(*PRESSIONE \"E N T E R\" PARA MANTER, OU ESCOLHA UMA NOVA) > ");
 			}else {
 				System.out.print("\n> ");
-			}
-			
-			String bufferNumeroCategoria = ler.nextLine();
+			}			
 			
 			Integer numeroCategoria = null;
 			
-			if(!(bufferNumeroCategoria.equals(""))) {
-				try {
-					numeroCategoria = Integer.valueOf(bufferNumeroCategoria);
-				}catch(Exception e) {			
-						
-				}
+			
+			try {
+				numeroCategoria = Integer.valueOf(ler.nextLine());
+			}catch(Exception e) {			
+					
 			}
+			
 			
 			if(numeroCategoria != null) {
 				if(numeroCategoria > 0 && numeroCategoria <= Categoria.values().length) {

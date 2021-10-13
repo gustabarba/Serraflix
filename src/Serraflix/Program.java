@@ -263,7 +263,6 @@ public class Program {
 		}
 	}
 	private static boolean fluxoEfetuarCriacaoEdicao(Programa prog, Integer tipo) {	
-		boolean efetuado = true;
 		if((prog != null) || (prog == null && tipo != null)) {
 			if(tipo == null) {
 				if(prog instanceof Filme) {
@@ -483,7 +482,6 @@ public class Program {
 					}
 				}
 			}else {
-				System.out.println("rebote");
 				Programa rebote = null;
 				switch(tipo) {
 				case 1:
@@ -501,7 +499,7 @@ public class Program {
 				}
 			}
 		}
-		return efetuado;
+		return true;
 	}
 	private static boolean fluxoEfetuarRemocao(Programa prog){
 		boolean efetuado = false;

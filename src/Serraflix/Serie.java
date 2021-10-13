@@ -97,7 +97,7 @@ public class Serie extends Programa{
 			}
 		}else {
 			super.pontuacao = null;
-			throw new ClassificacaoForaDoRangeException("\n*** AVISO: NÃO FOI INFORMADO UM VALOR PARA CLASSIFICAÇÃO ***");
+			/*throw new ClassificacaoForaDoRangeException("\n*** AVISO: NÃO FOI INFORMADO UM VALOR PARA CLASSIFICAÇÃO ***");*/
 		}
 	}	
 	

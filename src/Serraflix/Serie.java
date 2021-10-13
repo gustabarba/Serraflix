@@ -72,7 +72,7 @@ public class Serie extends Programa{
 				this.temporadas.add(new Temporada(i + 1, qtdEps.get(i)));
 			}
 		}else {
-			throw new Exception("\n*** ERRO AO ADICIONAR TEMPORADAS PARA A SÉRIE" + (this.nome == null ? "" : (" \"" + this.nome + "\"")) + ": VOCÊ PRECISA ADICIONAR UM NÚMERO POSITIVO DE EPISÓDIOS, E SÓ PODE CRIAR UMA TEMPORADA QUE AINDA NÃO EXISTA ***");
+			throw new Exception("\n*** NÃO FOI POSSÍVEL ADICIONAR TEMPORADAS PARA A SÉRIE" + (this.nome == null ? "" : (" \"" + this.nome + "\"")) + ". ***");
 		}
 	}
 	

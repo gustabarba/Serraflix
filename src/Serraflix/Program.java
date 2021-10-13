@@ -469,7 +469,7 @@ public class Program {
 			if(confirmaDeletar.equals("0")) {
 				efetuado = false;
 			}else {
-				for (Programa p : catalogo.listarProgramas(3)) {
+				for (Programa p : catalogo.listarProgramas(3, null, null)) {
 					if (p.equals(prog)) {
 						catalogo.deletarProgramaPorId(prog.getId());
 						System.out.print("\n* PROGRAMA DELETADO COM SUCESSO :). (PRESSIONE \"E N T E R\" PARA VOLTAR AO MENU PRINCIPAL)");
@@ -514,7 +514,7 @@ public class Program {
 			case "1":
 				boolean escolhendoFilmeDaLista = true;
 				while(escolhendoFilmeDaLista) {
-					ArrayList<Programa> listaDeFilmes = catalogo.listarProgramas(1);
+					ArrayList<Programa> listaDeFilmes = catalogo.listarProgramas(1, null, null);
 					if(listaDeFilmes.size() > 0) {
 						System.out.println("\n* ESCOLHA UM FILME DA LISTA: \n");
 						for(int i = 0; i < listaDeFilmes.size(); i++) {
@@ -557,7 +557,7 @@ public class Program {
 			case "2":
 				boolean escolhendoSerieDaLista = true;
 				while(escolhendoSerieDaLista) {
-					ArrayList<Programa> listaDeSeries = catalogo.listarProgramas(2);
+					ArrayList<Programa> listaDeSeries = catalogo.listarProgramas(2, null, null);
 					if(listaDeSeries.size() > 0) {
 						System.out.println("\n* ESCOLHA UM SÉRIE DA LISTA \n");
 						for(int i = 0; i < listaDeSeries.size(); i++) {
@@ -615,9 +615,9 @@ public class Program {
 			
 			if(categoriaEscolhida != null) {
 				
-				ArrayList<Programa> progsDaCategoria = catalogo.getProgramasPorCategoria(categoriaEscolhida);
+				ArrayList<Programa> progsDaCategoria = catalogo.listarProgramas(4, categoriaEscolhida, null);
 				
-				if(progsDaCategoria != null) {
+				if(progsDaCategoria.size() > 0) {
 						boolean escolhendoProgramaDaLista = true;
 						while(escolhendoProgramaDaLista) {
 							System.out.println("\n* ESCOLHA UM PROGRAMA DA LISTA: \n");
@@ -661,7 +661,7 @@ public class Program {
 		Programa prog = null;
 		boolean listando = true;
 		while(listando) {
-			ArrayList<Programa> listaDeTodos= catalogo.listarProgramas(3);
+			ArrayList<Programa> listaDeTodos= catalogo.listarProgramas(3, null, null);
 			if(listaDeTodos.size() > 0) {
 				System.out.println("\n* ESCOLHA UM PROGRAMA:\n");
 				for(int i = 0; i < listaDeTodos.size(); i++) {
@@ -708,8 +708,8 @@ public class Program {
 			System.out.println("\n* INSIRA O NOME DO PROGRAMA QUE DESEJA CONSULTAR:\n");
 			System.out.print("(DIGITE SUA PESQUISA, OU PRESSIONE \"E N T E R\" PARA VOLTAR) > ");
 			String nomeDoPrograma = ler.nextLine();
-			progs = catalogo.getProgramaPorNome(nomeDoPrograma);
-			if(progs != null && !(nomeDoPrograma.equals(""))) {
+			progs = catalogo.listarProgramas(5, null, nomeDoPrograma);
+			if(progs.size() > 0 && !(nomeDoPrograma.equals(""))) {
 				boolean escolhendo = true;
 				while(escolhendo) {
 					System.out.println("\n* EXIBINDO " + progs.size() + " RESULTADO(S) NA PESQUISA POR \"" + nomeDoPrograma + "\":\n");

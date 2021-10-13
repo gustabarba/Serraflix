@@ -18,12 +18,13 @@ public class Biblioteca{
 		ArrayList<Programa> programas = new ArrayList<>();
 		String termoPesquisa = "";
 		if(nome != null) {
-			termoPesquisa = nome.toLowerCase();
-			termoPesquisa = Normalizer.normalize(termoPesquisa, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+			termoPesquisa = Normalizer.normalize(nome, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 		}
 		for(Programa p: this.programas) {
-			String nomeCadastrado = p.nome.toLowerCase();
-			nomeCadastrado = Normalizer.normalize(nomeCadastrado, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+			String nomeCadastrado = "";
+			if(opcao == 5) {
+				nomeCadastrado = Normalizer.normalize(p.nome, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+			}
 			if((opcao == 1 && p instanceof Filme) || (opcao == 2 && p instanceof Serie) || (opcao == 3) || (opcao == 4 && p.getCategoria().equals(cat)) || (opcao == 5 && nomeCadastrado.contains(termoPesquisa)) ) {
 				programas.add(p);
 			}
@@ -47,7 +48,7 @@ public class Biblioteca{
 		this.programas.remove(indice);
 	}
 	
-	//método de encontrar programa por id
+	//método de encontrar índice do programa por id
 	public int encontrarIndicePorId(int id) {
 		int indice = -1;
 		for(int i = 0; i < this.programas.size(); i++) {

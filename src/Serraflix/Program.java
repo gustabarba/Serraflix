@@ -68,7 +68,7 @@ public class Program {
 				emOperacao = false;
 				break;
 			default:
-				System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
+				System.out.print("> *** OPÇÃO INVÁLIDA :( ***\n");
 				break;
 			}
 		}
@@ -137,7 +137,7 @@ public class Program {
 				criando = false;
 				break;
 			default:
-				System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
+				System.out.print("> *** OPÇÃO INVÁLIDA :( ***\n");
 				break;
 			}
 		}
@@ -178,7 +178,7 @@ public class Program {
 				editando = false;
 				break;
 			default:
-				System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
+				System.out.print("> *** OPÇÃO INVÁLIDA :( ***\n");
 				break;
 			}
 		}
@@ -217,7 +217,7 @@ public class Program {
 				removendo = false;
 				break;
 			default:
-				System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
+				System.out.print("> *** OPÇÃO INVÁLIDA :( ***\n");
 				break;
 			}
 		}
@@ -257,7 +257,7 @@ public class Program {
 				exibindo = false;
 				break;
 			default:
-				System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
+				System.out.print("> *** OPÇÃO INVÁLIDA :( ***\n");
 				break;
 			}
 		}
@@ -389,7 +389,7 @@ public class Program {
 								adicionouEps = true;
 								
 							}catch(Exception e) {
-								System.out.print("*** VALOR INVÁLIDO :( ***\n");	
+								System.out.print("> *** VALOR INVÁLIDO :( ***\n");	
 							}
 						}
 							
@@ -437,7 +437,7 @@ public class Program {
 					veredito = ler.nextLine();
 					
 					if(!veredito.equals("") && !veredito.toLowerCase().equals("v") && !veredito.equals("0")) {
-						System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
+						System.out.print("> *** OPÇÃO INVÁLIDA :( ***\n");
 					}else {
 						prossegue = true;
 					}
@@ -575,7 +575,7 @@ public class Program {
 							if(filmeEscolhidoDaLista == 0) {
 								escolhendoFilmeDaLista = false;
 							}else {
-								System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
+								System.out.print("> *** OPÇÃO INVÁLIDA :( ***\n");
 							}
 						}
 					}else {
@@ -616,7 +616,7 @@ public class Program {
 							if(serieEscolhidaDaLista == 0) {
 								escolhendoSerieDaLista = false;
 							}else {
-								System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");							
+								System.out.print("> *** OPÇÃO INVÁLIDA :( ***\n");							
 							}
 						}
 					}else {
@@ -632,7 +632,7 @@ public class Program {
 				escolhendoTipoAListar = false;
 				break;
 			default:
-				System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
+				System.out.print("> *** OPÇÃO INVÁLIDA :( ***\n");
 				break;
 			}
 		}
@@ -673,7 +673,7 @@ public class Program {
 								if(progEscolhidoDaLista == 0) {
 									escolhendoProgramaDaLista = false;
 								}else {
-									System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");
+									System.out.print("> *** OPÇÃO INVÁLIDA :( ***\n");
 								}
 							}
 						}	
@@ -717,7 +717,7 @@ public class Program {
 					if(programaEscolhidoDaLista == 0) {
 						listando = false;
 					}else {
-						System.out.print("*** OPÇÃO INVÁLIDA :( ***\n");	
+						System.out.print("> *** OPÇÃO INVÁLIDA :( ***\n");	
 					}
 				}		
 			}else {
@@ -766,7 +766,7 @@ public class Program {
 						if(resultadoSelecionado == 0) {
 							escolhendo = false;
 						}else {
-							System.out.print(" *** OPÇÃO INVÁLIDA :( ***\n");
+							System.out.print("> *** OPÇÃO INVÁLIDA :( ***\n");
 						}
 					}
 				}

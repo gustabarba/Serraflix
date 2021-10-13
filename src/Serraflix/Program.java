@@ -413,10 +413,18 @@ public class Program {
 				
 				switch(tipo) {
 				case 1:
-					preview = new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao);
+					if(catalogo.encontrarIndicePorId(prog.getId()) != -1) {
+						preview = new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao, prog.id);
+					}else {
+						preview = new Filme(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, duracao);
+					}
 					break;
 				case 2:
-					preview = new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps);
+					if(catalogo.encontrarIndicePorId(prog.getId()) != -1) {
+						preview = new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps, prog.id);
+					}else {
+						preview = new Serie(nomeDoPrograma, pontuacaoPrograma, categoriaPrograma, qtdEps);
+					}
 					break;
 				}
 				
@@ -427,7 +435,7 @@ public class Program {
 				while(!prossegue) {
 					System.out.println(preview.toString());
 					if(prog != null && catalogo.encontrarIndicePorId(prog.getId()) != -1) {
-						System.out.println("\n* VOCÊ ESTÁ PRESTES A EDITAR " + (tipo == 1 ? "O FILME" : "A SÉRIE") + " \"" + prog.nome + "\" COM AS INFORMAÇÕES ACIMA, DESEJA PROSSEGUIR?\n");
+						System.out.println("\n* VOCÊ ESTÁ PRESTES A EDITAR " + (tipo == 1 ? "O FILME" : "A SÉRIE") + " \"" + prog.nome + "\" COM AS INFORMAÇÕES ACIMA, DESEJA PROSSEGUIR?");
 					}else {
 						System.out.println("\n* VOCÊ ESTÁ PRESTES A CRIAR " + (tipo == 1 ? "UM FILME" : "UMA SÉRIE") + " COM AS INFORMAÇÕES ACIMA, DESEJA PROSSEGUIR?");
 					}
@@ -809,7 +817,7 @@ public class Program {
 			
 			if(cat != null) {
 				categoriaEscolhida = cat;
-				System.out.print("(*\nPRESSIONE \"E N T E R\" PARA MANTER, OU ESCOLHA UMA NOVA) > ");
+				System.out.print("\n(*PRESSIONE \"E N T E R\" PARA MANTER, OU ESCOLHA UMA NOVA) > ");
 			}else {
 				System.out.print("\n> ");
 			}

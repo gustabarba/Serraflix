@@ -37,19 +37,31 @@ public class Biblioteca{
 	public void addPrograma(Programa programa) {
 		this.programas.add(programa);
 		programa.getCategoria().aumentarContador();
+		if(programa instanceof Filme) {
+			Filme.aumentarContador();
+		}else if(programa instanceof Serie){
+			Serie.aumentarContador();
+		}
 	}
 	
 	//método de adicionar programas em massa
 	public void addProgramas(List<Programa> programas) {
-		this.programas.addAll(programas);
+		//this.programas.addAll(programas);
 		for(Programa p: programas) {
-			p.getCategoria().aumentarContador();
+			addPrograma(p);
+			
+			//implementei desse jeito para colocar os controles de contador em um lugar só
 		}
 	}
 	
 	//método de deletar programa por indice
 	public void deletarProgramaPorIndice(int indice) {
 		this.programas.get(indice).getCategoria().diminuirContador();
+		if(this.programas.get(indice) instanceof Filme) {
+			Filme.diminuirContador();
+		}else if(this.programas.get(indice) instanceof Serie){
+			Serie.diminuirContador();
+		}
 		this.programas.remove(indice);
 	}
 	

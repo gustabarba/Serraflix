@@ -15,7 +15,7 @@ public abstract class Programa implements Classificar{
 		try{
 			if(this instanceof Filme) {
 				Filme.classificar(pontuacao);
-			}else {
+			}else if (this instanceof Serie){
 				Serie.classificar(pontuacao);
 			}
 			this.pontuacao = pontuacao;
@@ -45,24 +45,19 @@ public abstract class Programa implements Classificar{
 	@Override
 	public String toString() {
 		String retorno = "";
+		retorno += 
+				"\n" + this.nome + "\n\n" + 
+				"NOTA: " + (this.pontuacao == null ? "SEM NOTA" : String.format("%.1f", this.pontuacao) + (this instanceof Filme ? "/5" : "/10")) + "\n" +
+				"CATEGORIA: " + this.getCategoria().getNomeCategoria() + "\n";
 		if(this instanceof Filme) {
+			retorno += "DURAÇÃO: " + ((Filme)this).getDuracao() + " MINUTOS";
+		}else if(this instanceof Serie){		
 			
-			retorno = "\n" + this.nome + " | FILME\n\n"
-					 + "NOTA: " + (this.pontuacao == null ? "SEM NOTA" : String.format("%.1f", this.pontuacao) + "/5") + "\n"
-					 + "CATEGORIA: " + this.getCategoria().getNomeCategoria() + "\n"
-					 + "DURAÇÃO: " + ((Filme)this).getDuracao() + " MINUTOS";
-			
-		}else {		
-			
-			retorno = "\n" + this.nome + " | SÉRIE\n\n"
-					 + "NOTA: " + (this.pontuacao == null ? "SEM NOTA" : String.format("%.1f", this.pontuacao) + "/10") + "\n"
-					 + "CATEGORIA: " + this.getCategoria().getNomeCategoria() + "\n\n"
-					 + "TEMPORADAS: " + ((Serie)this).getNumeroTemporas() + "\n\n";
+			retorno += "TEMPORADAS: " + ((Serie)this).getNumeroTemporas() + "\n\n";
 			for(Temporada t: ((Serie)this).getTemporadas()) {
 				retorno += String.format("%02d", t.getNomeTemporada()) + "ª TEMP: " + String.format("%02d", t.getQuantidadeEpisodios()) + " EPS\n";
 			}
 			retorno += "\nTOTAL DE EPISÓDIOS: " + ((Serie)this).getTotalEpisodios();
-			
 		}
 		return retorno;	
 	}

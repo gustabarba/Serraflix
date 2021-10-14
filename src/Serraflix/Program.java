@@ -41,8 +41,8 @@ public class Program {
 			System.out.println("__________________________");
 			System.out.println("1 ---> CRIAR UM PROGRAMA  |\n"
 					+ "2 ---> EDITAR UM PROGRAMA |\n"
-					+ "3 ---> DELETAR UM PROGRAMA| \n"
-					+ "4 ---> EXIBIR INFORMAÇÕES | \n"
+					+ "3 ---> DELETAR UM PROGRAMA|\n"
+					+ "4 ---> EXIBIR INFORMAÇÕES |\n\n"
 					+ "0 ---> SAIR               |");
 			System.out.println("__________________________|\n");
 			
@@ -118,7 +118,7 @@ public class Program {
 					System.out.println("_______________________________");
 					System.out.println(
 					  "1 ---> FILME                   |\n"
-					+ "2 ---> SÉRIE                   |\n"
+					+ "2 ---> SÉRIE                   |\n\n"
 					+ "0 ---> VOLTAR AO MENU PRINCIPAL|");
 					System.out.println("_______________________________|\n");
 			
@@ -152,8 +152,8 @@ public class Program {
 			System.out.println(
 					  "1 ---> DE UMA LISTAGEM POR TIPO           |\n"
 					+ "2 ---> DE UMA LISTAGEM POR CATEGORIA      |\n"
-					+ "3 ---> DE UMA LISTA COM TODOS OS PROGRAMAS| \n"
-					+ "4 ---> PELO NOME DO PROGRAMA              | \n"
+					+ "3 ---> DE UMA LISTA COM TODOS OS PROGRAMAS|\n"
+					+ "4 ---> PELO NOME DO PROGRAMA              |\n\n"
 					+ "0 ---> VOLTAR AO MENU PRINCIPAL           |");
 			System.out.println("__________________________________________|\n");
 			
@@ -193,8 +193,8 @@ public class Program {
 			System.out.println(
 					  "1 ---> DE UMA LISTAGEM POR TIPO           |\n"
 					+ "2 ---> DE UMA LISTAGEM POR CATEGORIA      |\n"
-					+ "3 ---> DE UMA LISTA COM TODOS OS PROGRAMAS| \n"
-					+ "4 ---> PELO NOME DO PROGRAMA              | \n"
+					+ "3 ---> DE UMA LISTA COM TODOS OS PROGRAMAS|\n"
+					+ "4 ---> PELO NOME DO PROGRAMA              |\n\n"
 					+ "0 ---> VOLTAR AO MENU PRINCIPAL           |");
 			System.out.println("__________________________________________|\n");
 			System.out.print("> ");
@@ -233,11 +233,11 @@ public class Program {
 			System.out.println(
 					  "1 ---> LISTAR POR TIPO               |\n"
 					+ "2 ---> LISTAR POR CATEGORIA          |\n"
-					+ "3 ---> LISTAR TODOS OS PROGRAMAS     | \n"
-					+ "4 ---> ENCONTRAR POR NOME            | \n"
+					+ "3 ---> LISTAR TODOS OS PROGRAMAS     |\n"
+					+ "4 ---> ENCONTRAR POR NOME            |\n\n"
 					+ "0 ---> VOLTAR AO MENU PRINCIPAL      |");
 			System.out.println(
-					  "_____________________________________|\n");
+					  "_____________________________________|\n\n");
 			System.out.print("> ");
 			String opcaoEscolhidaExibicao = ler.nextLine();
 			switch (opcaoEscolhidaExibicao) {
@@ -540,13 +540,11 @@ public class Program {
 		while(escolhendoTipoAListar) {
 			System.out.println(" ____________________________________________");
 			System.out.println("| QUAL TIPO DE PROGRAMA VOCÊ DESEJA LISTAR?  |");
-			System.out.println("|____________________________________________|\n\n)");
-			System.out.println("_______________________________");
+			System.out.println("|____________________________________________|\n\n");
 			System.out.println(
-			  "1 ---> FILME                   |\n"
-			+ "2 ---> SÉRIE                   |\n"
-			+ "0 ---> VOLTAR AO MENU PRINCIPAL|");
-			System.out.println("_______________________________|\n");
+			  "1 ---> FILME (" + Filme.obterContador() + " progs.)\n"
+			+ "2 ---> SÉRIE (" + Serie.obterContador() + " progs.)\n\n"
+			+ "0 ---> VOLTAR AO MENU PRINCIPAL\n");
 			
 			System.out.print("> ");
 			

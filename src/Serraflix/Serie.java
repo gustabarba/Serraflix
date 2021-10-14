@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Serie extends Programa{
 	private ArrayList<Temporada> temporadas = new ArrayList<>();
+	private static int contador = 0;
 	
 	//construtor padrão
 	public Serie(String nome, Double pontuacao, Categoria categoria, List<Integer> qtdEps){
@@ -93,5 +94,18 @@ public class Serie extends Programa{
 				throw new ClassificacaoForaDoRangeException("\n*** ERRO AO ADICIONAR A PONTUAÇÃO: A NOTA NÃO PODE SER MENOR QUE ZERO OU MAIOR DO QUE DEZ ***");
 			}
 		}
-	}	
+	}
+	
+	public static void aumentarContador() {
+		contador++;
+	}
+
+	public static void diminuirContador() {
+		contador--;
+	}
+	
+	public static int obterContador() {
+		return contador;
+	}
+	
 }

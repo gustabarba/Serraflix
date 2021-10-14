@@ -2,6 +2,7 @@ package Serraflix;
 
 public class Filme extends Programa{
 	private Integer duracao;
+	private static int contador = 0;
 	
 	//construtor padrão
 	public Filme(String nome, Double pontuacao, Categoria categoria, Integer duracao) {
@@ -32,6 +33,18 @@ public class Filme extends Programa{
 	}
 	public void setDuracao(int duracao) {
 		this.duracao = duracao;
+	}
+	
+	public static void aumentarContador() {
+		contador++;
+	}
+
+	public static void diminuirContador() {
+		contador--;
+	}
+	
+	public static int obterContador() {
+		return contador;
 	}
 	
 }

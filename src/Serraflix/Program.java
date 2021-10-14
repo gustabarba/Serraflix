@@ -544,7 +544,7 @@ public class Program {
 			System.out.println(
 			  "1 ---> FILME (" + Filme.obterContador() + " progs.)\n"
 			+ "2 ---> SÉRIE (" + Serie.obterContador() + " progs.)\n\n"
-			+ "0 ---> VOLTAR AO MENU PRINCIPAL\n");
+			+ "0 ---> VOLTAR\n");
 			
 			System.out.print("> ");
 			

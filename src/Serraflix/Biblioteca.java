@@ -15,7 +15,7 @@ public class Biblioteca{
 	
 	//listar programas por tipo, categoria, e nome
 	public ArrayList<Programa> listarProgramas(int opcao, Categoria cat, String nome){
-		ArrayList<Programa> programas = new ArrayList<>();
+		ArrayList<Programa> resultados = new ArrayList<>();
 		String termoPesquisa = "";
 		if(nome != null) {
 			termoPesquisa = Normalizer.normalize(nome, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
@@ -26,11 +26,55 @@ public class Biblioteca{
 				nomeCadastrado = Normalizer.normalize(p.nome, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 			}
 			if((opcao == 1 && p instanceof Filme) || (opcao == 2 && p instanceof Serie) || (opcao == 3) || (opcao == 4 && p.getCategoria().equals(cat)) || (opcao == 5 && nomeCadastrado.contains(termoPesquisa)) ) {
-				programas.add(p);
+				resultados.add(p);
 			}
 		}
-		Collections.sort(programas, new ordenarProgramasPorNome());
-		return programas;
+		/*
+		 
+		esboço do algoritmo de verificação ortográfica
+		  
+		if(opcao == 5 && resultados.size() == 0) {
+			for(Programa p: this.programas) {
+				String nomeCadastrado = "";
+				nomeCadastrado = Normalizer.normalize(p.nome, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+				
+				String[] palavrasDoTermo = termoPesquisa.split(" ");    
+				for(String pdt: palavrasDoTermo) {
+					
+					int tpt = pdt.length();
+					String ept = pdt.substring(0, tpt/2);
+					String dpt = "";
+					String mpt = "";
+					if(tpt % 2 == 0) {
+						dpt = pdt.substring(tpt/2, tpt);
+					}else {
+						dpt = pdt.substring((tpt/2)+1, tpt);
+						mpt = pdt.substring(tpt/2, (tpt/2)+1);
+					}
+					
+					String[] palavrasdoCadastrado = nomeCadastrado.split(" ");
+					for(String pdc: palavrasdoCadastrado) {
+						
+						int tpc = pdc.length();
+						String epc = pdc.substring(0, tpc/2);
+						String dpc = "";
+						String mpc = "";
+						if(tpc % 2 == 0) {
+							dpc = pdc.substring(tpc/2, tpc);
+						}else {
+							dpc = pdc.substring((tpc/2)+1, tpc);
+							mpc = pdc.substring(tpc/2, (tpc/2)+1);
+						}
+						
+					}	
+				}
+						
+			}
+			
+		}
+		*/
+		Collections.sort(resultados, new ordenarProgramasPorNome());
+		return resultados;
 	}
 	
 	//método de adicionar um programa

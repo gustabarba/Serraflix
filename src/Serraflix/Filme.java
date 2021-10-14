@@ -4,7 +4,7 @@ public class Filme extends Programa{
 	private Integer duracao;
 	
 	//construtor padrão
-	public Filme(String nome, Double pontuacao, Categoria categoria, Integer duracao){
+	public Filme(String nome, Double pontuacao, Categoria categoria, Integer duracao) {
 		super(nome, pontuacao, categoria);
 		this.duracao = duracao;
 	}
@@ -15,38 +15,17 @@ public class Filme extends Programa{
 		this.duracao = duracao;
 	}
 	
-	@Override
-	public String toString() {
-		return "\n" + super.nome + " | FILME\n\n"
-				 + "NOTA: " + (super.pontuacao == null ? "SEM NOTA" : String.format("%.1f", super.pontuacao) + "/5") + "\n"
-				 + "CATEGORIA: " + this.getCategoria().getNomeCategoria() + "\n"
-				 + "DURAÇÃO: " + this.duracao + " MINUTOS";
-	}
+
 	
 	//método de classificação
-	public void classificar(Double nota) throws ClassificacaoForaDoRangeException{
+	public static void classificar(Double nota) throws ClassificacaoForaDoRangeException{
 		if(nota != null) {
 			if(nota < 0 || nota > 5) {
-				super.pontuacao = null;
-				throw new ClassificacaoForaDoRangeException("\n*** ERRO AO ADICIONAR A CLASSIFICAÇÃO: A NOTA DEVE SER MAIOR QUE ZERO E MENOR QUE CINCO ***");
-			}else {
-				super.pontuacao = nota;
+				throw new ClassificacaoForaDoRangeException("\n*** ERRO AO ADICIONAR A PONTUAÇÃO: A NOTA DEVE SER MAIOR QUE ZERO E MENOR QUE CINCO ***");
 			}
-		}else {
-			super.pontuacao = null;
-			/*throw new ClassificacaoForaDoRangeException("\n*** AVISO: NÃO FOI INFORMADO UM VALOR PARA CLASSIFICAÇÃO ***");*/
 		}
 	}	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	//getter e setter
 	public Integer getDuracao() {
 		return duracao;

@@ -59,7 +59,31 @@ public class Biblioteca{
 		}
 		return indice;
 	}
-		
+	
+	/*
+	public String infoPrograma(Programa prog) {
+		String retorno = "";
+		if(prog instanceof Filme) {
+			
+			retorno = "\n" + prog.nome + " | FILME\n\n"
+					 + "NOTA: " + (prog.pontuacao == null ? "SEM NOTA" : String.format("%.1f", prog.pontuacao) + "/5") + "\n"
+					 + "CATEGORIA: " + prog.getCategoria().getNomeCategoria() + "\n"
+					 + "DURAÇÃO: " + ((Filme)prog).getDuracao() + " MINUTOS";
+			
+		}else {		
+			
+			retorno = "\n" + prog.nome + " | SÉRIE\n\n"
+					 + "NOTA: " + (prog.pontuacao == null ? "SEM NOTA" : String.format("%.1f", prog.pontuacao) + "/10") + "\n"
+					 + "CATEGORIA: " + prog.getCategoria().getNomeCategoria() + "\n\n"
+					 + "TEMPORADAS: " + ((Serie)prog).getNumeroTemporas() + "\n\n";
+			for(Temporada t: ((Serie)prog).getTemporadas()) {
+				retorno += String.format("%02d", t.getNomeTemporada()) + "ª TEMP: " + String.format("%02d", t.getQuantidadeEpisodios()) + " EPS\n";
+			}
+			retorno += "\nTOTAL DE EPISÓDIOS: " + ((Serie)prog).getTotalEpisodios();
+			
+		}
+		return retorno;	
+	}*/
 	
 }
 class ordenarProgramasPorNome implements Comparator<Programa>

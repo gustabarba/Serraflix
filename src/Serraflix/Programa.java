@@ -12,11 +12,7 @@ public abstract class Programa implements Classificar{
 		controladorid++;
 		this.id = controladorid;
 		this.nome = nome;
-		try {
-			classificar(pontuacao);
-		} catch (ClassificacaoForaDoRangeException e) {
-			System.out.println(e.getMessage());
-		}
+		this.pontuacao = pontuacao;
 		this.categoria = categoria;
 	}
 	
@@ -24,11 +20,7 @@ public abstract class Programa implements Classificar{
 	public Programa(String nome, Double pontuacao, Categoria categoria, int id) {
 		this.id = id;
 		this.nome = nome;
-		try {
-			classificar(pontuacao);
-		} catch (ClassificacaoForaDoRangeException e) {
-			System.out.println(e.getMessage());
-		}
+		this.pontuacao = pontuacao;
 		this.categoria = categoria;
 	}
 	
@@ -40,6 +32,32 @@ public abstract class Programa implements Classificar{
 			throw new Exception();
 		}
 	}
+	
+	@Override
+	public String toString() {
+		String retorno = "";
+		if(this instanceof Filme) {
+			
+			retorno = "\n" + this.nome + " | FILME\n\n"
+					 + "NOTA: " + (this.pontuacao == null ? "SEM NOTA" : String.format("%.1f", this.pontuacao) + "/5") + "\n"
+					 + "CATEGORIA: " + this.getCategoria().getNomeCategoria() + "\n"
+					 + "DURAÇÃO: " + ((Filme)this).getDuracao() + " MINUTOS";
+			
+		}else {		
+			
+			retorno = "\n" + this.nome + " | SÉRIE\n\n"
+					 + "NOTA: " + (this.pontuacao == null ? "SEM NOTA" : String.format("%.1f", this.pontuacao) + "/10") + "\n"
+					 + "CATEGORIA: " + this.getCategoria().getNomeCategoria() + "\n\n"
+					 + "TEMPORADAS: " + ((Serie)this).getNumeroTemporas() + "\n\n";
+			for(Temporada t: ((Serie)this).getTemporadas()) {
+				retorno += String.format("%02d", t.getNomeTemporada()) + "ª TEMP: " + String.format("%02d", t.getQuantidadeEpisodios()) + " EPS\n";
+			}
+			retorno += "\nTOTAL DE EPISÓDIOS: " + ((Serie)this).getTotalEpisodios();
+			
+		}
+		return retorno;	
+	}
+	
 	public void setPontuacao(Double pontuacao) {
 		this.pontuacao = pontuacao;
 	}

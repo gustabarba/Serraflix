@@ -323,9 +323,15 @@ public class Program {
 			
 			
 			try {
-				pontuacaoPrograma = Double.valueOf(ler.nextLine());
+				Double bufferPontuacao = Double.valueOf(ler.nextLine());
+				if(tipo == 1) {
+					Filme.classificar(bufferPontuacao);
+				}else {
+					Serie.classificar(bufferPontuacao);
+				}
+				pontuacaoPrograma = bufferPontuacao;
 			}catch(Exception e) {			
-					
+				System.out.println(e.getMessage());
 			}
 				
 			

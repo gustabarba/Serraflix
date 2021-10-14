@@ -87,31 +87,11 @@ public class Serie extends Programa{
 	}
 	
 	//método de classificação
-	public void classificar(Double nota) throws ClassificacaoForaDoRangeException{
+	public static void classificar(Double nota) throws ClassificacaoForaDoRangeException{
 		if(nota != null) {
 			if(nota < 0 || nota > 10) {
-				super.pontuacao = null;
-				throw new ClassificacaoForaDoRangeException("\n*** ERRO AO ADICIONAR A CLASSIFICAÇÃO: A NOTA NÃO PODE SER MENOR QUE ZERO OU MAIOR DO QUE DEZ ***");
-			}else {
-				super.pontuacao = nota;
+				throw new ClassificacaoForaDoRangeException("\n*** ERRO AO ADICIONAR A PONTUAÇÃO: A NOTA NÃO PODE SER MENOR QUE ZERO OU MAIOR DO QUE DEZ ***");
 			}
-		}else {
-			super.pontuacao = null;
-			/*throw new ClassificacaoForaDoRangeException("\n*** AVISO: NÃO FOI INFORMADO UM VALOR PARA CLASSIFICAÇÃO ***");*/
 		}
 	}	
-	
-	@Override
-	public String toString() {
-		String retorno = "";
-		retorno = "\n" + super.nome + " | SÉRIE\n\n"
-				 + "NOTA: " + (super.pontuacao == null ? "SEM NOTA" : String.format("%.1f", super.pontuacao) + "/10") + "\n"
-				 + "CATEGORIA: " + this.getCategoria().getNomeCategoria() + "\n\n"
-				 + "TEMPORADAS: " + this.temporadas.size() + "\n\n";
-		for(Temporada t: this.getTemporadas()) {
-			retorno += String.format("%02d", t.getNomeTemporada()) + "ª TEMP: " + String.format("%02d", t.getQuantidadeEpisodios()) + " EPS\n";
-		}
-		retorno += "\nTOTAL DE EPISÓDIOS: " + this.getTotalEpisodios();
-		return retorno;
-	}
 }

@@ -12,7 +12,16 @@ public abstract class Programa implements Classificar{
 		controladorid++;
 		this.id = controladorid;
 		this.nome = nome;
-		this.pontuacao = pontuacao;
+		try{
+			if(this instanceof Filme) {
+				Filme.classificar(pontuacao);
+			}else {
+				Serie.classificar(pontuacao);
+			}
+			this.pontuacao = pontuacao;
+		}catch (Exception e) {
+			this.pontuacao = null;
+		}
 		this.categoria = categoria;
 	}
 	

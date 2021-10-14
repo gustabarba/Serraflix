@@ -13,7 +13,7 @@ public class Serie extends Programa{
 		try {
 			adicionarTemporadas(qtdEps);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			/*System.out.println(e.getMessage());*/
 		}
 	}
 	

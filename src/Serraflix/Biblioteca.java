@@ -36,15 +36,20 @@ public class Biblioteca{
 	//método de adicionar um programa
 	public void addPrograma(Programa programa) {
 		this.programas.add(programa);
+		programa.getCategoria().aumentarContador();
 	}
 	
 	//método de adicionar programas em massa
 	public void addProgramas(List<Programa> programas) {
 		this.programas.addAll(programas);
+		for(Programa p: programas) {
+			p.getCategoria().aumentarContador();
+		}
 	}
 	
 	//método de deletar programa por indice
 	public void deletarProgramaPorIndice(int indice) {
+		this.programas.get(indice).getCategoria().diminuirContador();
 		this.programas.remove(indice);
 	}
 	

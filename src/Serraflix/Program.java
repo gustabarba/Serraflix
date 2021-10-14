@@ -22,7 +22,7 @@ public class Program {
 				new Filme("Eternal Sunshine Of The Spotless Mind", 4.1, Categoria.ROMANCE, 108),			
 				new Filme("Her", 4., Categoria.ROMANCE, 126),			
 				new Filme("Cowboy Bebop: The Movie", 3.9, Categoria.CYBERPUNK, 115),
-				new Filme("Lorem Ipsum", 3., Categoria.FANTASIA, 0)
+				new Filme("Lorem Ipsum", 9999999999999999999999999999999., Categoria.FANTASIA, 0)
 			));
 		
 		
@@ -330,8 +330,10 @@ public class Program {
 					Serie.classificar(bufferPontuacao);
 				}
 				pontuacaoPrograma = bufferPontuacao;
-			}catch(Exception e) {			
+			}catch(ClassificacaoForaDoRangeException e) {			
 				System.out.println(e.getMessage());
+			}catch(Exception e) {
+				
 			}
 				
 			
@@ -800,7 +802,7 @@ public class Program {
 			System.out.println("\nESCOLHA UMA CATEGORIA: \n");
 			
 			for(int i = 0; i < Categoria.values().length; i++) {
-				System.out.println((i + 1) + ": " + Categoria.values()[i].getNomeCategoria() + (cat != null ? (cat.equals(Categoria.values()[i]) ? " (ATUAL)" : ""): ""));
+				System.out.println((i + 1) + ": " + Categoria.values()[i].getNomeCategoria() + (deixaSairSemRetornarCategoria ? " (" + Categoria.values()[i].obterContador() + " progs.)" : "") + (cat != null ? (cat.equals(Categoria.values()[i]) ? " (ATUAL)" : ""): ""));
 			}
 			
 			if(deixaSairSemRetornarCategoria) {
@@ -830,7 +832,7 @@ public class Program {
 					categoriaEscolhida = Categoria.values()[numeroCategoria - 1];
 					escolhendoCategoria = false;
 				}else {
-					if(numeroCategoria == 0) {
+					if(numeroCategoria == 0 && deixaSairSemRetornarCategoria) {
 						escolhendoCategoria = false;
 					}else {
 						System.out.print("> (*** OPÇÃO INVÁLIDA :( ***)\n");
